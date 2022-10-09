@@ -12,7 +12,21 @@ app.use(express.static(path.resolve(__dirname, "./client")));
 app.use(express.json());
 initialRoutes(app);
 
-app.get("/");
+app.get("/", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./client", "index.html"));
+});
+
+app.get("/about", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./client", "about.html"));
+});
+
+app.get("/projects", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./client", "portfolio.html"));
+});
+
+app.get("/contact", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./client", "contact.html"));
+});
 
 sequelize
   .sync({ force: false })
