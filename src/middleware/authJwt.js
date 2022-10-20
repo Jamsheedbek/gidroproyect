@@ -1,27 +1,18 @@
-require("dotenv").config();
-const jwt = require("jsonwebtoken");
-const secret = process.env.JWT_SECRET;
-const db = require("../models");
-const Users = db.users;
+const { verifyUser } = require("../util/jwt");
 
 const verifyToken = (req, res, next) => {
-  let token = req.headers["token"];
+  let token = req.cookies.token;
   if (!token) {
-    return res.status(403).send({
-      message: "No token provided",
-    });
+    return res.redirect("/direksiya/login");
   }
 
-  jwt.verify(token, secret, (err, decoded) => {
-    if (err) {
-      return res.status(401).send({
-        message: "Unathorized",
-      });
-    }
-
-    req.userId = decoded.id;
-    next();
-  });
+  const role = verifyUser(token).role;
+  if (!role) {
+    return res.redirect("/direksiya/login");
+  } else if (role == "user" && req.url == "/direksiya/admin") {
+    return res.redirect("/direksiya/users");
+  }
+  next();
 };
 
 module.exports = verifyToken;

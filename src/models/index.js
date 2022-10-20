@@ -15,12 +15,17 @@ const Users = sequelize.define("users", {
   firstName: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique: true,
   },
   lastName: {
     type: DataTypes.STRING,
   },
   password: {
     type: DataTypes.STRING,
+  },
+  role: {
+    type: DataTypes.STRING,
+    defaultValue: "user",
   },
 });
 
@@ -38,7 +43,7 @@ const News = sequelize.define("news", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  image: {
+  fileName: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -55,6 +60,10 @@ const Projects = sequelize.define("projects", {
     allowNull: false,
     unique: true,
   },
+  formatFile: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
 });
 
 const Works = sequelize.define("works", {
@@ -67,10 +76,14 @@ const Works = sequelize.define("works", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  fileName: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
 });
 
-Works.hasOne(Users);
-Users.belongsTo(Works);
+Users.hasOne(Works, { onDelete: "cascade" });
+Works.belongsTo(Users);
 
 module.exports = {
   Users,

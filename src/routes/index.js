@@ -1,17 +1,54 @@
 const express = require("express");
+const authController = require("../controllers/auth.controller");
 const router = express.Router();
-const upload = require("../middleware/upload");
 
 //Controllers
 const newsController = require("../controllers/news.controller");
+const pageController = require("../controllers/page.controller");
+const projectsController = require("../controllers/projects.controller");
+const usersController = require("../controllers/users.controller");
+const workController = require("../controllers/work.controller");
+
+//middleware
+const verifyToken = require("../middleware/authJwt");
 
 let routes = (app) => {
   router
-    // news
-    .post("/news", upload.single("file"), newsController.createNews)
-    .get("/news", newsController.getNews);
+    //pages
+    .get("/", pageController.homePage)
+    .get("/about", pageController.aboutPage)
+    .get("/contact", pageController.contactPage)
+    .get("/projects", pageController.projectsPage)
+    .get("/direksiya/login", pageController.loginPage)
+    .get("/direksiya/admin", verifyToken, pageController.adminPage)
+    .get("/direksiya/users", verifyToken, pageController.userPage)
 
-  app.use("/api", router);
+    // news
+    .post("/news", newsController.createNews)
+    .post("/edite-news", newsController.editNews)
+    .post("/delete-news", newsController.deleteNews)
+
+    //projects
+    .get("/gidro-api/projects", projectsController.getProjects)
+    .post("/gidro-api/projects", projectsController.createProject)
+    .put("/projects", projectsController.editProject)
+    .delete("/projects", projectsController.deleteProject)
+
+    //login
+    .post("/direksiya/login", authController.signIn)
+    .post("/log-out", usersController.logOutUser)
+
+    //users
+    .post("/create-user", usersController.createUser)
+    .post("/edit-user", usersController.editUser)
+    .post("/delete-user", usersController.deleteUser)
+
+    // works
+    .post("/create-work", workController.uploadWork)
+    .post("/delete-work", workController.deleteWork)
+    .get("/download/:name", verifyToken, workController.downloadWork);
+
+  app.use(router);
 };
 
 module.exports = routes;

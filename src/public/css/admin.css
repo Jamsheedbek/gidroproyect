@@ -1,0 +1,38 @@
+.new-input[type="file"] {
+  display: none;
+}
+
+.new-img {
+  width: 140px;
+}
+
+.new {
+  width: 100%;
+}
+
+.new-form,
+.user-form {
+  margin: 50px;
+}
+
+.new-imgs {
+  width: 60px;
+}
+
+.admin .modal-header {
+  display: block;
+}
+
+.project-form {
+  margin: 50px;
+}
+
+.admin {
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.new {
+  overflow-y: auto;
+  overflow-x: hidden;
+}

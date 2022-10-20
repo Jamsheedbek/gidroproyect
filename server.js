@@ -1,33 +1,35 @@
+require("dotenv").config();
+const ejs = require("ejs");
+const cors = require("cors");
 const express = require("express");
-const path = require("path");
-const newsController = require("./src/controllers/news.controller");
-const PORT = process.env.PORT || 9000;
 const app = express();
+const cookieParser = require("cookie-parser");
+const PORT = process.env.PORT || 9000;
 const { sequelize } = require("./src/models");
 const initialRoutes = require("./src/routes");
+const fileUpload = require("express-fileupload");
 
 global.__basedir = __dirname;
 
-app.use(express.static(path.resolve(__dirname, "./client")));
+//middlewares
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+//use cors
+app.use(cors());
+//for file upload
+app.use(
+  fileUpload({
+    limits: { fieldSize: 250 * 1024 * 1024 },
+  })
+);
+app.use(express.static("./src/public"));
+app.use("/files", express.static("./src/uploads"));
+app.set("view engine", "ejs");
+app.set("views", "./src/views");
 initialRoutes(app);
 
-app.get("/", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./client", "index.html"));
-});
-
-app.get("/about", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./client", "about.html"));
-});
-
-app.get("/projects", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./client", "portfolio.html"));
-});
-
-app.get("/contact", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./client", "contact.html"));
-});
-
+//connection sequelize
 sequelize
   .sync({ force: false })
   .then(() => {

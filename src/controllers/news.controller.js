@@ -1,44 +1,63 @@
 const { News } = require("../models");
-const uploadFile = require("../middleware/upload");
 const fs = require("fs");
 
 module.exports = {
   createNews: async (req, res) => {
     try {
-      const { title, text, image } = req.body;
+      const { title, text } = req.body;
 
-      await News.create({ title, text, image }).then((news) => {
-        res.status(200).json(news.dataValues);
-      });
-    } catch (err) {
-      res.status(500).send({
-        message: err.message,
-      });
-    }
-  },
-  getNews: async (req, res) => {
-    try {
-      const baseUrl = "http://localhost:9000/files/";
-      const directoryPath = __basedir + "/src/uploads/assets";
-      await News.findAll().then((news) => {
-        const newRes = news.slice();
-        fs.readdir(directoryPath, function (err, files) {
+      const image = req.files.file;
+      console.log(image);
+      const fileName = image.name;
+      await News.create({
+        title,
+        text,
+        fileName,
+      }).then((news) => {
+        const uploadPath = __basedir + "/src/uploads/assets/news/" + fileName;
+
+        image.mv(uploadPath, function (err) {
           if (err) {
-            return res.status(500).send({
-              message: "Unable to scan files",
-            });
+            return console.log(err);
           }
-          newRes.forEach((e) => {
-            e.dataValues.imgUrl =
-              baseUrl + files.find((photo) => photo == e.dataValues.image);
-          });
-          res.status(200).json(newRes);
+
+          res.redirect("/direksiya/admin");
         });
       });
     } catch (err) {
-      res.status(500).send({
-        message: err.message,
+      console.log(err);
+    }
+  },
+  editNews: async (req, res) => {
+    try {
+      const { id, text, title } = req.body;
+
+      if ((text, title)) {
+        await News.update(
+          { title, text },
+          {
+            where: { id },
+          }
+        );
+
+        res.redirect("/direksiya/admin");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  deleteNews: async (req, res) => {
+    try {
+      const { id, fileName } = req.body;
+      const Path = __basedir + "/src/uploads/assets/news/" + fileName;
+      fs.unlink(Path, function (err) {
+        if (err) return console.log(err);
       });
+      await News.destroy({ where: { id } });
+
+      res.redirect("/direksiya/admin");
+    } catch (err) {
+      console.log(err);
     }
   },
 };

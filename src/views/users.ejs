@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Users</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/admin.css" />
+  </head>
+  <body>
+    <div
+      class="alert alert-primary d-flex align-items-center justify-content-between"
+      role="alert"
+    >
+      <span>Добро пожаловать <%= user.dataValues.firstName %></span>
+      <form
+        action="/log-out"
+        method="post"
+        enctype="application/x-www-form-urlencoded"
+      >
+        <button type="submit" class="log-out btn btn-danger">Log out</button>
+      </form>
+    </div>
+    <div class="works pages">
+      <form
+        action="/create-work"
+        class="project-form d-flex justify-content-center align-items-center mt-5"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div class="new-title">
+          <input name="file" type="file" id="project-photo" class="new-input" />
+          <input
+            name="userId"
+            type="text"
+            class="d-none"
+            value="<%= user.dataValues.id %>"
+          />
+          <label for="project-photo">
+            <img src="/img/Image 5.png" alt="" class="new-img" />
+          </label>
+        </div>
+        <input
+          class="form-control form-control-lg w-50"
+          type="text"
+          placeholder="Name"
+          name="title"
+          aria-label=".form-control-lg example"
+          style="margin: 15px 0"
+        />
+        <button type="submit" class="btn btn-primary mx-5">Create</button>
+      </form>
+      <% if(works.length>0) { works.forEach(work => { %>
+      <table class="table m-2">
+        <thead>
+          <tr>
+            <th scope="col" class="fs-6">Title</th>
+            <th scope="col" class="fs-6">Username</th>
+            <th scope="col" class="fs-6">Lastname</th>
+            <th scope="col" class="fs-6">Download</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= work.title %></td>
+            <td><%= work.user.firstName %></td>
+            <td><%= work.user.lastName %></td>
+            <td>
+              <form action="<%= work.url %>" method="get">
+                <button type="submit" class="btn btn-primary">Download</button>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <% }); %> <% } else { %>
+      <hr />
+      <div class="text-secondary display-3 text-center">
+        There are no uploaded jobs yet!
+      </div>
+      <% }; %>
+    </div>
+  </body>
+</html>
