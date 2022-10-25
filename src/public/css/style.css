@@ -201,6 +201,15 @@ a:focus {
   border-radius: 0;
 }
 
+.navbar-toggler {
+  border: none !important;
+  outline: none !important;
+}
+
+.navbar-toggler:focus {
+  outline: none !important;
+}
+
 .nav-bar .btn:hover {
   color: #030f27;
   background: #fdbe33;
