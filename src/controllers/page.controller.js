@@ -34,8 +34,13 @@ module.exports = {
     const news = await handleAllNews();
     const projects = await handleProjects();
     const works = await handleWorks();
-    console.log(works);
-    res.render("admin", { users, news, projects, works });
+    res.render("admin", {
+      users,
+      news,
+      projects,
+      works,
+      error: "",
+    });
   },
   userPage: async (req, res) => {
     const token = req.cookies.token;
@@ -43,5 +48,8 @@ module.exports = {
     const works = await handleWorks(userId);
     const user = await handleAllUsers(userId);
     res.render("users", { works, user });
+  },
+  projectController: async (req, res) => {
+    res.render("project");
   },
 };

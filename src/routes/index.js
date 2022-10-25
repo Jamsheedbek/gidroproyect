@@ -22,6 +22,7 @@ let routes = (app) => {
     .get("/direksiya/login", pageController.loginPage)
     .get("/direksiya/admin", verifyToken, pageController.adminPage)
     .get("/direksiya/users", verifyToken, pageController.userPage)
+    .get("/project/:name", pageController.projectController)
 
     // news
     .post("/news", newsController.createNews)
@@ -29,11 +30,11 @@ let routes = (app) => {
     .post("/delete-news", newsController.deleteNews)
 
     //projects
-    .get("/gidro-api/projects", projectsController.getProjects)
-    .post("/gidro-api/projects", projectsController.createProject)
-    .put("/projects", projectsController.editProject)
-    .delete("/projects", projectsController.deleteProject)
-
+    .post("/projects", projectsController.createProject)
+    .post("/edit-project", projectsController.editProject)
+    .post("/delete-project", projectsController.deleteProject)
+    .post("/add-image", projectsController.addImage)
+    .post("/delete-image", projectsController.deleteImage)
     //login
     .post("/direksiya/login", authController.signIn)
     .post("/log-out", usersController.logOutUser)

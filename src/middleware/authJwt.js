@@ -1,17 +1,26 @@
+const { Users } = require("../models");
 const { verifyUser } = require("../util/jwt");
 
-const verifyToken = (req, res, next) => {
+const verifyToken = async (req, res, next) => {
   let token = req.cookies.token;
   if (!token) {
     return res.redirect("/direksiya/login");
   }
 
-  const role = verifyUser(token).role;
-  if (!role) {
+  const verifyToken = verifyUser(token);
+
+  const user = await Users.findOne({
+    where: {
+      id: verifyToken.id,
+    },
+  });
+
+  if (!user) {
     return res.redirect("/direksiya/login");
-  } else if (role == "user" && req.url == "/direksiya/admin") {
+  }
+  if (verifyToken.role == "user" && req.url == "/direksiya/admin") {
     return res.redirect("/direksiya/users");
-  } else if (role == "admin" && req.url == "/direksiya/users") {
+  } else if (verifyToken.role == "admin" && req.url == "/direksiya/users") {
     return res.redirect("/direksiya/admin");
   }
   next();

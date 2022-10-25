@@ -4,13 +4,12 @@ const bcrypt = require("bcryptjs");
 module.exports = {
   createUser: async (req, res) => {
     try {
-      const { firstName, lastName, password, role } = req.body;
+      const { firstName, lastName, password } = req.body;
 
       const newUser = await Users.create({
         firstName,
         lastName,
         password: bcrypt.hashSync(password, 8),
-        role,
       });
 
       res.redirect("/direksiya/admin");

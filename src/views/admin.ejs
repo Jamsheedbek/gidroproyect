@@ -41,6 +41,9 @@
             <li>
               <div class="nav-link text-light bg-dark">Users</div>
             </li>
+            <li>
+              <div class="nav-link text-light bg-dark">Images</div>
+            </li>
           </ul>
         </div>
         <div class="new">
@@ -62,7 +65,11 @@
                     class="new-input"
                   />
                   <label for="news-photo">
-                    <img src="/img/Image 5.png" alt="" class="new-img" />
+                    <img
+                      src="/img/Image 5.png"
+                      alt=""
+                      class="new-img news-label"
+                    />
                   </label>
                 </div>
                 <div class="new-title mx-5 w-100">
@@ -197,14 +204,14 @@
                       type="button"
                       class="btn btn-primary"
                       data-bs-toggle="modal"
-                      data-bs-target="#staticBackdrop"
+                      data-bs-target="#newsBackdrop"
                     >
                       Delete
                     </button>
                   </td>
                   <div
                     class="modal fade"
-                    id="staticBackdrop"
+                    id="newsBackdrop"
                     data-bs-backdrop="static"
                     data-bs-keyboard="false"
                     tabindex="-1"
@@ -218,21 +225,10 @@
                     >
                       <div class="modal-dialog">
                         <div class="modal-content">
-                          <div class="modal-header">
-                            <h1
-                              class="modal-title fs-5"
-                              id="staticBackdropLabel"
-                            >
-                              Modal
-                            </h1>
-                          </div>
+                          <div class="modal-header"></div>
                           <div class="modal-body">
-                            Siz rostan ham o'chirmoqchimisiz?
-                            <input
-                              class="d-none delete-id"
-                              type="text"
-                              name="id"
-                            />
+                            Siz rostan ham o'chirmoqchimisiz? <input
+                            class=image-id" type="text" name="id" />
                             <input
                               class="d-none delete-file"
                               type="text"
@@ -512,19 +508,14 @@
 
           <!-- Project -->
           <div class="project pages d-none">
-            <form action="" class="project-form d-flex align-items-center">
-              <div class="new-title">
-                <input
-                  name="file"
-                  type="file"
-                  id="project-photo"
-                  class="new-input"
-                />
-                <label for="project-photo">
-                  <img src="/img/Image 5.png" alt="" class="new-img" />
-                </label>
-              </div>
+            <form
+              action="/projects"
+              class="project-form d-flex align-items-center"
+              method="post"
+              enctype="multipart/form-data"
+            >
               <input
+                required
                 class="form-control form-control-lg w-50"
                 type="text"
                 placeholder="Name"
@@ -532,29 +523,98 @@
                 aria-label=".form-control-lg example"
                 style="margin: 15px 0"
               />
-              <button class="btn btn-primary mx-5">Create</button>
+              <button type="submit" class="btn btn-primary mx-5">Create</button>
             </form>
             <table class="table m-2">
               <thead>
                 <tr>
-                  <th scope="col" class="fs-6 table-secondary">Image</th>
                   <th scope="col" class="fs-6 table-secondary">Name</th>
+                  <th scope="col" class="fs-6 table-secondary">Image</th>
                   <th scope="col" class="fs-6 table-secondary">Edit</th>
                   <th scope="col" class="fs-6 table-secondary">Delete</th>
                 </tr>
               </thead>
-              <tbody>
-                <% projects.forEach(project => { %>
+              <tbody class="projects-wrapper">
+                <% projects.projects.forEach(project => { %>
                 <tr>
-                  <td>
-                    <img src="<%= project.imgUrl %>" alt="" class="new-imgs" />
-                  </td>
                   <td><%= project.name %></td>
+                  <td>
+                    <button
+                      data-bs-toggle="modal"
+                      data-bs-target="#Image"
+                      class="btn btn-primary"
+                      data-id="<%= project.id %>"
+                    >
+                      Image
+                    </button>
+                    <div
+                      class="modal fade"
+                      id="Image"
+                      data-bs-backdrop="static"
+                      data-bs-keyboard="false"
+                      tabindex="-1"
+                      aria-labelledby="Image"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <form
+                              action="/add-image"
+                              method="post"
+                              enctype="multipart/form-data"
+                              style="width: 100%"
+                            >
+                              <input
+                                type="text"
+                                name="id"
+                                id="project-id"
+                                class="d-none"
+                              />
+                              <input
+                                required
+                                name="file"
+                                type="file"
+                                id="add-photo"
+                                class="d-none add-photo"
+                              />
+                              <label for="add-photo">
+                                <img
+                                  src="/img/Image 5.png"
+                                  alt=""
+                                  class="new-img project-label"
+                                />
+                              </label>
+                              <div
+                                class="d-flex"
+                                style="justify-content: flex-end"
+                              >
+                                <button
+                                  type="button"
+                                  class="btn btn-secondary mx-2"
+                                  data-bs-dismiss="modal"
+                                >
+                                  Close
+                                </button>
+                                <button
+                                  type="submit"
+                                  class="btn btn-primary mx-2"
+                                >
+                                  Add
+                                </button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
                   <td>
                     <button
                       data-bs-toggle="modal"
                       data-bs-target="#Project"
                       class="btn btn-primary"
+                      data-id="<%= project.id %>"
                     >
                       Edit
                     </button>
@@ -571,14 +631,25 @@
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <form action="" style="width: 100%">
+                          <form
+                            action="/edit-project"
+                            method="post"
+                            enctype="application/x-www-form-urlencoded"
+                            style="width: 100%"
+                          >
                             <input
+                              required
                               class="form-control form-control-lg w-100"
                               type="text"
                               name="name"
                               placeholder="Name"
                               aria-label=".form-control-lg example"
                               style="margin: 15px 0"
+                            />
+                            <input
+                              type="text"
+                              class="d-none project-edit"
+                              name="id"
                             />
                             <div
                               class="d-flex"
@@ -592,7 +663,7 @@
                                 Close
                               </button>
                               <button
-                                type="button"
+                                type="submit"
                                 class="btn btn-primary mx-2"
                               >
                                 OK
@@ -609,6 +680,7 @@
                       class="btn btn-primary"
                       data-bs-toggle="modal"
                       data-bs-target="#staticBackdrop"
+                      data-id="<%= project.id %>"
                     >
                       Delete
                     </button>
@@ -633,16 +705,27 @@
                           Siz rostan ham o'chirmoqchimisiz?
                         </div>
                         <div class="modal-footer">
-                          <button
-                            type="button"
-                            class="btn btn-secondary"
-                            data-bs-dismiss="modal"
+                          <form
+                            action="/delete-project"
+                            method="post"
+                            enctype="application/x-www-form-urlencoded"
                           >
-                            Close
-                          </button>
-                          <button type="button" class="btn btn-primary">
-                            Understood
-                          </button>
+                            <input
+                              type="text"
+                              name="id"
+                              class="d-none project-id"
+                            />
+                            <button
+                              type="button"
+                              class="btn btn-secondary"
+                              data-bs-dismiss="modal"
+                            >
+                              Close
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                              Ok
+                            </button>
+                          </form>
                         </div>
                       </div>
                     </div>
@@ -663,9 +746,10 @@
                   <th scope="col" class="fs-6 table-secondary">Username</th>
                   <th scope="col" class="fs-6 table-secondary">Lastname</th>
                   <th scope="col" class="fs-6 table-secondary">Download</th>
+                  <th scope="col" class="fs-6 table-secondary">Delete</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody class="works-wrapper">
                 <% works.forEach(work => { %>
                 <tr>
                   <td><%= work.title %></td>
@@ -678,12 +762,156 @@
                       </button>
                     </form>
                   </td>
+                  <td>
+                    <button
+                      data-id="<%= work.id %>"
+                      type="button"
+                      class="btn btn-primary"
+                      data-bs-toggle="modal"
+                      data-bs-target="#workBackdrop"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                  <div
+                    class="modal fade"
+                    id="workBackdrop"
+                    data-bs-backdrop="static"
+                    data-bs-keyboard="false"
+                    tabindex="-1"
+                    aria-labelledby="staticBackdropLabel"
+                    aria-hidden="true"
+                  >
+                    <form
+                      action="/delete-work"
+                      method="post"
+                      enctype="application/x-www-form-urlencoded"
+                    >
+                      <input class="d-none work-id" type="text" name="id" />
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1
+                              class="modal-title fs-5"
+                              id="staticBackdropLabel"
+                            >
+                              Modal
+                            </h1>
+                          </div>
+                          <div class="modal-body">
+                            Siz rostan ham o'chirmoqchimisiz?
+                          </div>
+                          <div class="modal-footer">
+                            <button
+                              type="button"
+                              class="btn btn-secondary"
+                              data-bs-dismiss="modal"
+                            >
+                              Close
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                              Ok
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
                 </tr>
                 <% }); %>
               </tbody>
             </table>
           </div>
           <!-- Works end -->
+
+          <!-- Project Images -->
+          <div class="project-images pages d-none">
+            <table class="table m-2">
+              <thead>
+                <tr>
+                  <th scope="col" class="fs-6 table-secondary">Image</th>
+                  <th scope="col" class="fs-6 table-secondary">Project Name</th>
+                  <th scope="col" class="fs-6 table-secondary">Delete</th>
+                </tr>
+              </thead>
+              <tbody class="image-wrapper">
+                <% projects.images.forEach((e) => { %>
+                <tr>
+                  <td>
+                    <img src="<%= e.imgUrl %>" alt="" class="new-imgs" />
+                  </td>
+                  <td><%= e.name %></td>
+                  <td>
+                    <button
+                      data-id="<%= e.id %>"
+                      data-file="<%= e.fileName %>"
+                      type="button"
+                      class="btn btn-primary"
+                      data-bs-toggle="modal"
+                      data-bs-target="#imageBackdrop"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                  <div
+                    class="modal fade"
+                    id="imageBackdrop"
+                    data-bs-backdrop="static"
+                    data-bs-keyboard="false"
+                    tabindex="-1"
+                    aria-labelledby="staticBackdropLabel"
+                    aria-hidden="true"
+                  >
+                    <form
+                      action="/delete-image"
+                      method="post"
+                      enctype="application/x-www-form-urlencoded"
+                    >
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1
+                              class="modal-title fs-5"
+                              id="staticBackdropLabel"
+                            >
+                              Modal
+                            </h1>
+                          </div>
+                          <div class="modal-body">
+                            Siz rostan ham o'chirmoqchimisiz?
+                            <input
+                              class="d-none image-id"
+                              type="text"
+                              name="id"
+                            />
+                            <input
+                              class="d-none image-name"
+                              type="text"
+                              name="fileName"
+                            />
+                          </div>
+                          <div class="modal-footer">
+                            <button
+                              type="button"
+                              class="btn btn-secondary"
+                              data-bs-dismiss="modal"
+                            >
+                              Close
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                              Delete
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+          <!-- Project Images end -->
         </div>
       </div>
     </div>

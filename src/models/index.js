@@ -3,11 +3,7 @@ const connectionString = process.env.CONNECTION_STRING;
 const { Sequelize, DataTypes } = require("sequelize");
 
 const sequelize = new Sequelize(
-  "postgres://postgres:pgpwd@localhost:5432/gidro",
-  {
-    host: "localhost",
-    dialect: "postgres",
-  }
+  "postgres://reuhyxok:w-ekd8Oa49s3TaQRHFKJ6CAMDePYhI3Q@arjuna.db.elephantsql.com/reuhyxok"
 );
 
 const Users = sequelize.define("users", {
@@ -64,7 +60,15 @@ const Projects = sequelize.define("projects", {
     allowNull: false,
     unique: true,
   },
-  formatFile: {
+});
+
+const projectImages = sequelize.define("images", {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    primaryKey: true,
+  },
+  fileName: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -88,11 +92,14 @@ const Works = sequelize.define("works", {
 
 Users.hasOne(Works, { onDelete: "cascade" });
 Works.belongsTo(Users);
+Projects.hasMany(projectImages, { onDelete: "cascade" });
+projectImages.belongsTo(Projects);
 
 module.exports = {
   Users,
   News,
   Projects,
   Works,
+  projectImages,
   sequelize,
 };

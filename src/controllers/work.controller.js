@@ -1,7 +1,6 @@
 const { Projects, Works } = require("../models");
 const fs = require("fs");
 const path = require("path");
-const handleWorks = require("../util/handleWorks");
 
 module.exports = {
   uploadWork: async (req, res) => {
@@ -27,12 +26,11 @@ module.exports = {
     try {
       const { id } = req.body;
       const oldWork = await Works.findOne({ where: { id } });
-      if (!oldWork) return console.log("Project not found");
       const Path = __basedir + "/src/works/" + oldWork.dataValues.fileName;
       fs.unlink(Path, function (err) {
         if (err) return console.log(err.message);
       });
-      await Projects.destroy({ where: { id } });
+      await Works.destroy({ where: { id } });
 
       res.redirect("/direksiya/admin");
     } catch (err) {

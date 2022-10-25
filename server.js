@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 9000;
 const { sequelize } = require("./src/models");
 const initialRoutes = require("./src/routes");
 const fileUpload = require("express-fileupload");
+const createAdmin = require("./src/util/createAdmin");
 
 global.__basedir = __dirname;
 
@@ -34,7 +35,10 @@ sequelize
   .sync({ force: false })
   .then(() => {
     console.log("Drop end Resync db");
+    createAdmin();
   })
   .catch((err) => console.log(err));
+
+app.get("*", (req, res) => res.render("pagenotfound"));
 
 app.listen(PORT, () => console.log(`Server is running on ${PORT}`));

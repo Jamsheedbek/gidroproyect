@@ -1,17 +1,25 @@
 const { News } = require("../models");
-const fs = require("fs");
+const moment = require("moment");
 
 const handleAllNews = async () => {
-  const allNews = await News.findAll();
+  try {
+    const allNews = await News.findAll();
 
-  const news = [];
-  allNews.map((e) => {
-    e.dataValues.imgUrl = "/files/assets/news/" + e.dataValues.fileName;
+    const news = [];
+    allNews.map((e) => {
+      e.dataValues.imgUrl = "/files/assets/news/" + e.dataValues.fileName;
 
-    news.push(e.dataValues);
-  });
+      e.dataValues.createdAt = moment()
+        .format(e.dataValues.createdAt.toString())
+        .slice(5, 16);
 
-  return news;
+      news.push(e.dataValues);
+    });
+
+    return news;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 module.exports = handleAllNews;
