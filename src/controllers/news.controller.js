@@ -1,5 +1,6 @@
 const { News } = require("../models");
 const fs = require("fs");
+const path = require("path");
 
 module.exports = {
   createNews: async (req, res) => {
@@ -14,7 +15,7 @@ module.exports = {
         text,
         fileName,
       }).then((news) => {
-        const uploadPath = __basedir + "/src/uploads/assets/news/" + fileName;
+        const uploadPath = path.resolve("./src/uploads/assets/news", fileName);
 
         image.mv(uploadPath, function (err) {
           if (err) {
@@ -49,7 +50,7 @@ module.exports = {
   deleteNews: async (req, res) => {
     try {
       const { id, fileName } = req.body;
-      const Path = __basedir + "/src/uploads/assets/news/" + fileName;
+      const Path = path.resolve("./src/uploads/assets/news", fileName);
       fs.unlink(Path, function (err) {
         if (err) return console.log(err);
       });

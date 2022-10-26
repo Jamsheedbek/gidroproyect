@@ -1,6 +1,6 @@
 const { Projects, projectImages } = require("../models");
 const fs = require("fs");
-const handleProjects = require("../util/handleProjects");
+const path = require("path");
 
 module.exports = {
   createProject: async (req, res) => {
@@ -64,10 +64,10 @@ module.exports = {
         projectId: id,
       });
 
-      const uploadPath =
-        __basedir +
-        "/src/uploads/assets/projects/" +
-        newProject.dataValues.fileName;
+      const uploadPath = path.resolve(
+        "./src/uploads/assets/projects",
+        newProject.dataValues.fileName
+      );
 
       file.mv(uploadPath, function (err) {
         if (err) {
@@ -85,7 +85,7 @@ module.exports = {
     try {
       const { id, fileName } = req.body;
 
-      const Path = __basedir + "/src/uploads/assets/projects/" + fileName;
+      const Path = path.resolve("./src/uploads/assets/projects", fileName);
       fs.unlink(Path, function (err) {
         if (err) return res.redirect("/direksiya/admin");
       });

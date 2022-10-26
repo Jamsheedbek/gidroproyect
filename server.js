@@ -10,8 +10,6 @@ const initialRoutes = require("./src/routes");
 const fileUpload = require("express-fileupload");
 const createAdmin = require("./src/util/createAdmin");
 
-global.__basedir = __dirname;
-
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
