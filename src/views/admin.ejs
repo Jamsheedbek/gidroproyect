@@ -116,8 +116,8 @@
                   <td>
                     <img src="<%= e.imgUrl %>" alt="" class="new-imgs" />
                   </td>
-                  <td><%= e.title %></td>
-                  <td><%= e.text %></td>
+                  <td class="text-truncate"><%= e.title %></td>
+                  <td class="text-truncate"><%= e.text %></td>
                   <td>
                     <button
                       data-id="<%= e.id %>"
@@ -227,8 +227,12 @@
                         <div class="modal-content">
                           <div class="modal-header"></div>
                           <div class="modal-body">
-                            Siz rostan ham o'chirmoqchimisiz? <input
-                            class=image-id" type="text" name="id" />
+                            Siz rostan ham o'chirmoqchimisiz?
+                            <input
+                              class="delete-id d-none"
+                              type="text"
+                              name="id"
+                            />
                             <input
                               class="d-none delete-file"
                               type="text"
@@ -244,7 +248,7 @@
                               Close
                             </button>
                             <button type="submit" class="btn btn-primary">
-                              Delete
+                              Ok
                             </button>
                           </div>
                         </div>
@@ -880,7 +884,7 @@
                           <div class="modal-body">
                             Siz rostan ham o'chirmoqchimisiz?
                             <input
-                              class="d-none image-id"
+                              class="d-none imadelete"
                               type="text"
                               name="id"
                             />

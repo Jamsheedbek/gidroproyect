@@ -49,7 +49,14 @@ module.exports = {
     const user = await handleAllUsers(userId);
     res.render("users", { works, user });
   },
-  projectController: async (req, res) => {
+  projectPage: async (req, res) => {
+    console.log(req.params);
     res.render("project");
+  },
+  newsPage: async (req, res) => {
+    const news = await handleAllNews();
+    const activeNews = await handleAllNews(req.params.id);
+
+    res.render("news", { news, activeNews });
   },
 };

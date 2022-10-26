@@ -31,6 +31,10 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
       rel="stylesheet"
     />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css"
+      rel="stylesheet"
+    />
     <link href="lib/flaticon/font/flaticon.css" rel="stylesheet" />
     <link href="lib/animate/animate.min.css" rel="stylesheet" />
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
@@ -52,7 +56,7 @@
             <div class="col-lg-4 col-md-12">
               <div class="logo">
                 <a href="/">
-                  <h2 class="text-light">Direksiya.uz</h2>
+                  <h2 class="text-light">1-Son Qurilish Direksiya</h2>
                   <!-- <img src="img/logo.jpg" alt="Logo"> -->
                 </a>
               </div>
@@ -137,8 +141,15 @@
             >
               <div class="navbar-nav mr-auto">
                 <a href="/" class="nav-item nav-link active">Bosh sahifa</a>
-                <a href="/about" class="nav-item nav-link">Biz haqimizda</a>
-                <a href="/projects" class="nav-item nav-link">Loyihalar</a>
+                <a href="/about" class="nav-item nav-link"
+                  >Korxona to'g'risida</a
+                >
+                <a href="/projects" class="nav-item nav-link"
+                  >Joriy loyihalar</a
+                >
+                <a href="/projects" class="nav-item nav-link"
+                  >Istiqbolli loyihalar</a
+                >
                 <a href="/contact" class="nav-item nav-link">Aloqa</a>
               </div>
             </div>
@@ -197,14 +208,22 @@
           </div>
           <div class="row">
             <% news.forEach(news => { %>
-            <div class="card col-lg-4 col-md-6">
-              <img src="<%= news.imgUrl %>" alt="<%= news.title %>" />
-              <div class="card-body">
-                <p class="fs-6 text-secondary m-0">
-                  <i class="far fa-calendar"></i> <%= news.createdAt %>
-                </p>
-                <h5 class="card-title"><%= news.title %></h5>
-                <a href="#!" class="text-primary">batafsil</a>
+            <div
+              class="col-lg-4 col-md-6 p-4 wow fadeInUp"
+              data-wow-delay="0.1s"
+            >
+              <div class="card">
+                <img src="<%= news.imgUrl %>" alt="<%= news.title %>" />
+                <div class="card-body">
+                  <p class="fs-6 text-secondary mb-2">
+                    <i class="far fa-calendar"></i> <%= news.createdAt %>
+                  </p>
+                  <h5 class="card-title"><%= news.title %></h5>
+                  <hr />
+                  <a href="/news/<%= news.id %>" class="text-primary"
+                    >batafsil</a
+                  >
+                </div>
               </div>
             </div>
             <% }); %>
@@ -330,22 +349,10 @@
           </div>
           <div class="row">
             <% projects.images.forEach(project => { %>
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-              <div class="service-item">
-                <a class="service-img" href="/project/<%= project.id %>">
-                  <img src="<%= project.imgUrl %>" alt="Image" />
-                </a>
-                <div class="service-text">
-                  <h3><%= project.name %></h3>
-                  <a
-                    class="btn see-more"
-                    href="<%= project.imgUrl %> "
-                    data-lightbox="service"
-                    ><p>&#8594;</p></a
-                  >
-                </div>
-              </div>
-            </div>
+            <div
+              class="col-lg-4 col-md-6 wow fadeInUp"
+              data-wow-delay="0.1s"
+            ></div>
             <% }); %>
           </div>
         </div>
@@ -366,14 +373,22 @@
           </div>
           <div class="row">
             <% news.forEach(news => { %>
-            <div class="card col-lg-4 col-md-6">
-              <img src="<%= news.imgUrl %>" alt="<%= news.title %>" />
-              <div class="card-body">
-                <p class="fs-6 text-secondary m-0">
-                  <i class="far fa-calendar"></i> <%= news.createdAt %>
-                </p>
-                <h5 class="card-title"><%= news.title %></h5>
-                <a href="#!" class="text-primary">batafsil</a>
+            <div
+              class="col-lg-4 col-md-6 p-4 wow fadeInUp"
+              data-wow-delay="0.1s"
+            >
+              <div class="card">
+                <img src="<%= news.imgUrl %>" alt="<%= news.title %>" />
+                <div class="card-body">
+                  <p class="fs-6 text-secondary mb-2">
+                    <i class="far fa-calendar"></i> <%= news.createdAt %>
+                  </p>
+                  <h5 class="card-title"><%= news.title %></h5>
+                  <hr />
+                  <a href="/news/<%= news.id %>" class="text-primary"
+                    >batafsil</a
+                  >
+                </div>
               </div>
             </div>
             <% }); %>

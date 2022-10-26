@@ -9,9 +9,8 @@ const createAdmin = async () => {
   });
   if (!admin) {
     await Users.create({
-      firstName: "Jamshidbek",
-      lastName: "Odiljonov",
-      password: bcrypt.hashSync("js0329", 8),
+      firstName: "bekzod",
+      password: bcrypt.hashSync("Beggi19961002", 8),
       role: "admin",
     });
   }

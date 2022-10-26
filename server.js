@@ -32,7 +32,7 @@ initialRoutes(app);
 
 //connection sequelize
 sequelize
-  .sync({ force: false })
+  .sync({ force: true })
   .then(() => {
     console.log("Drop end Resync db");
     createAdmin();

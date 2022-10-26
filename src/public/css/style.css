@@ -1,9 +1,17 @@
 /*******************************/
 /********* General CSS *********/
 /*******************************/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
 }
 
 h1,
@@ -12,6 +20,8 @@ h3,
 h4,
 h5,
 h6 {
+  margin-top: 0;
+  margin-bottom: 0;
   color: #000000;
 }
 
@@ -23,7 +33,7 @@ a {
 a:hover,
 a:active,
 a:focus {
-  color: #fdbe33;
+  color: #0d6efd;
   outline: none;
   text-decoration: none;
 }
@@ -1978,4 +1988,8 @@ a:focus {
 .slider .slide {
   height: 100px;
   width: 250px;
+}
+
+.footer {
+  margin: 0 !important;
 }

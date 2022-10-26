@@ -22,7 +22,8 @@ let routes = (app) => {
     .get("/direksiya/login", pageController.loginPage)
     .get("/direksiya/admin", verifyToken, pageController.adminPage)
     .get("/direksiya/users", verifyToken, pageController.userPage)
-    .get("/project/:name", pageController.projectController)
+    .get("/project/:id", pageController.projectPage)
+    .get("/news/:id", pageController.newsPage)
 
     // news
     .post("/news", newsController.createNews)
