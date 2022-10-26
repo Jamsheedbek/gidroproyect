@@ -39,8 +39,10 @@ module.exports = {
       });
 
       Project.images.forEach((e) => {
-        const Path =
-          __basedir + "/src/uploads/assets/projects/" + e.dataValues.fileName;
+        const Path = path.resolve(
+          "./src/uploads/assets/projects",
+          e.dataValues.fileName
+        );
         fs.unlink(Path, function (err) {
           if (err) return res.redirect("/direksiya/admin");
         });
@@ -69,11 +71,10 @@ module.exports = {
         newProject.dataValues.fileName
       );
 
-      file.mv(uploadPath, function (err) {
+      fs.writeFile(uploadPath, file.data, (err) => {
         if (err) {
-          res.redirect("/direksiya/admin");
+          return res.redirect("/direksiya/admin");
         }
-
         res.redirect("/direksiya/admin");
       });
     } catch (err) {

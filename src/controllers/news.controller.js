@@ -8,23 +8,19 @@ module.exports = {
       const { title, text } = req.body;
 
       const image = req.files.file;
-      console.log(image);
       const fileName = image.name;
-      await News.create({
+      const news = await News.create({
         title,
         text,
         fileName,
-      }).then((news) => {
-        const uploadPath = path.resolve("./src/uploads/assets/news", fileName);
-
-        image.mv(uploadPath, function (err) {
-          if (err) {
-            return console.log(err);
-          }
-
-          res.redirect("/direksiya/admin");
-        });
       });
+      const uploadPath = path.resolve("./src/uploads/assets/news", fileName);
+
+      fs.writeFile(uploadPath, image.data, (err) => {
+        console.log(err);
+      });
+
+      res.redirect("/direksiya/admin");
     } catch (err) {
       console.log(err);
     }
