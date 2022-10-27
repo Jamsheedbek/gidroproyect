@@ -2,13 +2,10 @@ require("dotenv").config();
 const connectionString = process.env.CONNECTION_STRING;
 const { Sequelize, DataTypes } = require("sequelize");
 
-const sequelize = new Sequelize(
-  "postgres://postgres:pgpwd@localhost:5432/gidro",
-  {
-    host: "localhost",
-    dialect: "postgres",
-  }
-);
+const sequelize = new Sequelize(connectionString, {
+  host: "localhost",
+  dialect: "postgres",
+});
 
 const Users = sequelize.define("users", {
   id: {
@@ -40,11 +37,11 @@ const News = sequelize.define("news", {
     primaryKey: true,
   },
   title: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false,
   },
   text: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false,
   },
   fileName: {
