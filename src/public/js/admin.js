@@ -111,17 +111,22 @@ newsImage.addEventListener("change", () => {
   reader.readAsDataURL(newsImage.files[0]);
 });
 
-projectImage.addEventListener("change", () => {
-  var reader = new FileReader();
-  reader.onload = function (e) {
-    projectLabel.src = e.target.result;
-  };
+if (projectImage) {
+  projectImage.addEventListener("change", () => {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      projectLabel.src = e.target.result;
+    };
 
-  reader.readAsDataURL(projectImage.files[0]);
-});
+    reader.readAsDataURL(projectImage.files[0]);
+  });
+}
 
 newsWrapper.addEventListener("click", (e) => {
+  console.log(e.target);
   if (e.target.textContent.includes("Edit")) {
+    console.log(document.querySelector(".news-id"));
+    console.log(e.target.dataset.id);
     document.querySelector(".news-id").value = e.target.dataset.id;
   } else if (e.target.textContent.includes("Delete")) {
     document.querySelector(".delete-id").value = e.target.dataset.id;
