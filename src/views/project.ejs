@@ -146,14 +146,35 @@
               id="navbarCollapse"
             >
               <div class="navbar-nav mr-auto">
-                <a href="/" class="nav-item nav-link active">Bosh sahifa</a>
-                <a href="/about" class="nav-item nav-link"
-                  >Korxona to'g'risida</a
-                >
-                <a href="/projects" class="nav-item nav-link"
+                <a href="/" class="nav-item nav-link">Bosh sahifa</a>
+                <div class="dropdown">
+                  <a
+                    class="nav-item nav-link dropdown-toggle"
+                    id="dropdownMenuButton"
+                    data-mdb-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Korxona to'g'risida
+                  </a>
+                  <ul
+                    class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton"
+                  >
+                    <li>
+                      <a class="dropdown-item" href="/lidership">Rahbariyat</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="/post">Yuridik maqomi</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="/news">Yangiliklar</a>
+                    </li>
+                  </ul>
+                </div>
+                <a href="/projects/current" class="nav-item nav-link"
                   >Joriy loyihalar</a
                 >
-                <a href="/projects" class="nav-item nav-link"
+                <a href="/projects/promising" class="nav-item nav-link"
                   >Istiqbolli loyihalar</a
                 >
               </div>
@@ -173,11 +194,6 @@
               alt="activeProject.dataValues.fileName"
             />
             <div class="card-body">
-              <!-- <p class="card-text">
-                <small class="text-muted">
-                  <i class="far fa-calendar"></i>
-                </small>
-              </p> -->
               <h5 class="card-title"><%= activeProject.dataValues.name %></h5>
               <hr />
               <p
@@ -219,6 +235,115 @@
         </div>
       </div>
       <!-- News end -->
+
+      <!-- Useful links start -->
+      <div class="slider-wrapper">
+        <div class="slider">
+          <div class="slide-track">
+            <div class="slide">
+              <a href="https://lex.uz/uz/" target="_blank">
+                <img
+                  src="https://uzgidro.uz/images/useful%20links/lex.uz.png61c1d23b21512.png"
+                  height="100"
+                  width="191"
+                  alt=""
+                />
+              </a>
+            </div>
+            <div class="slide">
+              <a href="https://www.minjust.uz/ru/" target="_blank">
+                <img
+                  src="https://uzgidro.uz/images/useful%20links/logo-new.png61c1b94fa0ddf.png"
+                  height="100"
+                  width="90"
+                  alt=""
+                />
+              </a>
+            </div>
+            <div class="slide">
+              <a href="https://it-park.uz/" target="_blank">
+                <img
+                  src="https://uzgidro.uz/images/useful%20links/QU2AG715592005873613_b.jpg61c1d36cb1dd2.jpg"
+                  height="100"
+                  width="96"
+                  alt=""
+                />
+              </a>
+            </div>
+            <div class="slide">
+              <a href="https://soliq.uz/" target="_blank">
+                <img
+                  src="https://uzgidro.uz/images/useful%20links/logo-ss.png61c1b9868ba27.png"
+                  height="100"
+                  width="100"
+                  alt=""
+                />
+              </a>
+            </div>
+            <div class="slide">
+              <a href="https://murojaat.gov.uz/" target="_blank">
+                <img
+                  src="https://uzgidro.uz/images/useful%20links/murojaat.svg6327f9f0db5bc.svg"
+                  height="100"
+                  width="191"
+                  alt=""
+                />
+              </a>
+            </div>
+            <div class="slide">
+              <a href="https://data.egov.uz/" target="_blank">
+                <img
+                  src="https://uzgidro.uz/images/useful%20links/logo-1.png61c1b8eb171db.png"
+                  height="100"
+                  width="101"
+                  alt=""
+                />
+              </a>
+            </div>
+            <div class="slide">
+              <a href="https://my.gov.uz/oz" target="_blank">
+                <img
+                  src="https://uzgidro.uz/images/useful%20links/logo%20(1).png61c1d163e24f8.png"
+                  height="100"
+                  width="100"
+                  alt=""
+                />
+              </a>
+            </div>
+            <div class="slide">
+              <a href="https://meningfikrim.uz/uz" target="_blank">
+                <img
+                  src="https://uzgidro.uz/images/useful%20links/logo-mf.png61c1d21561aaf.png"
+                  height="100"
+                  width="191"
+                  alt=""
+                />
+              </a>
+            </div>
+            <div class="slide">
+              <a href="https://gov.uz/uz" target="_blank">
+                <img
+                  src="https://uzgidro.uz/images/useful%20links/gerb.png"
+                  height="100"
+                  width="100"
+                  alt=""
+                />
+              </a>
+            </div>
+            <div class="slide">
+              <a href="https://parliament.gov.uz/ru/" target="_blank">
+                <img
+                  src="https://uzgidro.uz/images/useful%20links/logo_small.png61c1b9202fda4.png"
+                  height="100"
+                  width="176"
+                  alt=""
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Useful links end -->
 
       <!-- Footer Start -->
       <div class="wow fadeIn" data-wow-delay="0.3s">

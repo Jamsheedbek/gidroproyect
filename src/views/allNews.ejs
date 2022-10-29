@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Loyihalar | Uzbekgidroenergo 1-Direksiya</title>
+    <title>Bosh sahifa | Uzbekgidroenergo 1-Direksiya</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta
       content="UzbekGidroEnergo 1-direksiya loyiha offisi sayti"
@@ -31,6 +31,10 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
       rel="stylesheet"
     />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css"
+      rel="stylesheet"
+    />
     <link href="lib/flaticon/font/flaticon.css" rel="stylesheet" />
     <link href="lib/animate/animate.min.css" rel="stylesheet" />
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
@@ -40,6 +44,7 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet" />
+    <link href="css/login.css" rel="stylesheet" />
   </head>
 
   <body>
@@ -135,14 +140,35 @@
               id="navbarCollapse"
             >
               <div class="navbar-nav mr-auto">
-                <a href="/" class="nav-item nav-link active">Bosh sahifa</a>
-                <a href="/about" class="nav-item nav-link"
-                  >Korxona to'g'risida</a
-                >
-                <a href="/projects" class="nav-item nav-link"
+                <a href="/" class="nav-item nav-link">Bosh sahifa</a>
+                <div class="dropdown">
+                  <a
+                    class="nav-item nav-link dropdown-toggle"
+                    id="dropdownMenuButton"
+                    data-mdb-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Korxona to'g'risida
+                  </a>
+                  <ul
+                    class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton"
+                  >
+                    <li>
+                      <a class="dropdown-item" href="/lidership">Rahbariyat</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="/post">Yuridik maqomi</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="/news">Yangiliklar</a>
+                    </li>
+                  </ul>
+                </div>
+                <a href="/projects/current" class="nav-item nav-link"
                   >Joriy loyihalar</a
                 >
-                <a href="/projects" class="nav-item nav-link"
+                <a href="/projects/promising" class="nav-item nav-link"
                   >Istiqbolli loyihalar</a
                 >
               </div>
@@ -152,190 +178,146 @@
       </div>
       <!-- Nav Bar End -->
 
-      <!-- Page Header Start -->
-      <div class="page-header">
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <h2>Bizning Loyihalar</h2>
-            </div>
-            <div class="col-12">
-              <a href="/">Bosh Sahifa</a>
-              <a href="/projects">Loyihalar</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Page Header End -->
-
-      <!-- Portfolio Start -->
-      <div class="portfolio">
+      <!-- News Start -->
+      <div class="blog">
         <div class="container">
           <div class="section-header text-center">
-            <p>Bizning Loyihalar</p>
-            <h2>Loyihalarimizga tashrif buyuring</h2>
+            <h2>So'ngi yangiliklar</h2>
           </div>
-          <div class="row portfolio-container">
+          <div class="row">
+            <% news.forEach(news => { %>
             <div
-              class="col-lg-4 col-md-6 col-sm-12 portfolio-item first wow fadeInUp"
+              class="col-lg-4 col-md-6 p-4 wow fadeInUp"
               data-wow-delay="0.1s"
             >
-              <div class="portfolio-warp">
-                <div class="portfolio-img">
-                  <img src="img/portfolio-1.jpg" alt="Image" />
-                  <div class="portfolio-overlay">
-                    <p>
-                      Lorem ipsum dolor sit amet elit. Phasel nec pretium mi.
-                      Curabit facilis ornare velit non. Aliqu metus tortor,
-                      auctor id gravi condime, viverra quis sem.
-                    </p>
-                  </div>
-                </div>
-                <div class="portfolio-text">
-                  <h3>Project Name</h3>
-                  <a
-                    class="btn"
-                    href="img/portfolio-1.jpg"
-                    data-lightbox="portfolio"
-                    >+</a
+              <div class="card">
+                <img src="<%= news.imgUrl %>" alt="<%= news.title %>" />
+                <div class="card-body">
+                  <p class="fs-6 text-secondary mb-2">
+                    <i class="far fa-calendar"></i> <%= news.createdAt %>
+                  </p>
+                  <h5 class="card-title"><%= news.title %></h5>
+                  <hr />
+                  <a href="/news/view/<%= news.id %>" class="text-primary"
+                    >batafsil</a
                   >
                 </div>
               </div>
             </div>
-            <div
-              class="col-lg-4 col-md-6 col-sm-12 portfolio-item second wow fadeInUp"
-              data-wow-delay="0.2s"
-            >
-              <div class="portfolio-warp">
-                <div class="portfolio-img">
-                  <img src="img/portfolio-2.jpg" alt="Image" />
-                  <div class="portfolio-overlay">
-                    <p>
-                      Lorem ipsum dolor sit amet elit. Phasel nec pretium mi.
-                      Curabit facilis ornare velit non. Aliqu metus tortor,
-                      auctor id gravi condime, viverra quis sem.
-                    </p>
-                  </div>
-                </div>
-                <div class="portfolio-text">
-                  <h3>Project Name</h3>
-                  <a
-                    class="btn"
-                    href="img/portfolio-2.jpg"
-                    data-lightbox="portfolio"
-                    >+</a
-                  >
-                </div>
-              </div>
+            <% }); %>
+          </div>
+        </div>
+      </div>
+      <!-- News End -->
+
+      <!-- Useful links start -->
+      <div class="slider-wrapper">
+        <div class="slider">
+          <div class="slide-track">
+            <div class="slide">
+              <a href="https://lex.uz/uz/" target="_blank">
+                <img
+                  src="https://uzgidro.uz/images/useful%20links/lex.uz.png61c1d23b21512.png"
+                  height="100"
+                  width="191"
+                  alt=""
+                />
+              </a>
             </div>
-            <div
-              class="col-lg-4 col-md-6 col-sm-12 portfolio-item third wow fadeInUp"
-              data-wow-delay="0.3s"
-            >
-              <div class="portfolio-warp">
-                <div class="portfolio-img">
-                  <img src="img/portfolio-3.jpg" alt="Image" />
-                  <div class="portfolio-overlay">
-                    <p>
-                      Lorem ipsum dolor sit amet elit. Phasel nec pretium mi.
-                      Curabit facilis ornare velit non. Aliqu metus tortor,
-                      auctor id gravi condime, viverra quis sem.
-                    </p>
-                  </div>
-                </div>
-                <div class="portfolio-text">
-                  <h3>Project Name</h3>
-                  <a
-                    class="btn"
-                    href="img/portfolio-3.jpg"
-                    data-lightbox="portfolio"
-                    >+</a
-                  >
-                </div>
-              </div>
+            <div class="slide">
+              <a href="https://www.minjust.uz/ru/" target="_blank">
+                <img
+                  src="https://uzgidro.uz/images/useful%20links/logo-new.png61c1b94fa0ddf.png"
+                  height="100"
+                  width="90"
+                  alt=""
+                />
+              </a>
             </div>
-            <div
-              class="col-lg-4 col-md-6 col-sm-12 portfolio-item first wow fadeInUp"
-              data-wow-delay="0.4s"
-            >
-              <div class="portfolio-warp">
-                <div class="portfolio-img">
-                  <img src="img/portfolio-4.jpg" alt="Image" />
-                  <div class="portfolio-overlay">
-                    <p>
-                      Lorem ipsum dolor sit amet elit. Phasel nec pretium mi.
-                      Curabit facilis ornare velit non. Aliqu metus tortor,
-                      auctor id gravi condime, viverra quis sem.
-                    </p>
-                  </div>
-                </div>
-                <div class="portfolio-text">
-                  <h3>Project Name</h3>
-                  <a
-                    class="btn"
-                    href="img/portfolio-4.jpg"
-                    data-lightbox="portfolio"
-                    >+</a
-                  >
-                </div>
-              </div>
+            <div class="slide">
+              <a href="https://it-park.uz/" target="_blank">
+                <img
+                  src="https://uzgidro.uz/images/useful%20links/QU2AG715592005873613_b.jpg61c1d36cb1dd2.jpg"
+                  height="100"
+                  width="96"
+                  alt=""
+                />
+              </a>
             </div>
-            <div
-              class="col-lg-4 col-md-6 col-sm-12 portfolio-item second wow fadeInUp"
-              data-wow-delay="0.5s"
-            >
-              <div class="portfolio-warp">
-                <div class="portfolio-img">
-                  <img src="img/portfolio-5.jpg" alt="Image" />
-                  <div class="portfolio-overlay">
-                    <p>
-                      Lorem ipsum dolor sit amet elit. Phasel nec pretium mi.
-                      Curabit facilis ornare velit non. Aliqu metus tortor,
-                      auctor id gravi condime, viverra quis sem.
-                    </p>
-                  </div>
-                </div>
-                <div class="portfolio-text">
-                  <h3>Project Name</h3>
-                  <a
-                    class="btn"
-                    href="img/portfolio-5.jpg"
-                    data-lightbox="portfolio"
-                    >+</a
-                  >
-                </div>
-              </div>
+            <div class="slide">
+              <a href="https://soliq.uz/" target="_blank">
+                <img
+                  src="https://uzgidro.uz/images/useful%20links/logo-ss.png61c1b9868ba27.png"
+                  height="100"
+                  width="100"
+                  alt=""
+                />
+              </a>
             </div>
-            <div
-              class="col-lg-4 col-md-6 col-sm-12 portfolio-item third wow fadeInUp"
-              data-wow-delay="0.6s"
-            >
-              <div class="portfolio-warp">
-                <div class="portfolio-img">
-                  <img src="img/portfolio-6.jpg" alt="Image" />
-                  <div class="portfolio-overlay">
-                    <p>
-                      Lorem ipsum dolor sit amet elit. Phasel nec pretium mi.
-                      Curabit facilis ornare velit non. Aliqu metus tortor,
-                      auctor id gravi condime, viverra quis sem.
-                    </p>
-                  </div>
-                </div>
-                <div class="portfolio-text">
-                  <h3>Project Name</h3>
-                  <a
-                    class="btn"
-                    href="img/portfolio-6.jpg"
-                    data-lightbox="portfolio"
-                    >+</a
-                  >
-                </div>
-              </div>
+            <div class="slide">
+              <a href="https://murojaat.gov.uz/" target="_blank">
+                <img
+                  src="https://uzgidro.uz/images/useful%20links/murojaat.svg6327f9f0db5bc.svg"
+                  height="100"
+                  width="191"
+                  alt=""
+                />
+              </a>
+            </div>
+            <div class="slide">
+              <a href="https://data.egov.uz/" target="_blank">
+                <img
+                  src="https://uzgidro.uz/images/useful%20links/logo-1.png61c1b8eb171db.png"
+                  height="100"
+                  width="101"
+                  alt=""
+                />
+              </a>
+            </div>
+            <div class="slide">
+              <a href="https://my.gov.uz/oz" target="_blank">
+                <img
+                  src="https://uzgidro.uz/images/useful%20links/logo%20(1).png61c1d163e24f8.png"
+                  height="100"
+                  width="100"
+                  alt=""
+                />
+              </a>
+            </div>
+            <div class="slide">
+              <a href="https://meningfikrim.uz/uz" target="_blank">
+                <img
+                  src="https://uzgidro.uz/images/useful%20links/logo-mf.png61c1d21561aaf.png"
+                  height="100"
+                  width="191"
+                  alt=""
+                />
+              </a>
+            </div>
+            <div class="slide">
+              <a href="https://gov.uz/uz" target="_blank">
+                <img
+                  src="https://uzgidro.uz/images/useful%20links/gerb.png"
+                  height="100"
+                  width="100"
+                  alt=""
+                />
+              </a>
+            </div>
+            <div class="slide">
+              <a href="https://parliament.gov.uz/ru/" target="_blank">
+                <img
+                  src="https://uzgidro.uz/images/useful%20links/logo_small.png61c1b9202fda4.png"
+                  height="100"
+                  width="176"
+                  alt=""
+                />
+              </a>
             </div>
           </div>
         </div>
       </div>
-      <!-- Portfolio End -->
+      <!-- Useful links end -->
 
       <!-- Footer Start -->
       <div class="wow fadeIn" data-wow-delay="0.3s">
@@ -497,8 +479,6 @@
         <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
       </div>
       <!-- Footer End -->
-
-      <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
     </div>
 
     <!-- JavaScript Libraries -->
@@ -512,8 +492,6 @@
     <script src="lib/waypoints/waypoints.min.js"></script>
     <script src="lib/counterup/counterup.min.js"></script>
     <script src="lib/slick/slick.min.js"></script>
-
-    <!-- Template Javascript -->
     <script src="js/main.js"></script>
   </body>
 </html>

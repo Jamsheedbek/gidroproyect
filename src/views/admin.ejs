@@ -155,6 +155,15 @@
               </div>
             </div>
             <div class="row">
+              <div class="col-3 d-flex align-items-center">Loyiha turi :</div>
+              <div class="col-9">
+                <select name="type" class="form-select w-50 mb-3">
+                  <option selected value="news">Yangilik</option>
+                  <option value="poster">E'lon</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
               <div class="col-3 d-flex align-items-center">Mazmuni:</div>
               <div class="col-9">
                 <div class="card w-100 rounded-8">
@@ -176,7 +185,6 @@
               <tr>
                 <th scope="col" class="fs-6 table-secondary">Rasm</th>
                 <th scope="col" class="fs-6 table-secondary">Title</th>
-                <th scope="col" class="fs-6 table-secondary">Edit</th>
                 <th scope="col" class="fs-6 table-secondary">Delete</th>
               </tr>
             </thead>
@@ -187,79 +195,6 @@
                   <img src="<%= e.imgUrl %>" alt="" class="new-imgs" />
                 </td>
                 <td class="text-truncate"><%= e.title %></td>
-                <td>
-                  <button
-                    data-id="<%= e.id %>"
-                    data-bs-toggle="modal"
-                    data-bs-target="#staticBackdropp"
-                    class="btn btn-primary"
-                  >
-                    Edit
-                  </button>
-                </td>
-                <div
-                  class="modal fade"
-                  id="staticBackdropp"
-                  data-bs-backdrop="static"
-                  data-bs-keyboard="false"
-                  tabindex="-1"
-                  aria-labelledby="staticBackdropLabel"
-                  aria-hidden="true"
-                >
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <form
-                          action="/edite-news"
-                          enctype="application/x-www-form-urlencoded"
-                          method="post"
-                          style="width: 100%"
-                        >
-                          <div class="new-title w-100">
-                            <input
-                              required
-                              class="form-control form-control-lg w-100"
-                              type="text"
-                              placeholder="Title"
-                              name="title"
-                              aria-label=".form-control-lg example"
-                              style="margin: 15px 0"
-                            />
-                            <input
-                              required
-                              class="form-control form-control-lg w-100"
-                              type="text"
-                              placeholder="Text"
-                              name="text"
-                              aria-label=".form-control-lg example"
-                              style="margin: 15px 0"
-                            />
-                            <input
-                              class="d-none news-id"
-                              type="text"
-                              name="id"
-                              placeholder="Text"
-                              aria-label=".form-control-lg example"
-                              style="margin: 15px 0"
-                            />
-                          </div>
-                          <div class="d-flex" style="justify-content: flex-end">
-                            <button
-                              type="button"
-                              class="btn btn-secondary mx-2"
-                              data-bs-dismiss="modal"
-                            >
-                              Close
-                            </button>
-                            <button type="submit" class="btn btn-primary mx-2">
-                              OK
-                            </button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
                 <td>
                   <button
                     data-id="<%= e.id %>"
@@ -613,6 +548,15 @@
               </div>
             </div>
             <div class="row">
+              <div class="col-3 d-flex align-items-center">Loyiha turi :</div>
+              <div class="col-9">
+                <select name="type" class="form-select w-50 mb-3">
+                  <option selected value="finished">Joriy</option>
+                  <option value="planned">Istiqbolli</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
               <div class="col-3 d-flex align-items-center">
                 Loyiha mazmuni :
               </div>
@@ -636,8 +580,8 @@
           <% } %>
           <!-- Project end -->
 
-          <% if(page == "get-works") { %>
           <!-- Works start -->
+          <% if(page == "get-works") { %>
           <table class="table m-2">
             <thead>
               <tr>
@@ -720,14 +664,13 @@
           <% } %>
           <!-- Works end -->
 
-          <% if(page == "get-projects") { %>
           <!-- Project Images -->
+          <% if(page == "get-projects") { %>
           <table class="table m-2">
             <thead>
               <tr>
                 <th scope="col" class="fs-6 table-secondary">Image</th>
                 <th scope="col" class="fs-6 table-secondary">Name</th>
-                <th scope="col" class="fs-6 table-secondary">Edit</th>
                 <th scope="col" class="fs-6 table-secondary">Delete</th>
               </tr>
             </thead>
@@ -738,65 +681,6 @@
                   <img src="<%= project.imgUrl %>" alt="" class="new-imgs" />
                 </td>
                 <td><%= project.name %></td>
-                <td>
-                  <button
-                    data-bs-toggle="modal"
-                    data-bs-target="#Project"
-                    class="btn btn-primary"
-                    data-id="<%= project.id %>"
-                  >
-                    Edit
-                  </button>
-                </td>
-                <div
-                  class="modal fade"
-                  id="Project"
-                  data-bs-backdrop="static"
-                  data-bs-keyboard="false"
-                  tabindex="-1"
-                  aria-labelledby="Project"
-                  aria-hidden="true"
-                >
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <form
-                          action="/edit-project"
-                          method="post"
-                          enctype="application/x-www-form-urlencoded"
-                          style="width: 100%"
-                        >
-                          <input
-                            required
-                            class="form-control form-control-lg w-100"
-                            type="text"
-                            name="name"
-                            placeholder="Name"
-                            aria-label=".form-control-lg example"
-                            style="margin: 15px 0"
-                          />
-                          <input
-                            type="text"
-                            class="d-none project-edit"
-                            name="id"
-                          />
-                          <div class="d-flex" style="justify-content: flex-end">
-                            <button
-                              type="button"
-                              class="btn btn-secondary mx-2"
-                              data-bs-dismiss="modal"
-                            >
-                              Close
-                            </button>
-                            <button type="submit" class="btn btn-primary mx-2">
-                              OK
-                            </button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
                 <td>
                   <button
                     type="button"
@@ -857,8 +741,8 @@
               <% }); %>
             </tbody>
           </table>
-          <!-- Project Images end -->
           <% } %>
+          <!-- Project Images end -->
         </div>
       </div>
     </div>

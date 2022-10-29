@@ -17,8 +17,8 @@ let routes = (app) => {
     //pages
     .get("/", pageController.homePage)
     .get("/about", pageController.aboutPage)
-    .get("/contact", pageController.contactPage)
-    .get("/projects", pageController.projectsPage)
+    .get("/projects/current", pageController.finishedProjectsPage)
+    .get("/projects/promising", pageController.plannedProjectsPage)
     .get("/direksiya/login", pageController.loginPage)
     .get(
       "/direksiya/admin/create/news",
@@ -41,16 +41,16 @@ let routes = (app) => {
     .get("/direksiya/users", verifyToken, pageController.userPage)
     .get("/projects/view/:id", pageController.projectPage)
     .get("/news/view/:id", pageController.newsPage)
+    .get("/news", pageController.allNewsPage)
 
     // news
     .post("/news", newsController.createNews)
-    .post("/edite-news", newsController.editNews)
     .post("/delete-news", newsController.deleteNews)
 
     //projects
     .post("/projects", projectsController.createProject)
-    .post("/edit-project", projectsController.editProject)
     .post("/delete-project", projectsController.deleteProject)
+
     //login
     .post("/direksiya/login", authController.signIn)
     .post("/log-out", usersController.logOutUser)

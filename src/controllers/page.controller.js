@@ -12,16 +12,28 @@ module.exports = {
 
       res.render("index", { news, projects });
     } catch (err) {
-      res.status(500).send({
-        message: err.message,
-      });
+      console.log(err);
+    }
+  },
+  allNewsPage: async (req, res) => {
+    try {
+      const news = await handleAllNews();
+
+      res.render("allNews", { news });
+    } catch (err) {
+      console.log(err);
     }
   },
   aboutPage: (req, res) => {
     res.render("about", { page: "news" });
   },
-  projectsPage: (req, res) => {
-    res.render("projects");
+  finishedProjectsPage: async (req, res) => {
+    const projects = await handleProjects();
+    res.render("finishedProjects", { projects });
+  },
+  plannedProjectsPage: async (req, res) => {
+    const projects = await handleProjects();
+    res.render("plannedProjects", { projects });
   },
   contactPage: (req, res) => {
     res.render("contact");
@@ -30,15 +42,7 @@ module.exports = {
     res.render("login", { message: null });
   },
   createNewsPage: async (req, res) => {
-    // const users = await handleAllUsers();
-    // const news = await handleAllNews();
-    // const projects = await handleProjects();
-    // const works = await handleWorks();
     res.render("admin", {
-      // users,
-      // news,
-      // projects,
-      // works,
       page: "create-news",
     });
   },

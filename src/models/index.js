@@ -46,10 +46,18 @@ const News = sequelize.define("news", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  type: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
 });
 
 const Projects = sequelize.define("projects", {
   name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  type: {
     type: DataTypes.STRING,
     allowNull: false,
   },

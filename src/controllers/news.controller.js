@@ -5,7 +5,7 @@ const path = require("path");
 module.exports = {
   createNews: async (req, res) => {
     try {
-      const { title, content } = req.body;
+      const { title, content, type } = req.body;
 
       const image = req.files.file;
       const fileName = image.name;
@@ -13,6 +13,7 @@ module.exports = {
         title,
         content,
         fileName,
+        type,
       });
       const uploadPath = path.resolve("./src/uploads/assets/news", fileName);
 
@@ -21,24 +22,6 @@ module.exports = {
       });
 
       res.redirect("/direksiya/admin/create/news");
-    } catch (err) {
-      console.log(err);
-    }
-  },
-  editNews: async (req, res) => {
-    try {
-      const { id, text, title } = req.body;
-
-      if ((text, title)) {
-        await News.update(
-          { title, text },
-          {
-            where: { id },
-          }
-        );
-
-        res.redirect("/direksiya/admin/get/news");
-      }
     } catch (err) {
       console.log(err);
     }
