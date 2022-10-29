@@ -2,10 +2,13 @@ require("dotenv").config();
 const connectionString = process.env.CONNECTION_STRING;
 const { Sequelize, DataTypes } = require("sequelize");
 
-const sequelize = new Sequelize(connectionString, {
-  host: "localhost",
-  dialect: "postgres",
-});
+const sequelize = new Sequelize(
+  "postgres://reuhyxok:w-ekd8Oa49s3TaQRHFKJ6CAMDePYhI3Q@arjuna.db.elephantsql.com/reuhyxok",
+  {
+    host: "localhost",
+    dialect: "postgres",
+  }
+);
 
 const Users = sequelize.define("users", {
   id: {
@@ -31,18 +34,13 @@ const Users = sequelize.define("users", {
 });
 
 const News = sequelize.define("news", {
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
-  },
   title: {
     type: DataTypes.TEXT,
     allowNull: false,
   },
-  text: {
+  content: {
     type: DataTypes.TEXT,
-    allowNull: false,
+    allowNull: true,
   },
   fileName: {
     type: DataTypes.STRING,
@@ -51,23 +49,12 @@ const News = sequelize.define("news", {
 });
 
 const Projects = sequelize.define("projects", {
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
-  },
   name: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
   },
-});
-
-const projectImages = sequelize.define("images", {
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
+  content: {
+    type: DataTypes.TEXT,
   },
   fileName: {
     type: DataTypes.STRING,
@@ -91,16 +78,19 @@ const Works = sequelize.define("works", {
   },
 });
 
+// const Management = sequelize.define('management', {
+//   id: {
+//     type:
+//   }
+// })
+
 Users.hasOne(Works, { onDelete: "cascade" });
 Works.belongsTo(Users);
-Projects.hasMany(projectImages, { onDelete: "cascade" });
-projectImages.belongsTo(Projects);
 
 module.exports = {
   Users,
   News,
   Projects,
   Works,
-  projectImages,
   sequelize,
 };

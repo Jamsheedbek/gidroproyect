@@ -89,3 +89,25 @@
     portfolioIsotope.isotope({ filter: $(this).data("filter") });
   });
 })(jQuery);
+
+var Content = new Quill(document.getElementById("editor"));
+
+Content.setContents(
+  JSON.parse(document.getElementById("editor").dataset.content)
+);
+
+document.getElementById("editor").dataset.content = "";
+
+document
+  .getElementById("editor")
+  .querySelectorAll("img")
+  .forEach((e) => {
+    e.classList.add("card-img-top");
+  });
+
+document
+  .getElementById("editor")
+  .querySelectorAll("p")
+  .forEach((e) => {
+    e.classList.add("card-text");
+  });

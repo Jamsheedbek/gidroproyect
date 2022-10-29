@@ -5,13 +5,13 @@ const path = require("path");
 module.exports = {
   createNews: async (req, res) => {
     try {
-      const { title, text } = req.body;
+      const { title, content } = req.body;
 
       const image = req.files.file;
       const fileName = image.name;
       const news = await News.create({
         title,
-        text,
+        content,
         fileName,
       });
       const uploadPath = path.resolve("./src/uploads/assets/news", fileName);
@@ -20,7 +20,7 @@ module.exports = {
         console.log(err);
       });
 
-      res.redirect("/direksiya/admin");
+      res.redirect("/direksiya/admin/create/news");
     } catch (err) {
       console.log(err);
     }
@@ -37,7 +37,7 @@ module.exports = {
           }
         );
 
-        res.redirect("/direksiya/admin");
+        res.redirect("/direksiya/admin/get/news");
       }
     } catch (err) {
       console.log(err);
@@ -52,7 +52,7 @@ module.exports = {
       });
       await News.destroy({ where: { id } });
 
-      res.redirect("/direksiya/admin");
+      res.redirect("/direksiya/admin/get/news");
     } catch (err) {
       console.log(err);
     }

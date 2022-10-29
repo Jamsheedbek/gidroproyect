@@ -29,17 +29,50 @@ module.exports = {
   loginPage: (req, res) => {
     res.render("login", { message: null });
   },
-  adminPage: async (req, res) => {
-    const users = await handleAllUsers();
+  createNewsPage: async (req, res) => {
+    // const users = await handleAllUsers();
+    // const news = await handleAllNews();
+    // const projects = await handleProjects();
+    // const works = await handleWorks();
+    res.render("admin", {
+      // users,
+      // news,
+      // projects,
+      // works,
+      page: "create-news",
+    });
+  },
+  getNewsPage: async (req, res) => {
     const news = await handleAllNews();
+    res.render("admin", {
+      news,
+      page: "get-news",
+    });
+  },
+  createProjectPage: async (req, res) => {
+    res.render("admin", {
+      page: "create-project",
+    });
+  },
+  getProjectsPage: async (req, res) => {
     const projects = await handleProjects();
-    const works = await handleWorks();
+    res.render("admin", {
+      projects,
+      page: "get-projects",
+    });
+  },
+  usersPage: async (req, res) => {
+    const users = await handleAllUsers();
     res.render("admin", {
       users,
-      news,
-      projects,
+      page: "get-users",
+    });
+  },
+  worksPage: async (req, res) => {
+    const works = await handleWorks();
+    res.render("admin", {
       works,
-      error: "",
+      page: "get-works",
     });
   },
   userPage: async (req, res) => {
@@ -50,8 +83,9 @@ module.exports = {
     res.render("users", { works, user });
   },
   projectPage: async (req, res) => {
-    console.log(req.params);
-    res.render("project");
+    const news = await handleAllNews();
+    const activeProject = await handleProjects(req.params.id);
+    res.render("project", { activeProject, news });
   },
   newsPage: async (req, res) => {
     const news = await handleAllNews();

@@ -1,30 +1,23 @@
 const { Projects, projectImages } = require("../models");
 
-const handleProjects = async () => {
+const handleProjects = async (id) => {
   try {
-    const allProjects = await Projects.findAll({ include: projectImages });
-    var newRes = {
-      projects: [],
-      images: [],
-    };
+    var newRes = [];
+    var allProjects;
+    if (id) {
+      allProjects = await Projects.findOne({ where: { id } });
+
+      allProjects.imgUrl =
+        "/files/assets/projects/" + allProjects.dataValues.fileName;
+
+      return allProjects;
+    }
+
+    allProjects = await Projects.findAll();
 
     allProjects.forEach((e) => {
-      if (e.dataValues.images.length > 0) {
-        e.dataValues.url =
-          "/files/assets/projects/" +
-          e.dataValues.images[0].dataValues.fileName;
-        newRes.projects.push(e.dataValues);
-        e.dataValues.images.forEach((image) => {
-          newRes.images.push({
-            name: e.dataValues.name,
-            imgUrl: "/files/assets/projects/" + image.dataValues.fileName,
-            id: image.dataValues.id,
-            fileName: image.dataValues.fileName,
-          });
-        });
-      } else {
-        newRes.projects.push(e.dataValues);
-      }
+      e.dataValues.imgUrl = "/files/assets/projects/" + e.dataValues.fileName;
+      newRes.push(e.dataValues);
     });
 
     return newRes;

@@ -1,5 +1,6 @@
 body {
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .new-input[type="file"] {
@@ -10,7 +11,7 @@ body {
   width: 140px;
 }
 
-.new {
+.wrapper {
   width: 100%;
 }
 
@@ -36,7 +37,16 @@ body {
   overflow-x: hidden;
 }
 
-.new {
+.wrapper {
+  height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+#editor {
+  border: none;
+}
+
+.ql-toolbar.ql-snow {
+  border: none;
 }

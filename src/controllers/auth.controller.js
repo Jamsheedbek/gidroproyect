@@ -31,7 +31,7 @@ module.exports = {
       if (user.role == "user") {
         res.redirect("/direksiya/users");
       } else if (user.role == "admin") {
-        res.redirect("/direksiya/admin");
+        res.redirect("/direksiya/admin/create/news");
       }
     } catch (err) {
       res.render("login", {

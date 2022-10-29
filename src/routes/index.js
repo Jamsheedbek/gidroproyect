@@ -20,10 +20,27 @@ let routes = (app) => {
     .get("/contact", pageController.contactPage)
     .get("/projects", pageController.projectsPage)
     .get("/direksiya/login", pageController.loginPage)
-    .get("/direksiya/admin", verifyToken, pageController.adminPage)
+    .get(
+      "/direksiya/admin/create/news",
+      verifyToken,
+      pageController.createNewsPage
+    )
+    .get("/direksiya/admin/get/news", verifyToken, pageController.getNewsPage)
+    .get(
+      "/direksiya/admin/create/project",
+      verifyToken,
+      pageController.createProjectPage
+    )
+    .get(
+      "/direksiya/admin/get/projects",
+      verifyToken,
+      pageController.getProjectsPage
+    )
+    .get("/direksiya/admin/get/users", verifyToken, pageController.usersPage)
+    .get("/direksiya/admin/get/works", verifyToken, pageController.worksPage)
     .get("/direksiya/users", verifyToken, pageController.userPage)
-    .get("/project/:id", pageController.projectPage)
-    .get("/news/:id", pageController.newsPage)
+    .get("/projects/view/:id", pageController.projectPage)
+    .get("/news/view/:id", pageController.newsPage)
 
     // news
     .post("/news", newsController.createNews)
@@ -34,8 +51,6 @@ let routes = (app) => {
     .post("/projects", projectsController.createProject)
     .post("/edit-project", projectsController.editProject)
     .post("/delete-project", projectsController.deleteProject)
-    .post("/add-image", projectsController.addImage)
-    .post("/delete-image", projectsController.deleteImage)
     //login
     .post("/direksiya/login", authController.signIn)
     .post("/log-out", usersController.logOutUser)

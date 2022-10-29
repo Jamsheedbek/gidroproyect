@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin panel</title>
     <link rel="stylesheet" href="/css/admin.css" />
+    <!-- Main Quill library -->
+    <script src="//cdn.quilljs.com/1.0.0/quill.js"></script>
+
+    <!-- Theme included stylesheets -->
+    <link href="//cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet" />
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css"
       rel="stylesheet"
@@ -29,121 +34,333 @@
           </a>
           <hr />
           <ul class="nav nav-pills flex-column mb-auto">
-            <li>
-              <div class="nav-link text-light bg-dark">News</div>
-            </li>
-            <li>
-              <div class="nav-link text-light bg-dark">Projects</div>
-            </li>
-            <li>
-              <div class="nav-link text-light bg-dark">Works</div>
-            </li>
-            <li>
-              <div class="nav-link text-light bg-dark">Users</div>
-            </li>
-            <li>
-              <div class="nav-link text-light bg-dark">Images</div>
-            </li>
+            <div class="dropdown mb-4">
+              <button
+                class="btn btn-primary dropdown-toggle w-100 text-start"
+                type="button"
+                id="dropdownMenuButton"
+                data-mdb-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Yangiliklar
+              </button>
+              <ul
+                class="dropdown-menu w-100"
+                aria-labelledby="dropdownMenuButton"
+              >
+                <li>
+                  <a class="dropdown-item" href="/direksiya/admin/create/news"
+                    >Yangilik yaratish</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/direksiya/admin/get/news"
+                    >Barcha yangiliklar</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="dropdown mb-4">
+              <button
+                class="btn btn-primary dropdown-toggle w-100 text-start"
+                type="button"
+                id="dropdownMenuButton"
+                data-mdb-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Loyihalar
+              </button>
+              <ul
+                class="dropdown-menu w-100"
+                aria-labelledby="dropdownMenuButton"
+              >
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="/direksiya/admin/create/project"
+                    >Loyiha yaratish</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/direksiya/admin/get/projects"
+                    >Barcha loyihalar</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <a
+              class="btn btn-primary w-100 text-start mb-4"
+              href="/direksiya/admin/get/users"
+            >
+              Hodimlar
+            </a>
+            <a
+              class="btn btn-primary w-100 text-start"
+              href="/direksiya/admin/get/works"
+            >
+              Ishlar
+            </a>
           </ul>
         </div>
-        <div class="new">
-          <!-- News -->
-          <div class="new-page pages">
-            <form
-              action="/news"
-              method="post"
-              enctype="multipart/form-data"
-              class="new-form"
-            >
-              <div class="d-flex align-items-center">
-                <div class="new-title">
-                  <input
-                    required
-                    name="file"
-                    type="file"
-                    id="news-photo"
-                    class="new-input"
+        <div class="wrapper">
+          <% if(page == "create-news") { %>
+          <form
+            id="create-news"
+            action="/news"
+            method="post"
+            enctype="multipart/form-data"
+            class="new-form"
+          >
+            <div class="row">
+              <div class="col-3 d-flex align-items-center">
+                Yangilik rasmi :
+              </div>
+              <div class="col-9">
+                <input
+                  name="file"
+                  type="file"
+                  id="news-photo"
+                  class="new-input"
+                />
+                <label for="news-photo">
+                  <img
+                    src="/img/Image 5.png"
+                    alt=""
+                    class="new-img news-label"
                   />
-                  <label for="news-photo">
-                    <img
-                      src="/img/Image 5.png"
-                      alt=""
-                      class="new-img news-label"
-                    />
-                  </label>
-                </div>
-                <div class="new-title mx-5 w-100">
-                  <input
-                    required
-                    class="form-control form-control-lg w-50"
-                    type="text"
-                    placeholder="Title"
-                    name="title"
-                    aria-label=".form-control-lg example"
-                    style="margin: 15px 0"
-                  />
-                  <input
-                    required
-                    class="form-control form-control-lg w-50"
-                    type="text"
-                    name="text"
-                    placeholder="Text"
-                    aria-label=".form-control-lg example"
-                    style="margin: 15px 0"
-                  />
-                  <div class="new-btn d-flex">
-                    <button type="submit" class="btn btn-primary">
-                      Create
-                    </button>
-                  </div>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3 d-flex align-items-center">
+                <label for="news-title">Sarlavha :</label>
+              </div>
+              <div class="col-9">
+                <input
+                  id="news-title"
+                  required
+                  class="form-control form-control-lg w-75"
+                  type="text"
+                  placeholder="Title"
+                  name="title"
+                  aria-label=".form-control-lg example"
+                  style="margin: 15px 0"
+                />
+                <input
+                  type="text"
+                  class="d-none"
+                  id="news-content"
+                  name="content"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3 d-flex align-items-center">Mazmuni:</div>
+              <div class="col-9">
+                <div class="card w-100 rounded-8">
+                  <div id="newstoolbar"></div>
+                  <div id="newseditor"></div>
                 </div>
               </div>
-            </form>
+            </div>
+            <div class="d-flex justify-content-end mt-3">
+              <button type="submit" class="btn btn-primary">Yaratish</button>
+            </div>
+          </form>
+          <% } %>
 
-            <table class="table m-2">
-              <thead>
-                <tr>
-                  <th scope="col" class="fs-6 table-secondary">Image</th>
-                  <th scope="col" class="fs-6 table-secondary">Title</th>
-                  <th scope="col" class="fs-6 table-secondary">Text</th>
-                  <th scope="col" class="fs-6 table-secondary">Edit</th>
-                  <th scope="col" class="fs-6 table-secondary">Delete</th>
-                </tr>
-              </thead>
-              <tbody class="control-wrapper">
-                <% news.forEach((e,i) => { %>
-                <tr>
-                  <td>
-                    <img src="<%= e.imgUrl %>" alt="" class="new-imgs" />
-                  </td>
-                  <td class="text-truncate"><%= e.title %></td>
-                  <td class="text-truncate"><%= e.text %></td>
-                  <td>
-                    <button
-                      data-id="<%= e.id %>"
-                      data-bs-toggle="modal"
-                      data-bs-target="#staticBackdropp"
-                      class="btn btn-primary"
-                    >
-                      Edit
-                    </button>
-                  </td>
+          <!-- News -->
+          <% if(page == "get-news") { %>
+          <table class="table m-2">
+            <thead>
+              <tr>
+                <th scope="col" class="fs-6 table-secondary">Rasm</th>
+                <th scope="col" class="fs-6 table-secondary">Title</th>
+                <th scope="col" class="fs-6 table-secondary">Edit</th>
+                <th scope="col" class="fs-6 table-secondary">Delete</th>
+              </tr>
+            </thead>
+            <tbody class="control-wrapper">
+              <% news.forEach((e,i) => { %>
+              <tr>
+                <td>
+                  <img src="<%= e.imgUrl %>" alt="" class="new-imgs" />
+                </td>
+                <td class="text-truncate"><%= e.title %></td>
+                <td>
+                  <button
+                    data-id="<%= e.id %>"
+                    data-bs-toggle="modal"
+                    data-bs-target="#staticBackdropp"
+                    class="btn btn-primary"
+                  >
+                    Edit
+                  </button>
+                </td>
+                <div
+                  class="modal fade"
+                  id="staticBackdropp"
+                  data-bs-backdrop="static"
+                  data-bs-keyboard="false"
+                  tabindex="-1"
+                  aria-labelledby="staticBackdropLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <form
+                          action="/edite-news"
+                          enctype="application/x-www-form-urlencoded"
+                          method="post"
+                          style="width: 100%"
+                        >
+                          <div class="new-title w-100">
+                            <input
+                              required
+                              class="form-control form-control-lg w-100"
+                              type="text"
+                              placeholder="Title"
+                              name="title"
+                              aria-label=".form-control-lg example"
+                              style="margin: 15px 0"
+                            />
+                            <input
+                              required
+                              class="form-control form-control-lg w-100"
+                              type="text"
+                              placeholder="Text"
+                              name="text"
+                              aria-label=".form-control-lg example"
+                              style="margin: 15px 0"
+                            />
+                            <input
+                              class="d-none news-id"
+                              type="text"
+                              name="id"
+                              placeholder="Text"
+                              aria-label=".form-control-lg example"
+                              style="margin: 15px 0"
+                            />
+                          </div>
+                          <div class="d-flex" style="justify-content: flex-end">
+                            <button
+                              type="button"
+                              class="btn btn-secondary mx-2"
+                              data-bs-dismiss="modal"
+                            >
+                              Close
+                            </button>
+                            <button type="submit" class="btn btn-primary mx-2">
+                              OK
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <td>
+                  <button
+                    data-id="<%= e.id %>"
+                    data-file="<%= e.fileName %>"
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#newsBackdrop"
+                  >
+                    Delete
+                  </button>
+                </td>
+                <div
+                  class="modal fade"
+                  id="newsBackdrop"
+                  data-bs-backdrop="static"
+                  data-bs-keyboard="false"
+                  tabindex="-1"
+                  aria-labelledby="staticBackdropLabel"
+                  aria-hidden="true"
+                >
+                  <form
+                    action="/delete-news"
+                    method="post"
+                    enctype="application/x-www-form-urlencoded"
+                  >
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header"></div>
+                        <div class="modal-body">
+                          Siz rostan ham o'chirmoqchimisiz?
+                          <input
+                            class="delete-id d-none"
+                            type="text"
+                            name="id"
+                          />
+                          <input
+                            class="d-none delete-file"
+                            type="text"
+                            name="fileName"
+                          />
+                        </div>
+                        <div class="modal-footer">
+                          <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                          >
+                            Close
+                          </button>
+                          <button type="submit" class="btn btn-primary">
+                            Ok
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
+          <% } %>
+          <!-- News end -->
+
+          <!-- Users -->
+          <% if(page == "get-users") { %>
+          <table class="table" style="margin: 30px 10px">
+            <thead>
+              <tr>
+                <th scope="col" class="fs-6 table-secondary">Username</th>
+                <th scope="col" class="fs-6 table-secondary">Lastname</th>
+                <th scope="col" class="fs-6 table-secondary">Role</th>
+                <th scope="col" class="fs-6 table-secondary">
+                  <button
+                    data-bs-toggle="modal"
+                    data-bs-target="#Create"
+                    class="btn btn-primary"
+                    style="width: 130px"
+                  >
+                    Create
+                  </button>
+
+                  <!-- Create button modal -->
+
                   <div
                     class="modal fade"
-                    id="staticBackdropp"
+                    id="Create"
                     data-bs-backdrop="static"
                     data-bs-keyboard="false"
                     tabindex="-1"
-                    aria-labelledby="staticBackdropLabel"
+                    aria-labelledby="Create"
                     aria-hidden="true"
                   >
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
                           <form
-                            action="/edite-news"
-                            enctype="application/x-www-form-urlencoded"
+                            action="/create-user"
                             method="post"
+                            enctype="application/x-www-form-urlencoded"
                             style="width: 100%"
                           >
                             <div class="new-title w-100">
@@ -151,8 +368,8 @@
                                 required
                                 class="form-control form-control-lg w-100"
                                 type="text"
-                                placeholder="Title"
-                                name="title"
+                                placeholder="First Name"
+                                name="firstName"
                                 aria-label=".form-control-lg example"
                                 style="margin: 15px 0"
                               />
@@ -160,16 +377,17 @@
                                 required
                                 class="form-control form-control-lg w-100"
                                 type="text"
-                                placeholder="Text"
-                                name="text"
+                                placeholder="Last Name"
+                                name="lastName"
                                 aria-label=".form-control-lg example"
                                 style="margin: 15px 0"
                               />
                               <input
-                                class="d-none news-id"
-                                type="text"
-                                name="id"
-                                placeholder="Text"
+                                required
+                                class="form-control form-control-lg w-100"
+                                type="password"
+                                name="password"
+                                placeholder="Password"
                                 aria-label=".form-control-lg example"
                                 style="margin: 15px 0"
                               />
@@ -183,13 +401,13 @@
                                 class="btn btn-secondary mx-2"
                                 data-bs-dismiss="modal"
                               >
-                                Close
+                                Cancel
                               </button>
                               <button
                                 type="submit"
                                 class="btn btn-primary mx-2"
                               >
-                                OK
+                                Create
                               </button>
                             </div>
                           </form>
@@ -197,464 +415,75 @@
                       </div>
                     </div>
                   </div>
-                  <td>
-                    <button
-                      data-id="<%= e.id %>"
-                      data-file="<%= e.fileName %>"
-                      type="button"
-                      class="btn btn-primary"
-                      data-bs-toggle="modal"
-                      data-bs-target="#newsBackdrop"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                  <div
-                    class="modal fade"
-                    id="newsBackdrop"
-                    data-bs-backdrop="static"
-                    data-bs-keyboard="false"
-                    tabindex="-1"
-                    aria-labelledby="staticBackdropLabel"
-                    aria-hidden="true"
+                </th>
+              </tr>
+            </thead>
+            <tbody class="users-wrapper">
+              <% users.forEach(user => { %>
+              <tr>
+                <td><%= user.firstName %></td>
+                <td><%= user.lastName %></td>
+                <td><%= user.role %></td>
+                <td class="col">
+                  <button
+                    data-id="<%= user.id %>"
+                    data-bs-toggle="modal"
+                    data-bs-target="#Edit"
+                    class="btn btn-primary"
                   >
-                    <form
-                      action="/delete-news"
-                      method="post"
-                      enctype="application/x-www-form-urlencoded"
-                    >
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header"></div>
-                          <div class="modal-body">
-                            Siz rostan ham o'chirmoqchimisiz?
-                            <input
-                              class="delete-id d-none"
-                              type="text"
-                              name="id"
-                            />
-                            <input
-                              class="d-none delete-file"
-                              type="text"
-                              name="fileName"
-                            />
-                          </div>
-                          <div class="modal-footer">
-                            <button
-                              type="button"
-                              class="btn btn-secondary"
-                              data-bs-dismiss="modal"
-                            >
-                              Close
-                            </button>
-                            <button type="submit" class="btn btn-primary">
-                              Ok
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </tr>
-                <% }); %>
-              </tbody>
-            </table>
-          </div>
-          <!-- News end -->
+                    Edit
+                  </button>
 
-          <!-- Users -->
-          <div class="user pages d-none">
-            <table class="table" style="margin: 30px 10px">
-              <thead>
-                <tr>
-                  <th scope="col" class="fs-6 table-secondary">Username</th>
-                  <th scope="col" class="fs-6 table-secondary">Lastname</th>
-                  <th scope="col" class="fs-6 table-secondary">Role</th>
-                  <th scope="col" class="fs-6 table-secondary">
-                    <button
-                      data-bs-toggle="modal"
-                      data-bs-target="#Create"
-                      class="btn btn-primary"
-                      style="width: 130px"
-                    >
-                      Create
-                    </button>
-
-                    <!-- Create button modal -->
-
-                    <div
-                      class="modal fade"
-                      id="Create"
-                      data-bs-backdrop="static"
-                      data-bs-keyboard="false"
-                      tabindex="-1"
-                      aria-labelledby="Create"
-                      aria-hidden="true"
-                    >
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <form
-                              action="/create-user"
-                              method="post"
-                              enctype="application/x-www-form-urlencoded"
-                              style="width: 100%"
-                            >
-                              <div class="new-title w-100">
-                                <input
-                                  required
-                                  class="form-control form-control-lg w-100"
-                                  type="text"
-                                  placeholder="First Name"
-                                  name="firstName"
-                                  aria-label=".form-control-lg example"
-                                  style="margin: 15px 0"
-                                />
-                                <input
-                                  required
-                                  class="form-control form-control-lg w-100"
-                                  type="text"
-                                  placeholder="Last Name"
-                                  name="lastName"
-                                  aria-label=".form-control-lg example"
-                                  style="margin: 15px 0"
-                                />
-                                <input
-                                  required
-                                  class="form-control form-control-lg w-100"
-                                  type="password"
-                                  name="password"
-                                  placeholder="Password"
-                                  aria-label=".form-control-lg example"
-                                  style="margin: 15px 0"
-                                />
-                              </div>
-                              <div
-                                class="d-flex"
-                                style="justify-content: flex-end"
-                              >
-                                <button
-                                  type="button"
-                                  class="btn btn-secondary mx-2"
-                                  data-bs-dismiss="modal"
-                                >
-                                  Cancel
-                                </button>
-                                <button
-                                  type="submit"
-                                  class="btn btn-primary mx-2"
-                                >
-                                  Create
-                                </button>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </th>
-                </tr>
-              </thead>
-              <tbody class="users-wrapper">
-                <% users.forEach(user => { %>
-                <tr>
-                  <td><%= user.firstName %></td>
-                  <td><%= user.lastName %></td>
-                  <td><%= user.role %></td>
-                  <td class="col">
-                    <button
-                      data-id="<%= user.id %>"
-                      data-bs-toggle="modal"
-                      data-bs-target="#Edit"
-                      class="btn btn-primary"
-                    >
-                      Edit
-                    </button>
-
-                    <!-- Edit button modal   -->
-                    <div
-                      class="modal fade"
-                      id="Edit"
-                      data-bs-backdrop="static"
-                      data-bs-keyboard="false"
-                      tabindex="-1"
-                      aria-labelledby="Edit"
-                      aria-hidden="true"
-                    >
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <form
-                              action="/edit-user"
-                              method="post"
-                              enctype="application/x-www-form-urlencoded"
-                              style="width: 100%"
-                            >
-                              <div class="new-title w-100">
-                                <input
-                                  class="form-control form-control-lg w-100"
-                                  type="text"
-                                  placeholder="First Name"
-                                  name="firstName"
-                                  aria-label=".form-control-lg example"
-                                  style="margin: 15px 0"
-                                />
-                                <input
-                                  class="form-control form-control-lg w-100"
-                                  type="text"
-                                  placeholder="Last Name"
-                                  name="lastName"
-                                  aria-label=".form-control-lg example"
-                                  style="margin: 15px 0"
-                                />
-                                <input
-                                  class="form-control form-control-lg w-100"
-                                  type="password"
-                                  name="password"
-                                  placeholder="Password"
-                                  aria-label=".form-control-lg example"
-                                  style="margin: 15px 0"
-                                />
-                                <input
-                                  type="text"
-                                  name="id"
-                                  class="d-none user-edit"
-                                />
-                              </div>
-                              <div
-                                class="d-flex"
-                                style="justify-content: flex-end"
-                              >
-                                <button
-                                  type="button"
-                                  class="btn btn-secondary mx-2"
-                                  data-bs-dismiss="modal"
-                                >
-                                  Cancel
-                                </button>
-                                <button
-                                  type="submit"
-                                  class="btn btn-primary mx-2"
-                                >
-                                  Ok
-                                </button>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <button
-                      data-id="<%= user.id %>"
-                      data-bs-toggle="modal"
-                      data-bs-target="#Delete"
-                      class="btn btn-primary"
-                    >
-                      Delete
-                    </button>
-
-                    <!-- Delete button modal   -->
-                    <div
-                      class="modal fade"
-                      id="Delete"
-                      data-bs-backdrop="static"
-                      data-bs-keyboard="false"
-                      tabindex="-1"
-                      aria-labelledby="Delete"
-                      aria-hidden="true"
-                    >
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h1
-                              class="modal-title fs-5"
-                              id="staticBackdropLabel"
-                            >
-                              Modal title
-                            </h1>
-                          </div>
-                          <div class="modal-body">
-                            Siz rostan ham o'chirmoqchimisiz?
-                          </div>
-                          <div class="modal-footer">
-                            <form
-                              action="/delete-user"
-                              method="post"
-                              enctype="application/x-www-form-urlencoded"
-                            >
-                              <input
-                                type="text"
-                                name="id"
-                                class="d-none delete-user"
-                              />
-                              <button
-                                type="button"
-                                class="btn btn-secondary"
-                                data-bs-dismiss="modal"
-                              >
-                                Close
-                              </button>
-                              <button type="submit" class="btn btn-primary">
-                                Ok
-                              </button>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-                <% }); %>
-              </tbody>
-            </table>
-          </div>
-          <!-- Users end -->
-
-          <!-- Project -->
-          <div class="project pages d-none">
-            <form
-              action="/projects"
-              class="project-form d-flex align-items-center"
-              method="post"
-              enctype="multipart/form-data"
-            >
-              <input
-                required
-                class="form-control form-control-lg w-50"
-                type="text"
-                placeholder="Name"
-                name="name"
-                aria-label=".form-control-lg example"
-                style="margin: 15px 0"
-              />
-              <button type="submit" class="btn btn-primary mx-5">Create</button>
-            </form>
-            <table class="table m-2">
-              <thead>
-                <tr>
-                  <th scope="col" class="fs-6 table-secondary">Name</th>
-                  <th scope="col" class="fs-6 table-secondary">Image</th>
-                  <th scope="col" class="fs-6 table-secondary">Edit</th>
-                  <th scope="col" class="fs-6 table-secondary">Delete</th>
-                </tr>
-              </thead>
-              <tbody class="projects-wrapper">
-                <% projects.projects.forEach(project => { %>
-                <tr>
-                  <td><%= project.name %></td>
-                  <td>
-                    <button
-                      data-bs-toggle="modal"
-                      data-bs-target="#Image"
-                      class="btn btn-primary"
-                      data-id="<%= project.id %>"
-                    >
-                      Image
-                    </button>
-                    <div
-                      class="modal fade"
-                      id="Image"
-                      data-bs-backdrop="static"
-                      data-bs-keyboard="false"
-                      tabindex="-1"
-                      aria-labelledby="Image"
-                      aria-hidden="true"
-                    >
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <form
-                              action="/add-image"
-                              method="post"
-                              enctype="multipart/form-data"
-                              style="width: 100%"
-                            >
-                              <input
-                                type="text"
-                                name="id"
-                                id="project-id"
-                                class="d-none"
-                              />
-                              <input
-                                required
-                                name="file"
-                                type="file"
-                                id="add-photo"
-                                class="d-none add-photo"
-                              />
-                              <label for="add-photo">
-                                <img
-                                  src="/img/Image 5.png"
-                                  alt=""
-                                  class="new-img project-label"
-                                />
-                              </label>
-                              <div
-                                class="d-flex"
-                                style="justify-content: flex-end"
-                              >
-                                <button
-                                  type="button"
-                                  class="btn btn-secondary mx-2"
-                                  data-bs-dismiss="modal"
-                                >
-                                  Close
-                                </button>
-                                <button
-                                  type="submit"
-                                  class="btn btn-primary mx-2"
-                                >
-                                  Add
-                                </button>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <button
-                      data-bs-toggle="modal"
-                      data-bs-target="#Project"
-                      class="btn btn-primary"
-                      data-id="<%= project.id %>"
-                    >
-                      Edit
-                    </button>
-                  </td>
+                  <!-- Edit button modal   -->
                   <div
                     class="modal fade"
-                    id="Project"
+                    id="Edit"
                     data-bs-backdrop="static"
                     data-bs-keyboard="false"
                     tabindex="-1"
-                    aria-labelledby="Project"
+                    aria-labelledby="Edit"
                     aria-hidden="true"
                   >
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
                           <form
-                            action="/edit-project"
+                            action="/edit-user"
                             method="post"
                             enctype="application/x-www-form-urlencoded"
                             style="width: 100%"
                           >
-                            <input
-                              required
-                              class="form-control form-control-lg w-100"
-                              type="text"
-                              name="name"
-                              placeholder="Name"
-                              aria-label=".form-control-lg example"
-                              style="margin: 15px 0"
-                            />
-                            <input
-                              type="text"
-                              class="d-none project-edit"
-                              name="id"
-                            />
+                            <div class="new-title w-100">
+                              <input
+                                class="form-control form-control-lg w-100"
+                                type="text"
+                                placeholder="First Name"
+                                name="firstName"
+                                aria-label=".form-control-lg example"
+                                style="margin: 15px 0"
+                              />
+                              <input
+                                class="form-control form-control-lg w-100"
+                                type="text"
+                                placeholder="Last Name"
+                                name="lastName"
+                                aria-label=".form-control-lg example"
+                                style="margin: 15px 0"
+                              />
+                              <input
+                                class="form-control form-control-lg w-100"
+                                type="password"
+                                name="password"
+                                placeholder="Password"
+                                aria-label=".form-control-lg example"
+                                style="margin: 15px 0"
+                              />
+                              <input
+                                type="text"
+                                name="id"
+                                class="d-none user-edit"
+                              />
+                            </div>
                             <div
                               class="d-flex"
                               style="justify-content: flex-end"
@@ -664,13 +493,13 @@
                                 class="btn btn-secondary mx-2"
                                 data-bs-dismiss="modal"
                               >
-                                Close
+                                Cancel
                               </button>
                               <button
                                 type="submit"
                                 class="btn btn-primary mx-2"
                               >
-                                OK
+                                Ok
                               </button>
                             </div>
                           </form>
@@ -678,24 +507,23 @@
                       </div>
                     </div>
                   </div>
-                  <td>
-                    <button
-                      type="button"
-                      class="btn btn-primary"
-                      data-bs-toggle="modal"
-                      data-bs-target="#staticBackdrop"
-                      data-id="<%= project.id %>"
-                    >
-                      Delete
-                    </button>
-                  </td>
+                  <button
+                    data-id="<%= user.id %>"
+                    data-bs-toggle="modal"
+                    data-bs-target="#Delete"
+                    class="btn btn-primary"
+                  >
+                    Delete
+                  </button>
+
+                  <!-- Delete button modal   -->
                   <div
                     class="modal fade"
-                    id="staticBackdrop"
+                    id="Delete"
                     data-bs-backdrop="static"
                     data-bs-keyboard="false"
                     tabindex="-1"
-                    aria-labelledby="staticBackdropLabel"
+                    aria-labelledby="Delete"
                     aria-hidden="true"
                   >
                     <div class="modal-dialog">
@@ -710,14 +538,14 @@
                         </div>
                         <div class="modal-footer">
                           <form
-                            action="/delete-project"
+                            action="/delete-user"
                             method="post"
                             enctype="application/x-www-form-urlencoded"
                           >
                             <input
                               type="text"
                               name="id"
-                              class="d-none project-id"
+                              class="d-none delete-user"
                             />
                             <button
                               type="button"
@@ -734,188 +562,303 @@
                       </div>
                     </div>
                   </div>
-                </tr>
-                <% }); %>
-              </tbody>
-            </table>
-          </div>
+                </td>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
+          <% } %>
+          <!-- Users end -->
+
+          <!-- Project -->
+          <% if(page == "create-project") { %>
+          <form
+            id="create-projects"
+            action="/projects"
+            class="project-form"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <div class="row">
+              <div class="col-3 d-flex align-items-center">Loyiha rasmi :</div>
+              <div class="col-9">
+                <input
+                  required
+                  name="file"
+                  type="file"
+                  id="add-photo"
+                  class="d-none add-photo"
+                />
+                <label for="add-photo">
+                  <img
+                    src="/img/Image 5.png"
+                    alt=""
+                    class="new-img project-label"
+                  />
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3 d-flex align-items-center">Loyiha nomi :</div>
+              <div class="col-9">
+                <input
+                  required
+                  class="form-control form-control-lg w-50"
+                  type="text"
+                  placeholder="Name"
+                  name="name"
+                  aria-label=".form-control-lg example"
+                  style="margin: 15px 0"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3 d-flex align-items-center">
+                Loyiha mazmuni :
+              </div>
+              <div class="col-9">
+                <input
+                  type="text"
+                  class="d-none"
+                  name="content"
+                  id="project-content"
+                />
+                <div class="card w-100 rounded-8">
+                  <div id="projecttoolbar"></div>
+                  <div id="projecteditor"></div>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-end mt-3">
+              <button type="submit" class="btn btn-primary">Yaratish</button>
+            </div>
+          </form>
+          <% } %>
           <!-- Project end -->
 
+          <% if(page == "get-works") { %>
           <!-- Works start -->
-          <div class="works pages d-none">
-            <table class="table m-2">
-              <thead>
-                <tr>
-                  <th scope="col" class="fs-6 table-secondary">Title</th>
-                  <th scope="col" class="fs-6 table-secondary">Username</th>
-                  <th scope="col" class="fs-6 table-secondary">Lastname</th>
-                  <th scope="col" class="fs-6 table-secondary">Download</th>
-                  <th scope="col" class="fs-6 table-secondary">Delete</th>
-                </tr>
-              </thead>
-              <tbody class="works-wrapper">
-                <% works.forEach(work => { %>
-                <tr>
-                  <td><%= work.title %></td>
-                  <td><%= work.user.firstName %></td>
-                  <td><%= work.user.lastName %></td>
-                  <td>
-                    <form action="<%= work.url %>" method="get">
-                      <button type="submit" class="btn btn-primary">
-                        Download
-                      </button>
-                    </form>
-                  </td>
-                  <td>
-                    <button
-                      data-id="<%= work.id %>"
-                      type="button"
-                      class="btn btn-primary"
-                      data-bs-toggle="modal"
-                      data-bs-target="#workBackdrop"
-                    >
-                      Delete
+          <table class="table m-2">
+            <thead>
+              <tr>
+                <th scope="col" class="fs-6 table-secondary">Title</th>
+                <th scope="col" class="fs-6 table-secondary">Username</th>
+                <th scope="col" class="fs-6 table-secondary">Lastname</th>
+                <th scope="col" class="fs-6 table-secondary">Download</th>
+                <th scope="col" class="fs-6 table-secondary">Delete</th>
+              </tr>
+            </thead>
+            <tbody class="works-wrapper">
+              <% works.forEach(work => { %>
+              <tr>
+                <td><%= work.title %></td>
+                <td><%= work.user.firstName %></td>
+                <td><%= work.user.lastName %></td>
+                <td>
+                  <form action="<%= work.url %>" method="get">
+                    <button type="submit" class="btn btn-primary">
+                      Download
                     </button>
-                  </td>
-                  <div
-                    class="modal fade"
-                    id="workBackdrop"
-                    data-bs-backdrop="static"
-                    data-bs-keyboard="false"
-                    tabindex="-1"
-                    aria-labelledby="staticBackdropLabel"
-                    aria-hidden="true"
+                  </form>
+                </td>
+                <td>
+                  <button
+                    data-id="<%= work.id %>"
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#workBackdrop"
                   >
-                    <form
-                      action="/delete-work"
-                      method="post"
-                      enctype="application/x-www-form-urlencoded"
-                    >
-                      <input class="d-none work-id" type="text" name="id" />
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h1
-                              class="modal-title fs-5"
-                              id="staticBackdropLabel"
-                            >
-                              Modal
-                            </h1>
-                          </div>
-                          <div class="modal-body">
-                            Siz rostan ham o'chirmoqchimisiz?
-                          </div>
-                          <div class="modal-footer">
-                            <button
-                              type="button"
-                              class="btn btn-secondary"
-                              data-bs-dismiss="modal"
-                            >
-                              Close
-                            </button>
-                            <button type="submit" class="btn btn-primary">
-                              Ok
-                            </button>
-                          </div>
+                    Delete
+                  </button>
+                </td>
+                <div
+                  class="modal fade"
+                  id="workBackdrop"
+                  data-bs-backdrop="static"
+                  data-bs-keyboard="false"
+                  tabindex="-1"
+                  aria-labelledby="staticBackdropLabel"
+                  aria-hidden="true"
+                >
+                  <form
+                    action="/delete-work"
+                    method="post"
+                    enctype="application/x-www-form-urlencoded"
+                  >
+                    <input class="d-none work-id" type="text" name="id" />
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                            Modal
+                          </h1>
+                        </div>
+                        <div class="modal-body">
+                          Siz rostan ham o'chirmoqchimisiz?
+                        </div>
+                        <div class="modal-footer">
+                          <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                          >
+                            Close
+                          </button>
+                          <button type="submit" class="btn btn-primary">
+                            Ok
+                          </button>
                         </div>
                       </div>
-                    </form>
-                  </div>
-                </tr>
-                <% }); %>
-              </tbody>
-            </table>
-          </div>
+                    </div>
+                  </form>
+                </div>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
+          <% } %>
           <!-- Works end -->
 
+          <% if(page == "get-projects") { %>
           <!-- Project Images -->
-          <div class="project-images pages d-none">
-            <table class="table m-2">
-              <thead>
-                <tr>
-                  <th scope="col" class="fs-6 table-secondary">Image</th>
-                  <th scope="col" class="fs-6 table-secondary">Project Name</th>
-                  <th scope="col" class="fs-6 table-secondary">Delete</th>
-                </tr>
-              </thead>
-              <tbody class="image-wrapper">
-                <% projects.images.forEach((e) => { %>
-                <tr>
-                  <td>
-                    <img src="<%= e.imgUrl %>" alt="" class="new-imgs" />
-                  </td>
-                  <td><%= e.name %></td>
-                  <td>
-                    <button
-                      data-id="<%= e.id %>"
-                      data-file="<%= e.fileName %>"
-                      type="button"
-                      class="btn btn-primary"
-                      data-bs-toggle="modal"
-                      data-bs-target="#imageBackdrop"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                  <div
-                    class="modal fade"
-                    id="imageBackdrop"
-                    data-bs-backdrop="static"
-                    data-bs-keyboard="false"
-                    tabindex="-1"
-                    aria-labelledby="staticBackdropLabel"
-                    aria-hidden="true"
+          <table class="table m-2">
+            <thead>
+              <tr>
+                <th scope="col" class="fs-6 table-secondary">Image</th>
+                <th scope="col" class="fs-6 table-secondary">Name</th>
+                <th scope="col" class="fs-6 table-secondary">Edit</th>
+                <th scope="col" class="fs-6 table-secondary">Delete</th>
+              </tr>
+            </thead>
+            <tbody class="projects-wrapper">
+              <% projects.forEach(project => { %>
+              <tr>
+                <td>
+                  <img src="<%= project.imgUrl %>" alt="" class="new-imgs" />
+                </td>
+                <td><%= project.name %></td>
+                <td>
+                  <button
+                    data-bs-toggle="modal"
+                    data-bs-target="#Project"
+                    class="btn btn-primary"
+                    data-id="<%= project.id %>"
                   >
-                    <form
-                      action="/delete-image"
-                      method="post"
-                      enctype="application/x-www-form-urlencoded"
-                    >
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h1
-                              class="modal-title fs-5"
-                              id="staticBackdropLabel"
-                            >
-                              Modal
-                            </h1>
-                          </div>
-                          <div class="modal-body">
-                            Siz rostan ham o'chirmoqchimisiz?
-                            <input
-                              class="d-none imadelete"
-                              type="text"
-                              name="id"
-                            />
-                            <input
-                              class="d-none image-name"
-                              type="text"
-                              name="fileName"
-                            />
-                          </div>
-                          <div class="modal-footer">
+                    Edit
+                  </button>
+                </td>
+                <div
+                  class="modal fade"
+                  id="Project"
+                  data-bs-backdrop="static"
+                  data-bs-keyboard="false"
+                  tabindex="-1"
+                  aria-labelledby="Project"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <form
+                          action="/edit-project"
+                          method="post"
+                          enctype="application/x-www-form-urlencoded"
+                          style="width: 100%"
+                        >
+                          <input
+                            required
+                            class="form-control form-control-lg w-100"
+                            type="text"
+                            name="name"
+                            placeholder="Name"
+                            aria-label=".form-control-lg example"
+                            style="margin: 15px 0"
+                          />
+                          <input
+                            type="text"
+                            class="d-none project-edit"
+                            name="id"
+                          />
+                          <div class="d-flex" style="justify-content: flex-end">
                             <button
                               type="button"
-                              class="btn btn-secondary"
+                              class="btn btn-secondary mx-2"
                               data-bs-dismiss="modal"
                             >
                               Close
                             </button>
-                            <button type="submit" class="btn btn-primary">
-                              Delete
+                            <button type="submit" class="btn btn-primary mx-2">
+                              OK
                             </button>
                           </div>
-                        </div>
+                        </form>
                       </div>
-                    </form>
+                    </div>
                   </div>
-                </tr>
-                <% }); %>
-              </tbody>
-            </table>
-          </div>
+                </div>
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop"
+                    data-id="<%= project.id %>"
+                  >
+                    Delete
+                  </button>
+                </td>
+                <div
+                  class="modal fade"
+                  id="staticBackdrop"
+                  data-bs-backdrop="static"
+                  data-bs-keyboard="false"
+                  tabindex="-1"
+                  aria-labelledby="staticBackdropLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                          Modal title
+                        </h1>
+                      </div>
+                      <div class="modal-body">
+                        Siz rostan ham o'chirmoqchimisiz?
+                      </div>
+                      <div class="modal-footer">
+                        <form
+                          action="/delete-project"
+                          method="post"
+                          enctype="application/x-www-form-urlencoded"
+                        >
+                          <input
+                            type="text"
+                            name="id"
+                            class="d-none project-id"
+                          />
+                          <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                          >
+                            Close
+                          </button>
+                          <button type="submit" class="btn btn-primary">
+                            Ok
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
           <!-- Project Images end -->
+          <% } %>
         </div>
       </div>
     </div>
@@ -925,6 +868,12 @@
       integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
       crossorigin="anonymous"
     ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"
+    ></script>
+    <script></script>
     <script src="/js/admin.js"></script>
   </body>
 </html>
