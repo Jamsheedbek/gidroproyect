@@ -52,6 +52,27 @@ const News = sequelize.define("news", {
   },
 });
 
+const Leaders = sequelize.define("leaders", {
+  fullName: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  position: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  tel: {
+    type: DataTypes.TEXT,
+  },
+  mail: {
+    type: DataTypes.TEXT,
+  },
+  about: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+});
+
 const Projects = sequelize.define("projects", {
   name: {
     type: DataTypes.STRING,
@@ -86,12 +107,6 @@ const Works = sequelize.define("works", {
   },
 });
 
-// const Management = sequelize.define('management', {
-//   id: {
-//     type:
-//   }
-// })
-
 Users.hasOne(Works, { onDelete: "cascade" });
 Works.belongsTo(Users);
 
@@ -100,5 +115,6 @@ module.exports = {
   News,
   Projects,
   Works,
+  Leaders,
   sequelize,
 };

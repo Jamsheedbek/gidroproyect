@@ -23,10 +23,10 @@
     />
 
     <!-- CSS Libraries -->
-    <link
+    <!-- <link
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
       rel="stylesheet"
-    />
+    /> -->
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
       rel="stylesheet"
@@ -41,7 +41,6 @@
     />
     <link href="lib/flaticon/font/flaticon.css" rel="stylesheet" />
     <link href="lib/animate/animate.min.css" rel="stylesheet" />
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
     <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
     <link href="lib/slick/slick.css" rel="stylesheet" />
     <link href="lib/slick/slick-theme.css" rel="stylesheet" />
@@ -182,9 +181,8 @@
       <!-- Nav Bar End -->
 
       <!-- Carousel Start -->
-      <!-- Carousel wrapper -->
       <div
-        id="carouselMaterialStyle"
+        id="carouselBasicExample"
         class="carousel slide carousel-fade"
         data-mdb-ride="carousel"
       >
@@ -192,7 +190,7 @@
         <div class="carousel-indicators">
           <button
             type="button"
-            data-mdb-target="#carouselMaterialStyle"
+            data-mdb-target="#carouselBasicExample"
             data-mdb-slide-to="0"
             class="active"
             aria-current="true"
@@ -200,31 +198,33 @@
           ></button>
           <button
             type="button"
-            data-mdb-target="#carouselMaterialStyle"
+            data-mdb-target="#carouselBasicExample"
             data-mdb-slide-to="1"
             aria-label="Slide 2"
           ></button>
           <button
             type="button"
-            data-mdb-target="#carouselMaterialStyle"
+            data-mdb-target="#carouselBasicExample"
             data-mdb-slide-to="2"
             aria-label="Slide 3"
           ></button>
         </div>
 
         <!-- Inner -->
-        <div class="carousel-inner shadow-4-strong">
+        <div class="carousel-inner">
           <!-- Single item -->
           <div class="carousel-item active">
             <img
-              src="	https://uzgidro.uz/images/slider/1.jpg61cbef6463acf.jpg"
+              src="https://uzgidro.uz/images/slider/1.jpg61cbef6463acf.jpg"
               class="d-block w-100"
-              alt=""
+              alt="Sunset Over the City"
             />
-            <!-- <div class="carousel-caption d-none d-md-block">
-              <h5>First slide label</h5>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-            </div> -->
+            <div class="carousel-caption d-none d-md-block">
+              <h5 class="text-start display-3 text-light">First slide label</h5>
+              <p class="text-start h-5 text-light">
+                Nulla vitae elit libero, a pharetra augue mollis interdum.
+              </p>
+            </div>
           </div>
 
           <!-- Single item -->
@@ -234,10 +234,14 @@
               class="d-block w-100"
               alt="Canyon at Nigh"
             />
-            <!-- <div class="carousel-caption d-none d-md-block">
-              <h5>Second slide label</h5>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div> -->
+            <div class="carousel-caption d-none d-md-block">
+              <h5 class="text-start display-3 text-light">
+                Second slide label
+              </h5>
+              <p class="text-start h-5 text-light">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </p>
+            </div>
           </div>
 
           <!-- Single item -->
@@ -247,12 +251,12 @@
               class="d-block w-100"
               alt="Cliff Above a Stormy Sea"
             />
-            <!-- <div class="carousel-caption d-none d-md-block">
-              <h5>Third slide label</h5>
-              <p>
+            <div class="carousel-caption d-none d-md-block">
+              <h5 class="text-start display-3 text-light">Third slide label</h5>
+              <p class="text-start h-5 text-light">
                 Praesent commodo cursus magna, vel scelerisque nisl consectetur.
               </p>
-            </div> -->
+            </div>
           </div>
         </div>
         <!-- Inner -->
@@ -261,23 +265,22 @@
         <button
           class="carousel-control-prev"
           type="button"
-          data-mdb-target="#carouselMaterialStyle"
+          data-mdb-target="#carouselBasicExample"
           data-mdb-slide="prev"
         >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <i class="fas fa-chevron-left fa-4x"></i>
           <span class="visually-hidden">Previous</span>
         </button>
         <button
           class="carousel-control-next"
           type="button"
-          data-mdb-target="#carouselMaterialStyle"
+          data-mdb-target="#carouselBasicExample"
           data-mdb-slide="next"
         >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <i class="fas fa-chevron-right fa-4x"></i>
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-      <!-- Carousel wrapper -->
       <!-- Carousel End -->
 
       <!-- News Start -->
@@ -562,14 +565,15 @@
                 style="border: 0"
                 allowfullscreen="true"
                 loading="lazy"
-                class="h-100 w-100"
+                width="100%"
+                height="330px"
                 referrerpolicy="no-referrer-when-downgrade"
               ></iframe>
             </div>
             <div class="col-lg-7 p-3">
               <form>
                 <div class="row">
-                  <div class="col-md-9">
+                  <div class="col-md-8">
                     <div class="row mb-4">
                       <div class="col-md-6 mb-4 mb-md-0">
                         <div class="form-outline">
@@ -625,24 +629,39 @@
                       </button>
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                     <ul class="list-unstyled">
                       <li class="d-flex flex-column align-items-center">
                         <i class="fas fa-map-marker-alt fa-2x text-primary"></i>
                         <p class="text-center">
-                          <small>New York, NY 10012, USA</small>
+                          <small>Узбекистан 100100, Ташкент ул.Навои, 22</small>
                         </p>
                       </li>
                       <li class="d-flex flex-column align-items-center">
                         <i class="fas fa-phone fa-2x text-primary"></i>
                         <p class="text-center">
-                          <small>+ 01 234 567 89</small>
+                          <small
+                            ><a href="tel:+998712413963"
+                              >+998 (71) 241-39-63</a
+                            ></small
+                          >
                         </p>
                       </li>
                       <li class="d-flex flex-column align-items-center">
                         <i class="fas fa-envelope fa-2x text-primary"></i>
                         <p class="text-center">
-                          <small>contact@gmail.com</small>
+                          <small class="d-flex"
+                            >e-mail:
+                            <a href="mailto:upds1@uzgidro.uz" class="ms-1"
+                              >upds1@uzgidro.uz</a
+                            ></small
+                          >
+                          <small class="d-flex"
+                            >exat:
+                            <a href="mailto:upds@exat.uz" class="ms-1"
+                              >upds@exat.uz</a
+                            ></small
+                          >
                         </p>
                       </li>
                     </ul>
@@ -724,7 +743,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="lib/isotope/isotope.pkgd.min.js"></script>
     <script src="lib/lightbox/js/lightbox.min.js"></script>
     <script src="lib/waypoints/waypoints.min.js"></script>
