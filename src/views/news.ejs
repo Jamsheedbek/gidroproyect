@@ -184,64 +184,37 @@
       </div>
       <!-- Nav Bar End -->
 
-      <!-- News start -->
-      <div class="row mt-3">
-        <div class="col-lg-8 col-md-12 p-4">
-          <div class="card shadow">
-            <img
-              src="<%= activeNews.dataValues.imgUrl %>"
-              class="card-img-top"
-              alt="activeNews.dataValues.fileName"
-            />
-            <div class="card-body">
-              <p class="card-text">
-                <small class="text-muted"
-                  ><i class="far fa-calendar"></i> <%=
-                  activeNews.dataValues.createdAt %></small
-                >
-              </p>
-              <h5 class="card-title"><%= activeNews.dataValues.title %></h5>
-              <hr />
-              <p
-                id="editor"
-                class="card-text"
-                data-content="<%= activeNews.dataValues.content %>"
-              ></p>
-            </div>
+      <!-- Tenders Start -->
+      <div class="blog">
+        <div class="container">
+          <div class="section-header text-center">
+            <h2>Tendr va e'lonlar</h2>
           </div>
-        </div>
-        <div class="col-lg-4 col-md-12 p-4">
-          <div class="shadow rounded">
-            <a class="text-center mb-2 text-primary" href="/news"
-              >So'ngi yangiliklar</a
+          <div class="row">
+            <% news.forEach(news => { %> <% if(news.type == "news"){ %>
+            <div
+              class="col-lg-4 col-md-6 p-4 wow fadeInUp"
+              data-wow-delay="0.1s"
             >
-            <div class="card py-3 px-2">
-              <% news.forEach(news => { %>
-              <div class="d-flex">
-                <div class="flex-shrink-0">
-                  <img
-                    src="<%= news.imgUrl %>"
-                    alt="<%= news.title %>"
-                    width="85"
-                    class="rounded"
-                  />
-                </div>
-                <div class="flex-grow-1 ms-3 w-100">
-                  <a href="/news/<%= news.id %>" class="w-100 card-text d-block"
-                    ><%= news.title %></a
-                  >
-                  <small class="text-muted text-primary"
-                    ><i class="far fa-calendar"></i> <%= news.createdAt
-                    %></small
+              <div class="card">
+                <img src="<%= news.imgUrl %>" alt="<%= news.title %>" />
+                <div class="card-body">
+                  <p class="fs-6 text-secondary mb-2">
+                    <i class="far fa-calendar"></i> <%= news.createdAt %>
+                  </p>
+                  <h5 class="card-title"><%= news.title %></h5>
+                  <hr />
+                  <a href="/news/view/<%= news.id %>" class="text-primary"
+                    >batafsil</a
                   >
                 </div>
               </div>
-              <% }); %>
             </div>
+            <% } %> <% }); %>
           </div>
         </div>
       </div>
-      <!-- News end -->
+      <!-- Tenders End -->
 
       <!-- Useful links start -->
       <div class="slider-wrapper">

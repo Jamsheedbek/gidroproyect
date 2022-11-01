@@ -18,7 +18,7 @@ const handleWorks = async (id) => {
 
   allWorks.forEach((e) => {
     e.dataValues.url =
-      "http://localhost:9000/download/" + e.dataValues.fileName;
+      "https://uzhydroenergy.uz/download/" + e.dataValues.fileName;
 
     newRes.push(e.dataValues);
   });

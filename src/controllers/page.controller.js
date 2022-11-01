@@ -35,9 +35,6 @@ module.exports = {
     const projects = await handleProjects();
     res.render("plannedProjects", { projects });
   },
-  contactPage: (req, res) => {
-    res.render("contact");
-  },
   loginPage: (req, res) => {
     res.render("login", { message: null });
   },
@@ -96,5 +93,10 @@ module.exports = {
     const activeNews = await handleAllNews(req.params.id);
 
     res.render("news", { news, activeNews });
+  },
+  tendersPage: async (req, res) => {
+    const news = await handleAllNews();
+
+    res.render("tender", { news });
   },
 };

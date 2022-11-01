@@ -42,6 +42,7 @@ let routes = (app) => {
     .get("/projects/view/:id", pageController.projectPage)
     .get("/news/view/:id", pageController.newsPage)
     .get("/news", pageController.allNewsPage)
+    .get("/tenders", pageController.tendersPage)
 
     // news
     .post("/news", newsController.createNews)

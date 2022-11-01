@@ -739,8 +739,7 @@ a:focus {
   margin: 45px 0;
   padding: 70px 0;
   text-align: center;
-  background: linear-gradient(rgba(31, 97, 141, 0.9), rgba(31, 97, 141, 0.9)),
-    url("https://uzgidro.uz/images/slider/1.jpg61cbef6463acf.jpg");
+  background: url("https://uzgidro.uz/images/slider/1.jpg61cbef6463acf.jpg");
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
