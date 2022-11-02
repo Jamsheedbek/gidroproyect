@@ -50,3 +50,8 @@ body {
 .ql-toolbar.ql-snow {
   border: none;
 }
+
+.table-title {
+  width: 100%;
+  word-break: break-all;
+}

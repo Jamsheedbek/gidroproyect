@@ -75,6 +75,8 @@ if (document.getElementById("editor")) {
 
   document.getElementById("editor").dataset.content = "";
 
+  Content.enable(false);
+
   document
     .getElementById("editor")
     .querySelectorAll("img")

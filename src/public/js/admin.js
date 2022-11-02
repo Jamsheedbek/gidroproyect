@@ -109,33 +109,30 @@ if (newsWrapper) {
   });
 }
 
-// usersWrapper.addEventListener("click", (e) => {
-//   if (e.target.textContent.includes("Edit")) {
-//     document.querySelector(".user-edit").value = e.target.dataset.id;
-//   } else if (e.target.textContent.includes("Delete")) {
-//     document.querySelector(".delete-user").value = e.target.dataset.id;
-//   }
-// });
+if (usersWrapper) {
+  usersWrapper.addEventListener("click", (e) => {
+    if (e.target.textContent.includes("Edit")) {
+      document.querySelector(".user-edit").value = e.target.dataset.id;
+    } else if (e.target.textContent.includes("Delete")) {
+      document.querySelector(".delete-user").value = e.target.dataset.id;
+    }
+  });
+}
 
-// projectsWrapper.addEventListener("click", (e) => {
-//   if (e.target.textContent.includes("Edit")) {
-//     document.querySelector(".project-edit").value = e.target.dataset.id;
-//   } else if (e.target.textContent.includes("Delete")) {
-//     document.querySelector(".project-id").value = e.target.dataset.id;
-//   } else if (e.target.textContent.includes("Image")) {
-//     document.querySelector("#project-id").value = e.target.dataset.id;
-//   }
-// });
+if (projectsWrapper) {
+  projectsWrapper.addEventListener("click", (e) => {
+    if (e.target.textContent.includes("Edit")) {
+      document.querySelector(".project-edit").value = e.target.dataset.id;
+    } else if (e.target.textContent.includes("Delete")) {
+      document.querySelector(".project-id").value = e.target.dataset.id;
+    }
+  });
+}
 
-// worksWrapper.addEventListener("click", (e) => {
-//   if (e.target.textContent.includes("Delete")) {
-//     document.querySelector(".work-id").value = e.target.dataset.id;
-//   }
-// });
-
-// imageWrapper.addEventListener("click", (e) => {
-//   if (e.target.textContent.includes("Delete")) {
-//     document.querySelector(".image-id").value = e.target.dataset.id;
-//     document.querySelector(".image-name").value = e.target.dataset.file;
-//   }
-// });
+if (worksWrapper) {
+  worksWrapper.addEventListener("click", (e) => {
+    if (e.target.textContent.includes("Delete")) {
+      document.querySelector(".work-id").value = e.target.dataset.id;
+    }
+  });
+}

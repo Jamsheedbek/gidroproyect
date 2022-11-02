@@ -1706,3 +1706,8 @@ a:focus {
   display: block;
   margin-top: 0;
 }
+
+.news-title-left {
+  width: 100%;
+  word-break: break-all;
+}

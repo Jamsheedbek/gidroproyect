@@ -194,7 +194,7 @@
                 <td>
                   <img src="<%= e.imgUrl %>" alt="" class="new-imgs" />
                 </td>
-                <td class="text-truncate"><%= e.title %></td>
+                <td class="table-title"><%= e.title %></td>
                 <td>
                   <button
                     data-id="<%= e.id %>"
@@ -261,7 +261,7 @@
           <!-- News end -->
 
           <!-- Users -->
-          <% if(page == "get-users") { %>
+          <% if(page == "get-users" && users) { %>
           <table class="table" style="margin: 30px 10px">
             <thead>
               <tr>
@@ -595,7 +595,7 @@
             <tbody class="works-wrapper">
               <% works.forEach(work => { %>
               <tr>
-                <td><%= work.title %></td>
+                <td class="table-title"><%= work.title %></td>
                 <td><%= work.user.firstName %></td>
                 <td><%= work.user.lastName %></td>
                 <td>
@@ -680,7 +680,7 @@
                 <td>
                   <img src="<%= project.imgUrl %>" alt="" class="new-imgs" />
                 </td>
-                <td><%= project.name %></td>
+                <td class="table-title"><%= project.name %></td>
                 <td>
                   <button
                     type="button"

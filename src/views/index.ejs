@@ -13,11 +13,6 @@
       name="description"
     />
 
-    <!-- <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" /> -->
-
     <!-- Google Font -->
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
@@ -25,10 +20,6 @@
     />
 
     <!-- CSS Libraries -->
-    <!-- <link
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      rel="stylesheet"
-    /> -->
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
       rel="stylesheet"
@@ -299,9 +290,9 @@
                 <img src="<%= news.imgUrl %>" alt="<%= news.title %>" />
                 <div class="card-body">
                   <p class="fs-6 text-secondary mb-2">
-                    <i class="far fa-calendar"></i> <%= news.createdAt %>
+                    <i class="far fa-calendar"></i> <%= news.date %>
                   </p>
-                  <h5 class="card-title"><%= news.title %></h5>
+                  <h5 class="card-title fw-normal"><%= news.title %></h5>
                   <hr />
                   <a href="/news/view/<%= news.id %>" class="text-primary"
                     >batafsil</a
@@ -610,8 +601,13 @@
               </h6>
               <ul>
                 <li class="nav-item nav-link">
+                  <a href="https://www.uzgidro.uz/" target="_blank"
+                    >"O'zbekgidroenergo" AJ
+                  </a>
+                </li>
+                <li class="nav-item nav-link">
                   <a href="https://www.gidroproekt.uz/" target="_blank"
-                    >"Gidroloyiha" AJ</a
+                    >"Gidroproekt" AJ</a
                   >
                 </li>
                 <li class="nav-item nav-link">
@@ -746,7 +742,7 @@
                 <a
                   class="btn text-white btn-floating m-1"
                   style="background-color: #3b5998"
-                  href="#!"
+                  href="/"
                   role="button"
                   ><i class="fab fa-facebook-f"></i
                 ></a>
@@ -755,7 +751,7 @@
                 <a
                   class="btn text-white btn-floating m-1"
                   style="background-color: #55acee"
-                  href="#!"
+                  href="/"
                   role="button"
                   ><i class="fab fa-twitter"></i
                 ></a>
@@ -764,7 +760,7 @@
                 <a
                   class="btn text-white btn-floating m-1"
                   style="background-color: #dd4b39"
-                  href="#!"
+                  href="/"
                   role="button"
                   ><i class="fab fa-google"></i
                 ></a>
@@ -773,7 +769,7 @@
                 <a
                   class="btn text-white btn-floating m-1"
                   style="background-color: #ac2bac"
-                  href="#!"
+                  href="/"
                   role="button"
                   ><i class="fab fa-instagram"></i
                 ></a>
@@ -785,7 +781,7 @@
             <!-- Copyright -->
             <div class="text-center p-3" style="background-color: #1f618d">
               © 2022
-              <a class="text-warning" href="https://uzgidro.uz/" target="_blank"
+              <a class="text-light" href="https://uzgidro.uz/" target="_blank"
                 >"O'zbekgidroenergo" AJ
               </a>
               1-Son Qurilish Direksiyasi

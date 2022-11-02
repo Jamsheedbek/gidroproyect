@@ -1,5 +1,6 @@
 const { News } = require("../models");
 const moment = require("moment");
+moment.locale("uz");
 
 const handleAllNews = async (id) => {
   try {
@@ -10,9 +11,9 @@ const handleAllNews = async (id) => {
       allNews.dataValues.imgUrl =
         "/files/assets/news/" + allNews.dataValues.fileName;
 
-      allNews.dataValues.createdAt = moment()
-        .format(allNews.dataValues.createdAt.toString())
-        .slice(4, 16);
+      allNews.dataValues.date = moment(allNews.dataValues.createdAt).format(
+        "L h:mm:ss"
+      );
 
       return allNews;
     } else {
@@ -20,9 +21,7 @@ const handleAllNews = async (id) => {
       allNews.map((e) => {
         e.dataValues.imgUrl = "/files/assets/news/" + e.dataValues.fileName;
 
-        e.dataValues.createdAt = moment()
-          .format(e.dataValues.createdAt.toString())
-          .slice(4, 16);
+        e.dataValues.date = moment(e.dataValues.createdAt).format("L h:mm:ss");
 
         news.push(e.dataValues);
       });

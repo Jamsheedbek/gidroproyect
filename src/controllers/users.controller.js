@@ -12,9 +12,10 @@ module.exports = {
         password: bcrypt.hashSync(password, 8),
       });
 
-      res.redirect("/direksiya/admin");
+      res.redirect("/direksiya/admin/get/users");
     } catch (err) {
       console.log(err);
+      res.redirect("/direksiya/admin/get/users");
     }
   },
   editUser: async (req, res) => {
@@ -72,9 +73,10 @@ module.exports = {
           }
         );
       }
-      res.redirect("/direksiya/admin");
+      res.redirect("/direksiya/admin/get/users");
     } catch (err) {
       console.log(err);
+      res.redirect("/direksiya/admin/get/users");
     }
   },
   deleteUser: async (req, res) => {
@@ -84,7 +86,7 @@ module.exports = {
 
       await Users.destroy({ where: { id } });
 
-      res.redirect("/direksiya/admin");
+      res.redirect("/direksiya/admin/get/users");
     } catch (err) {
       console.log(err);
     }

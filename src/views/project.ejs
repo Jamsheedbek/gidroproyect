@@ -205,11 +205,11 @@
         </div>
         <div class="col-lg-4 col-md-12 p-4">
           <% if(news.length > 0){ %>
-          <div class="shadow rounded">
+          <div class="card bg-light p-2">
             <h2 class="text-center mb-2 text-primary">So'ngi yangiliklar</h2>
-            <div class="card py-3 px-2">
+            <div class="py-3 px-3 w-100">
               <% news.forEach(news => { %>
-              <div class="d-flex">
+              <div class="d-flex w-100 mb-3">
                 <div class="flex-shrink-0">
                   <img
                     src="<%= news.imgUrl %>"
@@ -218,13 +218,14 @@
                     class="rounded"
                   />
                 </div>
-                <div class="flex-grow-1 ms-3 w-100">
-                  <a href="/news/<%= news.id %>" class="w-100 card-text d-block"
+                <div class="ms-3 w-100">
+                  <a
+                    href="/news/<%= news.id %>"
+                    class="news-title-left card-text d-block"
                     ><%= news.title %></a
                   >
                   <small class="text-muted text-primary"
-                    ><i class="far fa-calendar"></i> <%= news.createdAt
-                    %></small
+                    ><i class="far fa-calendar"></i> <%= news.date %></small
                   >
                 </div>
               </div>
