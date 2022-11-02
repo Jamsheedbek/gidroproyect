@@ -2,14 +2,11 @@ require("dotenv").config();
 const connectionString = process.env.CONNECTION_STRING;
 const { Sequelize, DataTypes } = require("sequelize");
 
-const sequelize = new Sequelize(
-  "postgres://cqsxwkvc:9i6ohxAwZ4oh1y1NDBf8sWgMUbSW_Ipy@jelani.db.elephantsql.com/cqsxwkvc",
-  {
-    host: "localhost",
-    dialect: "postgres",
-    timezone: "Asia/Tashkent",
-  }
-);
+const sequelize = new Sequelize(connectionString, {
+  host: "localhost",
+  dialect: "postgres",
+  timezone: "Asia/Tashkent",
+});
 
 const Users = sequelize.define("users", {
   id: {
