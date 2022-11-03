@@ -1,6 +1,8 @@
+const handleCurrency = require("../util/handleCurrency");
 const handleAllNews = require("../util/handleNews");
 const handleProjects = require("../util/handleProjects");
 const handleAllUsers = require("../util/handleUsers");
+const handleWheather = require("../util/handleWheatther");
 const handleWorks = require("../util/handleWorks");
 const { verifyUser } = require("../util/jwt");
 
@@ -9,8 +11,10 @@ module.exports = {
     try {
       const news = await handleAllNews();
       const projects = await handleProjects();
+      const currency = handleCurrency();
+      const wheather = handleWheather();
 
-      res.render("index", { news, projects });
+      res.render("index", { news, projects, wheather, currency });
     } catch (err) {
       console.log(err);
     }
@@ -100,10 +104,5 @@ module.exports = {
     const news = await handleAllNews();
 
     res.render("lidership", { news });
-  },
-  legalStatusPage: async (req, res) => {
-    const news = await handleAllNews();
-
-    res.render("status", { news });
   },
 };
