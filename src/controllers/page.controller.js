@@ -24,9 +24,6 @@ module.exports = {
       console.log(err);
     }
   },
-  aboutPage: (req, res) => {
-    res.render("about", { page: "news" });
-  },
   finishedProjectsPage: async (req, res) => {
     const projects = await handleProjects();
     res.render("finishedProjects", { projects });
@@ -98,5 +95,15 @@ module.exports = {
     const news = await handleAllNews();
 
     res.render("tender", { news });
+  },
+  leadershipPage: async (req, res) => {
+    const news = await handleAllNews();
+
+    res.render("lidership", { news });
+  },
+  legalStatusPage: async (req, res) => {
+    const news = await handleAllNews();
+
+    res.render("status", { news });
   },
 };

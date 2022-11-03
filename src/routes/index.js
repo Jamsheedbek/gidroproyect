@@ -16,7 +16,6 @@ let routes = (app) => {
   router
     //pages
     .get("/", pageController.homePage)
-    .get("/about", pageController.aboutPage)
     .get("/projects/current", pageController.finishedProjectsPage)
     .get("/projects/promising", pageController.plannedProjectsPage)
     .get("/direksiya/login", pageController.loginPage)
@@ -43,6 +42,8 @@ let routes = (app) => {
     .get("/news/view/:id", pageController.newsPage)
     .get("/news", pageController.allNewsPage)
     .get("/tenders", pageController.tendersPage)
+    .get("/lidership", pageController.leadershipPage)
+    .get("/post", pageController.legalStatusPage)
 
     // news
     .post("/news", newsController.createNews)
