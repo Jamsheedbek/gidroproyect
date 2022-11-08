@@ -179,7 +179,11 @@
           <% news.forEach(news => { %> <% if(news.type == "poster"){ %>
           <div class="col-lg-4 col-md-6 p-4 wow fadeInUp" data-wow-delay="0.1s">
             <div class="card h-100">
-              <img src="<%= news.imgUrl %>" alt="<%= news.title %>" />
+              <img
+                class="card-image-top"
+                src="<%= news.imgUrl %>"
+                alt="<%= news.title %>"
+              />
               <div class="card-body">
                 <p class="fs-6 text-secondary mb-2">
                   <i class="far fa-calendar"></i> <%= news.date %>

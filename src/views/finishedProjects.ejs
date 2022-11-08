@@ -178,7 +178,11 @@
           <% projects.forEach(project => { %>
           <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
             <div class="card h-100">
-              <img src="<%= project.imgUrl %>" alt="<%= project.name %>" />
+              <img
+                class="card-image-top"
+                src="<%= project.imgUrl %>"
+                alt="<%= project.name %>"
+              />
               <div class="card-body">
                 <!-- <p class="fs-6 text-secondary mb-2">
                       <i class="far fa-calendar"></i>
