@@ -13,7 +13,7 @@ const handleProjects = async (id) => {
       return allProjects;
     }
 
-    allProjects = await Projects.findAll({ order: '"updatedAt" DESC' });
+    allProjects = await Projects.findAll({ order: [["updatedAt", "DESC"]] });
 
     allProjects.forEach((e) => {
       e.dataValues.imgUrl = "/files/assets/projects/" + e.dataValues.fileName;

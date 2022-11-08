@@ -17,7 +17,7 @@ const handleAllNews = async (id) => {
 
       return allNews;
     } else {
-      const allNews = await News.findAll({ order: '"updatedAt" DESC' });
+      const allNews = await News.findAll({ order: [["updatedAt", "DESC"]] });
       allNews.map((e) => {
         e.dataValues.imgUrl = "/files/assets/news/" + e.dataValues.fileName;
 
