@@ -1714,5 +1714,5 @@ a:focus {
 
 .card-images {
   height: 260px !important;
-  object-fit: contain;
+  object-fit: cover;
 }
