@@ -189,12 +189,14 @@
               <i class="far fa-calendar"></i>
               <%= activeNews.dataValues.date %>
             </p>
-            <h5 class="card-title"><%= activeNews.dataValues.title %></h5>
+            <h5 class="card-title fw-bold fs-5">
+              <%= activeNews.dataValues.title %>
+            </h5>
             <hr />
-            <p
+            <div
               id="editor"
               data-content="<%= activeNews.dataValues.content %>"
-            ></p>
+            ></div>
           </div>
         </div>
       </div>
