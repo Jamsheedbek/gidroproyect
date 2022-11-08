@@ -1711,3 +1711,8 @@ a:focus {
   width: 100%;
   word-break: break-all;
 }
+
+.card-images {
+  height: 260px !important;
+  object-fit: contain;
+}
