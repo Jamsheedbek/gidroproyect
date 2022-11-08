@@ -26,6 +26,11 @@ let routes = (app) => {
     )
     .get("/direksiya/admin/get/news", verifyToken, pageController.getNewsPage)
     .get(
+      "/direksiya/admin/edit/news/:id",
+      verifyToken,
+      pageController.editNewsPage
+    )
+    .get(
       "/direksiya/admin/create/project",
       verifyToken,
       pageController.createProjectPage
@@ -47,6 +52,7 @@ let routes = (app) => {
     // news
     .post("/news", newsController.createNews)
     .post("/delete-news", newsController.deleteNews)
+    .post("/edit-news", newsController.editNews)
 
     //projects
     .post("/projects", projectsController.createProject)

@@ -1,3 +1,4 @@
+const { News } = require("../models");
 const handleCurrency = require("../util/handleCurrency");
 const handleAllNews = require("../util/handleNews");
 const handleProjects = require("../util/handleProjects");
@@ -11,8 +12,8 @@ module.exports = {
     try {
       const news = await handleAllNews();
       const projects = await handleProjects();
-      const currency = handleCurrency();
-      const wheather = handleWheather();
+      const currency = await handleCurrency();
+      const wheather = await handleWheather();
 
       res.render("index", { news, projects, wheather, currency });
     } catch (err) {
@@ -50,6 +51,10 @@ module.exports = {
       news,
       page: "get-news",
     });
+  },
+  editNewsPage: async (req, res) => {
+    const news = await handleAllNews(req.params.id);
+    res.render("admin", { page: "edit-news", news: news.dataValues });
   },
   createProjectPage: async (req, res) => {
     res.render("admin", {

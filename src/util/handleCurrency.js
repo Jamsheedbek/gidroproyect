@@ -1,11 +1,11 @@
 const axios = require("axios");
 
-const handleCurrency = () => {
+const handleCurrency = async () => {
   let link = "https://cbu.uz/oz/arkhiv-kursov-valyut/json/";
 
-  axios.default.get(link).then(({ data }) => {
-    return data.slice(0, 3);
-  });
+  const { data } = await axios.default.get(link);
+
+  return data.slice(0, 3);
 };
 
 module.exports = handleCurrency;

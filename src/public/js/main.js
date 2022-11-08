@@ -81,7 +81,7 @@ if (document.getElementById("editor")) {
     .getElementById("editor")
     .querySelectorAll("img")
     .forEach((e) => {
-      e.classList.add("card-img-top");
+      e.classList.add("card-img");
     });
 
   document

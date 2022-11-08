@@ -160,7 +160,7 @@
               <a href="/projects/promising" class="nav-item nav-link"
                 >Istiqbolli loyihalar</a
               >
-              <a href="/tenders" class="nav-item nav-link">Tendrlar</a>
+              <a href="/tenders" class="nav-item nav-link">Tenderlar</a>
               <a href="#" id="to-footer" class="nav-item nav-link">Aloqa</a>
             </div>
           </div>
@@ -173,7 +173,7 @@
     <div class="blog">
       <div class="container">
         <div class="section-header text-center">
-          <h2>Tendr va e'lonlar</h2>
+          <h2>Tender vs E'lonlar</h2>
         </div>
         <div class="row">
           <% news.forEach(news => { %> <% if(news.type == "poster"){ %>
@@ -182,9 +182,9 @@
               <img src="<%= news.imgUrl %>" alt="<%= news.title %>" />
               <div class="card-body">
                 <p class="fs-6 text-secondary mb-2">
-                  <i class="far fa-calendar"></i> <%= news.createdAt %>
+                  <i class="far fa-calendar"></i> <%= news.date %>
                 </p>
-                <h5 class="card-title"><%= news.title %></h5>
+                <h5 class="card-title fw-normal"><%= news.title %></h5>
                 <hr />
                 <a href="/news/view/<%= news.id %>" class="text-primary"
                   >batafsil</a

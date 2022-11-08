@@ -151,7 +151,7 @@
               <a href="/projects/promising" class="nav-item nav-link"
                 >Istiqbolli loyihalar</a
               >
-              <a href="/tenders" class="nav-item nav-link">Tendrlar</a>
+              <a href="/tenders" class="nav-item nav-link">Tenderlar</a>
               <a href="#" id="to-footer" class="nav-item nav-link">Aloqa</a>
             </div>
           </div>
@@ -436,11 +436,16 @@
           <div class="col-md-6 pt-3">
             <div class="row">
               <div class="col-md-12 col-lg-6 ms-auto me-auto">
-                <div class="card" style="color: #4b515d; border-radius: 35px">
+                <div
+                  class="card bg-light bg-opacity-75"
+                  style="color: #4b515d; border-radius: 35px"
+                >
                   <div class="card-body p-4">
                     <div class="d-flex">
-                      <h6 class="flex-grow-1 text-start">Toshkent</h6>
-                      <h6>15:07</h6>
+                      <h6 class="flex-grow-1 text-start">
+                        <%= wheather.name %>
+                      </h6>
+                      <h6><%= wheather.time %></h6>
                     </div>
 
                     <div class="d-flex flex-column text-center mt-5 mb-4">
@@ -448,9 +453,8 @@
                         class="display-4 mb-0 font-weight-bold"
                         style="color: #1c2331"
                       >
-                        13°C
+                        <%= wheather.temp %>°C
                       </h6>
-                      <span class="small" style="color: #868b94">Stormy</span>
                     </div>
 
                     <div class="d-flex align-items-center">
@@ -460,21 +464,14 @@
                             class="fas fa-wind fa-fw"
                             style="color: #868b94"
                           ></i>
-                          <span class="ms-1"> 40 km/h </span>
+                          <span class="ms-1"> <%= wheather.wind %> m/s </span>
                         </div>
                         <div class="text-start">
                           <i
                             class="fas fa-tint fa-fw"
                             style="color: #868b94"
                           ></i>
-                          <span class="ms-1"> 84% </span>
-                        </div>
-                        <div class="text-start">
-                          <i
-                            class="fas fa-sun fa-fw"
-                            style="color: #868b94"
-                          ></i>
-                          <span class="ms-1"> 0.2h </span>
+                          <span class="ms-1"> <%= wheather.humidity %>% </span>
                         </div>
                       </div>
                       <div class="d-flex">
@@ -493,36 +490,48 @@
               </div>
             </div>
           </div>
-          <div
-            class="col-md-6 pt-3 d-flex justify-content-center align-items-center"
-          >
-            <div
-              class="card d-block w-75"
-              style="color: #4b515d; border-radius: 35px"
-            >
-              <div class="card-body p-4">
-                <div class="d-flex">
-                  <h6 class="flex-grow-1 text-start">
-                    <i class="fas fa-money-check-alt text-primary"></i>
-                    Valyuta kurslari
-                  </h6>
-                  <h6>15:07</h6>
-                </div>
+          <div class="col-md-6 pt-3">
+            <div class="row">
+              <div class="col-md-12 col-lg-6 ms-auto me-auto">
+                <div
+                  class="card bg-light bg-opacity-75"
+                  style="color: #4b515d; border-radius: 35px"
+                >
+                  <div class="card-body p-4">
+                    <div class="d-flex">
+                      <h6 class="flex-grow-1 text-start">Valyuta kurslari</h6>
+                      <h6><%= wheather.date %></h6>
+                    </div>
 
-                <div class="d-flex flex-column text-center mt-3">
-                  <div class="text-start">
-                    <i class="fas fa-dollar-sign"></i>
-                    <span class="dollar-currency"></span>
-                  </div>
-                  <hr />
-                  <div class="text-start">
-                    <i class="fas fa-euro-sign"></i>
-                    <span class="dollar-currency"></span>
-                  </div>
-                  <hr />
-                  <div class="text-start">
-                    <i class="fas fa-ruble-sign"></i>
-                    <span class="dollar-currency"></span>
+                    <div class="d-flex flex-column mt-3 mb-2">
+                      <p
+                        class="fs-4 mb-0 font-weight-bold"
+                        style="color: #1c2331"
+                      >
+                        <i class="fas fa-dollar-sign"></i> <%= currency[0].Ccy
+                        %> = <%= currency[0].Rate %>
+                      </p>
+                    </div>
+                    <div class="d-flex flex-column mt-3 mb-2">
+                      <p
+                        class="fs-4 mb-0 font-weight-bold"
+                        style="color: #1c2331"
+                      >
+                        <i class="fas fa-euro-sign"></i> <%= currency[1].Ccy %>
+                        = <%= currency[1].Rate %>
+                      </p>
+                    </div>
+                    <div class="d-flex flex-column mt-3 mb-2">
+                      <p
+                        class="fs-4 mb-0 font-weight-bold"
+                        style="color: #1c2331"
+                      >
+                        <i class="fas fa-ruble-sign"></i> <%= currency[2].Ccy %>
+                        = <%= currency[2].Rate %>
+                      </p>
+                    </div>
+
+                    <div class="d-flex align-items-center"></div>
                   </div>
                 </div>
               </div>
@@ -537,7 +546,7 @@
     <div class="blog">
       <div class="container">
         <div class="section-header text-center">
-          <h2>Tendr va e'lonlar</h2>
+          <h2>Tender va E'lonlar</h2>
         </div>
         <div class="row">
           <% news.slice(0,3).forEach(news => { %> <% if(news.type == "poster"){
@@ -547,9 +556,9 @@
               <img src="<%= news.imgUrl %>" alt="<%= news.title %>" />
               <div class="card-body">
                 <p class="fs-6 text-secondary mb-2">
-                  <i class="far fa-calendar"></i> <%= news.createdAt %>
+                  <i class="far fa-calendar"></i> <%= news.date %>
                 </p>
-                <h5 class="card-title"><%= news.title %></h5>
+                <h5 class="card-title fw-normal"><%= news.title %></h5>
                 <hr />
                 <a href="/news/view/<%= news.id %>" class="text-primary"
                   >batafsil</a
@@ -787,6 +796,5 @@
     <script src="lib/counterup/counterup.min.js"></script>
     <script src="lib/slick/slick.min.js"></script>
     <script src="/js/main.js"></script>
-    <script src="/js/wheather.js"></script>
   </body>
 </html>

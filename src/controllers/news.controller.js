@@ -40,4 +40,64 @@ module.exports = {
       console.log(err);
     }
   },
+  editNews: async (req, res) => {
+    try {
+      const { id, title, content, type } = req.body;
+
+      const image = req.files;
+
+      const oldNews = await News.findOne({ where: { id } });
+
+      if (image) {
+        const fileName = image.file.name;
+        fs.unlink(
+          path.resolve(
+            "./src/uploads/assets/news",
+            oldNews.dataValues.fileName
+          ),
+          function (err) {
+            if (err) return console.log(err);
+          }
+        );
+
+        let news = await News.update(
+          {
+            title,
+            content,
+            fileName,
+            type,
+          },
+          {
+            where: {
+              id: oldNews.dataValues.id,
+            },
+          }
+        );
+
+        const uploadPath = path.resolve("./src/uploads/assets/news", fileName);
+
+        fs.writeFile(uploadPath, image.file.data, (err) => {
+          console.log(err);
+        });
+      } else {
+        let news = await News.update(
+          {
+            title,
+            content,
+            fileName: oldNews.dataValues.fileName,
+            type,
+          },
+          {
+            where: {
+              id: oldNews.dataValues.id,
+            },
+          }
+        );
+      }
+
+      res.redirect("/direksiya/admin/get/news");
+    } catch (err) {
+      console.log(err);
+    }
+  },
 };
