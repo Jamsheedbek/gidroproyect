@@ -40,6 +40,11 @@ let routes = (app) => {
       verifyToken,
       pageController.getProjectsPage
     )
+    .get(
+      "/direksiya/admin/edit/project/:id",
+      verifyToken,
+      pageController.editProjectPage
+    )
     .get("/direksiya/admin/get/users", verifyToken, pageController.usersPage)
     .get("/direksiya/admin/get/works", verifyToken, pageController.worksPage)
     .get("/direksiya/users", verifyToken, pageController.userPage)

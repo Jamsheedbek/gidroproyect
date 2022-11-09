@@ -8,6 +8,7 @@ const projectsWrapper = document.querySelector(".projects-wrapper");
 const worksWrapper = document.querySelector(".works-wrapper");
 const imageWrapper = document.querySelector(".image-wrapper");
 const editNews = document.querySelector("#editNews");
+const editProjects = document.getElementById("edit-projects");
 
 var toolbarOptions = [
   ["bold", "italic", "underline", "strike"],
@@ -172,6 +173,57 @@ if (editNews) {
     e.classList.add("card-text");
   });
   document.getElementById("edit-news").addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (
+      !document.getElementById("edited-news-content").value &&
+      Content.getContents().ops.length > 1
+    ) {
+      e.preventDefault();
+
+      document.getElementById("edited-news-content").value = JSON.stringify(
+        Content.getContents()
+      );
+
+      document.querySelector("#edit-news").submit();
+    } else if (
+      Content.getContents().ops.length == 1 &&
+      !document.getElementById("edited-news-content").value
+    ) {
+      e.preventDefault();
+    }
+  });
+}
+
+if (editProjects) {
+  document.getElementById("add-edited-photo").addEventListener("change", () => {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      document.getElementById("edited-project-label").src = e.target.result;
+    };
+    reader.readAsDataURL(document.getElementById("add-edited-photo").files[0]);
+  });
+
+  var Content = new Quill("#editedprojecteditor", {
+    modules: {
+      toolbar: toolbarOptions,
+    },
+    theme: "snow",
+  });
+
+  // if (editNews.dataset.content) {
+  //   Content.setContents(JSON.parse(editNews.dataset.content));
+  // }
+
+  // editNews.dataset.content = "";
+
+  // editNews.querySelectorAll("img").forEach((e) => {
+  //   e.classList.add("card-img");
+  // });
+
+  // editNews.querySelectorAll("p").forEach((e) => {
+  //   e.classList.add("card-text");
+  // });
+  document.getElementById("edit-projects").addEventListener("submit", (e) => {
     e.preventDefault();
     if (
       !document.getElementById("edited-news-content").value &&

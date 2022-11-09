@@ -68,6 +68,9 @@ module.exports = {
       page: "get-projects",
     });
   },
+  editProjectPage: async (req, res) => {
+    res.render("admin", { page: "edit-project" });
+  },
   usersPage: async (req, res) => {
     const users = await handleAllUsers();
     res.render("admin", {

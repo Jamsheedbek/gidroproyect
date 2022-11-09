@@ -595,7 +595,7 @@
           <% } %>
           <!-- Users end -->
 
-          <!-- Project -->
+          <!-- Create Project start -->
           <% if(page == "create-project") { %>
           <form
             id="create-projects"
@@ -668,7 +668,172 @@
             </div>
           </form>
           <% } %>
-          <!-- Project end -->
+          <!-- Create Project end -->
+
+          <!-- Get Projects start -->
+          <% if(page == "get-projects") { %>
+          <table class="table m-2">
+            <thead>
+              <tr>
+                <th scope="col" class="fs-6 table-secondary">Image</th>
+                <th scope="col" class="fs-6 table-secondary">Name</th>
+                <th scope="col" class="fs-6 table-secondary">Type</th>
+                <th scope="col" class="fs-6 table-secondary">Edit</th>
+                <th scope="col" class="fs-6 table-secondary">Delete</th>
+              </tr>
+            </thead>
+            <tbody class="projects-wrapper">
+              <% projects.forEach(project => { %>
+              <tr>
+                <td>
+                  <img src="<%= project.imgUrl %>" alt="" class="new-imgs" />
+                </td>
+                <td class="table-title"><%= project.name %></td>
+                <td class="table-title"><%= project.type %></td>
+                <td>
+                  <a
+                    href="/direksiya/admin/edit/project/<%= project.id %>"
+                    class="btn btn-primary"
+                    >Edit</a
+                  >
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop"
+                    data-id="<%= project.id %>"
+                  >
+                    Delete
+                  </button>
+                </td>
+                <div
+                  class="modal fade"
+                  id="staticBackdrop"
+                  data-bs-backdrop="static"
+                  data-bs-keyboard="false"
+                  tabindex="-1"
+                  aria-labelledby="staticBackdropLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                          Modal title
+                        </h1>
+                      </div>
+                      <div class="modal-body">
+                        Siz rostan ham o'chirmoqchimisiz?
+                      </div>
+                      <div class="modal-footer">
+                        <form
+                          action="/delete-project"
+                          method="post"
+                          enctype="application/x-www-form-urlencoded"
+                        >
+                          <input
+                            type="text"
+                            name="id"
+                            class="d-none project-id"
+                          />
+                          <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                          >
+                            Close
+                          </button>
+                          <button type="submit" class="btn btn-primary">
+                            Ok
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
+          <% } %>
+          <!-- Get Projects end -->
+
+          <!-- Edit Project start -->
+          <% if(page == "edit-project") { %>
+          <form
+            id="edit-projects"
+            action="/projects"
+            class="project-form"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <div class="row">
+              <div class="col-3 d-flex align-items-center">Loyiha rasmi :</div>
+              <div class="col-9">
+                <input
+                  required
+                  name="file"
+                  type="file"
+                  id="add-edited-photo"
+                  class="d-none add-photo"
+                />
+                <label for="add-edited-photo">
+                  <img
+                    src="/img/Image 5.png"
+                    alt=""
+                    class="new-img edited-project-label"
+                  />
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3 d-flex align-items-center">Loyiha nomi :</div>
+              <div class="col-9">
+                <input
+                  required
+                  class="form-control form-control-lg w-50"
+                  type="text"
+                  placeholder="Name"
+                  name="name"
+                  aria-label=".form-control-lg example"
+                  style="margin: 15px 0"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3 d-flex align-items-center">Loyiha turi :</div>
+              <div class="col-9">
+                <select name="type" class="form-select w-50 mb-3">
+                  <option selected value="finished">Joriy</option>
+                  <option value="planned">Istiqbolli</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3 d-flex align-items-center">
+                Loyiha mazmuni :
+              </div>
+              <div class="col-9">
+                <input
+                  type="text"
+                  class="d-none"
+                  name="content"
+                  id="edited-project-content"
+                />
+                <div class="card w-100 rounded-8">
+                  <div id="editedprojecttoolbar"></div>
+                  <div id="editedprojecteditor"></div>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-end mt-3">
+              <button type="submit" class="btn btn-primary">Yaratish</button>
+            </div>
+          </form>
+          <% } %>
+          <!-- Edit Project end -->
 
           <!-- Works start -->
           <% if(page == "get-works") { %>
@@ -753,86 +918,6 @@
           </table>
           <% } %>
           <!-- Works end -->
-
-          <!-- Project Images -->
-          <% if(page == "get-projects") { %>
-          <table class="table m-2">
-            <thead>
-              <tr>
-                <th scope="col" class="fs-6 table-secondary">Image</th>
-                <th scope="col" class="fs-6 table-secondary">Name</th>
-                <th scope="col" class="fs-6 table-secondary">Delete</th>
-              </tr>
-            </thead>
-            <tbody class="projects-wrapper">
-              <% projects.forEach(project => { %>
-              <tr>
-                <td>
-                  <img src="<%= project.imgUrl %>" alt="" class="new-imgs" />
-                </td>
-                <td class="table-title"><%= project.name %></td>
-                <td>
-                  <button
-                    type="button"
-                    class="btn btn-primary"
-                    data-bs-toggle="modal"
-                    data-bs-target="#staticBackdrop"
-                    data-id="<%= project.id %>"
-                  >
-                    Delete
-                  </button>
-                </td>
-                <div
-                  class="modal fade"
-                  id="staticBackdrop"
-                  data-bs-backdrop="static"
-                  data-bs-keyboard="false"
-                  tabindex="-1"
-                  aria-labelledby="staticBackdropLabel"
-                  aria-hidden="true"
-                >
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                          Modal title
-                        </h1>
-                      </div>
-                      <div class="modal-body">
-                        Siz rostan ham o'chirmoqchimisiz?
-                      </div>
-                      <div class="modal-footer">
-                        <form
-                          action="/delete-project"
-                          method="post"
-                          enctype="application/x-www-form-urlencoded"
-                        >
-                          <input
-                            type="text"
-                            name="id"
-                            class="d-none project-id"
-                          />
-                          <button
-                            type="button"
-                            class="btn btn-secondary"
-                            data-bs-dismiss="modal"
-                          >
-                            Close
-                          </button>
-                          <button type="submit" class="btn btn-primary">
-                            Ok
-                          </button>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </tr>
-              <% }); %>
-            </tbody>
-          </table>
-          <% } %>
-          <!-- Project Images end -->
         </div>
       </div>
     </div>
