@@ -1,4 +1,5 @@
 const { News } = require("../models");
+const handleCarousel = require("../util/handleCarousel");
 const handleCurrency = require("../util/handleCurrency");
 const handleAllNews = require("../util/handleNews");
 const handleProjects = require("../util/handleProjects");
@@ -14,8 +15,9 @@ module.exports = {
       const projects = await handleProjects();
       const currency = await handleCurrency();
       const wheather = await handleWheather();
+      const carousel = await handleCarousel();
 
-      res.render("index", { news, projects, wheather, currency });
+      res.render("index", { news, projects, wheather, currency, carousel });
     } catch (err) {
       console.log(err);
     }
@@ -69,7 +71,9 @@ module.exports = {
     });
   },
   editProjectPage: async (req, res) => {
-    res.render("admin", { page: "edit-project" });
+    const project = await handleProjects(req.params.id);
+
+    res.render("admin", { page: "edit-project", project });
   },
   usersPage: async (req, res) => {
     const users = await handleAllUsers();
@@ -112,5 +116,13 @@ module.exports = {
     const news = await handleAllNews();
 
     res.render("lidership", { news });
+  },
+  createLiders: async (req, res) => {
+    res.render("admin", { page: "create-liders" });
+  },
+  editImages: async (req, res) => {
+    const carousel = await handleCarousel();
+
+    res.render("admin", { page: "get-images", carousel });
   },
 };

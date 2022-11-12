@@ -1,5 +1,6 @@
 const express = require("express");
 const authController = require("../controllers/auth.controller");
+const carouselController = require("../controllers/carousel.controller");
 const router = express.Router();
 
 //Controllers
@@ -19,6 +20,8 @@ let routes = (app) => {
     .get("/projects/current", pageController.finishedProjectsPage)
     .get("/projects/promising", pageController.plannedProjectsPage)
     .get("/direksiya/login", pageController.loginPage)
+
+    // News page
     .get(
       "/direksiya/admin/create/news",
       verifyToken,
@@ -30,6 +33,11 @@ let routes = (app) => {
       verifyToken,
       pageController.editNewsPage
     )
+    .get("/news/view/:id", pageController.newsPage)
+    .get("/news", pageController.allNewsPage)
+    .get("/tenders", pageController.tendersPage)
+
+    // Projects page
     .get(
       "/direksiya/admin/create/project",
       verifyToken,
@@ -45,37 +53,53 @@ let routes = (app) => {
       verifyToken,
       pageController.editProjectPage
     )
-    .get("/direksiya/admin/get/users", verifyToken, pageController.usersPage)
-    .get("/direksiya/admin/get/works", verifyToken, pageController.worksPage)
-    .get("/direksiya/users", verifyToken, pageController.userPage)
     .get("/projects/view/:id", pageController.projectPage)
-    .get("/news/view/:id", pageController.newsPage)
-    .get("/news", pageController.allNewsPage)
-    .get("/tenders", pageController.tendersPage)
+
+    // Users page
+    .get("/direksiya/admin/get/users", verifyToken, pageController.usersPage)
+    .get("/direksiya/users", verifyToken, pageController.userPage)
+
+    // Works page
+    .get("/direksiya/admin/get/works", verifyToken, pageController.worksPage)
+
+    // Liders page
+    .get(
+      "/direksiya/admin/create/liders",
+      verifyToken,
+      pageController.createLiders
+    )
     .get("/lidership", pageController.leadershipPage)
 
-    // news
+    // Images page
+    .get("/direksiya/admin/get/images", verifyToken, pageController.editImages)
+
+    // news controller
     .post("/news", newsController.createNews)
     .post("/delete-news", newsController.deleteNews)
     .post("/edit-news", newsController.editNews)
 
-    //projects
+    //projects controller
     .post("/projects", projectsController.createProject)
     .post("/delete-project", projectsController.deleteProject)
+    .post("/edit-project", projectsController.editProject)
 
-    //login
+    //login controller
     .post("/direksiya/login", authController.signIn)
     .post("/log-out", usersController.logOutUser)
 
-    //users
+    //users controller
     .post("/create-user", usersController.createUser)
     .post("/edit-user", usersController.editUser)
     .post("/delete-user", usersController.deleteUser)
 
-    // works
+    // works controller
     .post("/create-work", workController.uploadWork)
     .post("/delete-work", workController.deleteWork)
-    .get("/download/:name", verifyToken, workController.downloadWork);
+    .get("/download/:name", verifyToken, workController.downloadWork)
+
+    // carousel controller
+    .post("/create-carousel", carouselController.createCarousel)
+    .post("/edit-carousel", carouselController.updateCarousel);
 
   app.use(router);
 };

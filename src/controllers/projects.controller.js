@@ -18,12 +18,12 @@ module.exports = {
 
       const uploadPath = path.resolve(
         "./src/uploads/assets/projects",
-        newProject.dataValues.fileName
+        fileName
       );
 
       fs.writeFile(uploadPath, file.data, (err) => {
         if (err) {
-          return res.redirect("/direksiya/admin");
+          return res.redirect("/direksiya/admin/create/project");
         }
       });
 
@@ -43,11 +43,21 @@ module.exports = {
         "./src/uploads/assets/projects",
         Project.dataValues.fileName
       );
-      fs.unlink(Path, function (err) {
-        if (err) return res.redirect("/direksiya/admin/get/projects");
-      });
 
-      await Projects.destroy({ where: { id } });
+      fs.readFile(
+        `./src/uploads/assets/projects/${Project.dataValues.fileName}`,
+        async (err, data) => {
+          if (err) {
+            console.log(err.message);
+          }
+          if (data) {
+            fs.unlink(Path, function (err) {
+              if (err) return res.redirect("/direksiya/admin/get/projects");
+            });
+          }
+          await Projects.destroy({ where: { id } });
+        }
+      );
 
       res.redirect("direksiya/admin/get/projects");
     } catch (err) {
@@ -57,32 +67,66 @@ module.exports = {
   },
   editProject: async (req, res) => {
     try {
-      const { ud, name, content, type } = req.body;
-      const file = req.files.file;
-      const fileName = file.name;
+      const { id, name, content, type } = req.body;
 
-      const newProject = await Projects.create({
-        name,
-        content,
-        fileName,
-        type,
-      });
+      const image = req.files;
 
-      const uploadPath = path.resolve(
-        "./src/uploads/assets/projects",
-        newProject.dataValues.fileName
-      );
+      const oldProject = await Projects.findOne({ where: { id } });
 
-      fs.writeFile(uploadPath, file.data, (err) => {
-        if (err) {
-          return res.redirect("/direksiya/admin");
-        }
-      });
+      if (image) {
+        const fileName = image.file.name;
+        fs.unlink(
+          path.resolve(
+            "./src/uploads/assets/projects",
+            oldProject.dataValues.fileName
+          ),
+          function (err) {
+            if (err) return console.log(err);
+          }
+        );
+
+        let project = await Projects.update(
+          {
+            name,
+            content,
+            fileName,
+            type,
+          },
+          {
+            where: {
+              id,
+            },
+          }
+        );
+
+        const uploadPath = path.resolve(
+          "./src/uploads/assets/projects",
+          fileName
+        );
+
+        fs.writeFile(uploadPath, image.file.data, (err) => {
+          console.log(err);
+        });
+      } else {
+        let project = await Projects.update(
+          {
+            name,
+            content,
+            fileName: oldNews.dataValues.fileName,
+            type,
+          },
+          {
+            where: {
+              id,
+            },
+          }
+        );
+      }
 
       res.redirect("/direksiya/admin/get/projects");
     } catch (err) {
       console.log(err);
-      res.redirect("/direksiya/admin/create/project");
+      res.redirect("/direksiya/admin/get/projects");
     }
   },
 };

@@ -1716,3 +1716,23 @@ a:focus {
   height: 260px !important;
   object-fit: cover;
 }
+
+.ql-editor {
+  padding: 0;
+}
+
+@media (max-width: 991.98px) {
+  .card-img-top {
+    border-radius: 0 !important;
+  }
+
+  .card-img {
+    border-radius: 0 !important;
+  }
+}
+
+@media (max-width: 500) {
+  .card-body {
+    padding: 15px !important;
+  }
+}

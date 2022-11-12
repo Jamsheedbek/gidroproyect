@@ -9,6 +9,7 @@ const worksWrapper = document.querySelector(".works-wrapper");
 const imageWrapper = document.querySelector(".image-wrapper");
 const editNews = document.querySelector("#editNews");
 const editProjects = document.getElementById("edit-projects");
+const carousel = document.querySelector(".slides");
 
 var toolbarOptions = [
   ["bold", "italic", "underline", "strike"],
@@ -60,7 +61,7 @@ if (newsImage && document.querySelector("#create-news")) {
   });
 }
 
-if (projectImage) {
+if (projectImage && document.getElementById("create-projects")) {
   projectImage.addEventListener("change", () => {
     var reader = new FileReader();
     reader.onload = function (e) {
@@ -152,7 +153,7 @@ if (editNews) {
       );
     });
 
-  var Content = new Quill("#editNews", {
+  let Content = new Quill("#editNews", {
     modules: {
       toolbar: toolbarOptions,
     },
@@ -195,52 +196,104 @@ if (editNews) {
 }
 
 if (editProjects) {
-  document.getElementById("add-edited-photo").addEventListener("change", () => {
-    var reader = new FileReader();
-    reader.onload = function (e) {
-      document.getElementById("edited-project-label").src = e.target.result;
-    };
-    reader.readAsDataURL(document.getElementById("add-edited-photo").files[0]);
-  });
+  document
+    .getElementById("edited-project-img")
+    .addEventListener("change", () => {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        document.querySelector(".edited-project-label").src = e.target.result;
+      };
+      reader.readAsDataURL(
+        document.getElementById("edited-project-img").files[0]
+      );
+    });
 
-  var Content = new Quill("#editedprojecteditor", {
+  let Content = new Quill("#editedprojecteditor", {
     modules: {
       toolbar: toolbarOptions,
     },
     theme: "snow",
   });
 
-  // if (editNews.dataset.content) {
-  //   Content.setContents(JSON.parse(editNews.dataset.content));
-  // }
+  if (document.getElementById("editedprojecteditor").dataset.content) {
+    Content.setContents(
+      JSON.parse(document.getElementById("editedprojecteditor").dataset.content)
+    );
+  }
 
-  // editNews.dataset.content = "";
+  document.getElementById("editedprojecteditor").dataset.content = "";
 
-  // editNews.querySelectorAll("img").forEach((e) => {
-  //   e.classList.add("card-img");
-  // });
+  document
+    .getElementById("editedprojecteditor")
+    .querySelectorAll("img")
+    .forEach((e) => {
+      e.classList.add("card-img");
+    });
 
-  // editNews.querySelectorAll("p").forEach((e) => {
-  //   e.classList.add("card-text");
-  // });
+  document
+    .getElementById("editedprojecteditor")
+    .querySelectorAll("p")
+    .forEach((e) => {
+      e.classList.add("card-text");
+    });
   document.getElementById("edit-projects").addEventListener("submit", (e) => {
-    e.preventDefault();
     if (
-      !document.getElementById("edited-news-content").value &&
+      !document.getElementById("edited-project-content").value &&
       Content.getContents().ops.length > 1
     ) {
       e.preventDefault();
 
-      document.getElementById("edited-news-content").value = JSON.stringify(
+      document.getElementById("edited-project-content").value = JSON.stringify(
         Content.getContents()
       );
 
-      document.querySelector("#edit-news").submit();
+      document.querySelector("#edit-projects").submit();
     } else if (
       Content.getContents().ops.length == 1 &&
-      !document.getElementById("edited-news-content").value
+      !document.getElementById("edited-project-content").value
     ) {
       e.preventDefault();
     }
   });
+}
+
+if (carousel) {
+  document
+    .getElementById("caroousel-image-1")
+    .addEventListener("change", () => {
+      let reader = new FileReader();
+      reader.onload = function (e) {
+        document.getElementById("caroousel-image-1-label").src =
+          e.target.result;
+      };
+      reader.readAsDataURL(
+        document.getElementById("caroousel-image-1").files[0]
+      );
+    });
+
+  document
+    .getElementById("caroousel-image-2")
+    .addEventListener("change", () => {
+      let reader = new FileReader();
+      reader.onload = function (e) {
+        document.getElementById("caroousel-image-2-label").src =
+          e.target.result;
+      };
+      reader.readAsDataURL(
+        document.getElementById("caroousel-image-2").files[0]
+      );
+    });
+
+  document
+    .getElementById("caroousel-image-3")
+    .addEventListener("change", () => {
+      let reader = new FileReader();
+      reader.onload = function (e) {
+        document.getElementById("caroousel-image-3-label").src =
+          e.target.result;
+      };
+      reader.readAsDataURL(
+        document.getElementById("caroousel-image-3").files[0]
+      );
+    });
 }

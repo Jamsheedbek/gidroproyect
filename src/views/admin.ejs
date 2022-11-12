@@ -88,6 +88,32 @@
                 </li>
               </ul>
             </div>
+            <!-- <div class="dropdown mb-4">
+              <button
+                class="btn btn-primary dropdown-toggle w-100 text-start"
+                type="button"
+                id="dropdownMenuButton"
+                data-mdb-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Rahbariyat
+              </button>
+              <ul
+                class="dropdown-menu w-100"
+                aria-labelledby="dropdownMenuButton"
+              >
+                <li>
+                  <a class="dropdown-item" href="/direksiya/admin/create/liders"
+                    >Yaratish</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/direksiya/admin/get/liders"
+                    >Barchasini korish</a
+                  >
+                </li>
+              </ul>
+            </div> -->
             <a
               class="btn btn-primary w-100 text-start mb-4"
               href="/direksiya/admin/get/users"
@@ -95,10 +121,16 @@
               Hodimlar
             </a>
             <a
-              class="btn btn-primary w-100 text-start"
+              class="btn btn-primary w-100 text-start mb-4"
               href="/direksiya/admin/get/works"
             >
               Ishlar
+            </a>
+            <a
+              class="btn btn-primary w-100 text-start"
+              href="/direksiya/admin/get/images"
+            >
+              Rasmlar
             </a>
           </ul>
         </div>
@@ -764,7 +796,7 @@
           <% if(page == "edit-project") { %>
           <form
             id="edit-projects"
-            action="/projects"
+            action="/edit-project"
             class="project-form"
             method="post"
             enctype="multipart/form-data"
@@ -776,12 +808,12 @@
                   required
                   name="file"
                   type="file"
-                  id="add-edited-photo"
+                  id="edited-project-img"
                   class="d-none add-photo"
                 />
-                <label for="add-edited-photo">
+                <label for="edited-project-img">
                   <img
-                    src="/img/Image 5.png"
+                    src="<%= project.imgUrl %>"
                     alt=""
                     class="new-img edited-project-label"
                   />
@@ -799,6 +831,7 @@
                   name="name"
                   aria-label=".form-control-lg example"
                   style="margin: 15px 0"
+                  value="<%= project.dataValues.name %>"
                 />
               </div>
             </div>
@@ -822,9 +855,18 @@
                   name="content"
                   id="edited-project-content"
                 />
+                <input
+                  type="text"
+                  name="id"
+                  value="<%= project.dataValues.id %>"
+                  class="d-none"
+                />
                 <div class="card w-100 rounded-8">
                   <div id="editedprojecttoolbar"></div>
-                  <div id="editedprojecteditor"></div>
+                  <div
+                    id="editedprojecteditor"
+                    data-content="<%= project.dataValues.content %>"
+                  ></div>
                 </div>
               </div>
             </div>
@@ -918,6 +960,312 @@
           </table>
           <% } %>
           <!-- Works end -->
+
+          <!-- <% if(page == "create-liders") { %>
+          <form
+            id="create-projects"
+            action="/projects"
+            class="project-form"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <div class="row">
+              <div class="col-12 text-center">
+                <input
+                  required
+                  name="file"
+                  type="file"
+                  id="add-photo"
+                  class="d-none add-photo"
+                />
+                <label for="add-photo">
+                  <img
+                    src="/img/Image 5.png"
+                    alt=""
+                    class="new-img project-label"
+                  />
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="row">
+                <div class="col-6">
+                  <input
+                    required
+                    class="form-control form-control-lg w-75"
+                    type="text"
+                    placeholder="To'liq ismi"
+                    name="fullName"
+                    aria-label=".form-control-lg example"
+                    style="margin: 15px 0"
+                  />
+                </div>
+                <div class="col-6">
+                  <input
+                    required
+                    class="form-control form-control-lg w-75"
+                    type="text"
+                    placeholder="Lavozimi"
+                    name="position"
+                    aria-label=".form-control-lg example"
+                    style="margin: 15px 0"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <input
+                    required
+                    class="form-control form-control-lg w-75"
+                    type="text"
+                    placeholder="Telefon"
+                    name="tel"
+                    aria-label=".form-control-lg example"
+                    style="margin: 15px 0"
+                  />
+                </div>
+                <div class="col-6">
+                  <input
+                    required
+                    class="form-control form-control-lg w-75"
+                    type="text"
+                    placeholder="Email"
+                    name="mail"
+                    aria-label=".form-control-lg example"
+                    style="margin: 15px 0"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <input
+                    required
+                    class="form-control form-control-lg w-75"
+                    type="text"
+                    placeholder="Qabul kunlari"
+                    name="acceptance"
+                    aria-label=".form-control-lg example"
+                    style="margin: 15px 0"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 text-center mt-2 fs-5">
+                Funksiyalari va Majburiyatlari
+              </div>
+              <div class="col-12">
+                <input
+                  type="text"
+                  class="d-none"
+                  name="commitment"
+                  id="commitment-content"
+                />
+                <div class="card w-100 rounded-8">
+                  <div id="commitmenttoolbar"></div>
+                  <div id="commitmenteditor"></div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 text-center mt-2 fs-5">Tarjimai hol</div>
+              <div class="col-12">
+                <input
+                  type="text"
+                  class="d-none"
+                  name="about"
+                  id="about-content"
+                />
+                <div class="card w-100 rounded-8">
+                  <div id="abouttoolbar"></div>
+                  <div id="abouteditor"></div>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-end mt-3">
+              <button type="submit" class="btn btn-primary">Yaratish</button>
+            </div>
+          </form>
+          <% } %> -->
+
+          <% if(page == "get-images") { %>
+          <div class="row slides">
+            <div class="col-4 p-4">
+              <form
+                action="/edit-carousel"
+                method="post"
+                enctype="multipart/form-data"
+              >
+                <div class="card">
+                  <div
+                    class="bg-image hover-overlay ripple"
+                    data-mdb-ripple-color="light"
+                  >
+                    <input
+                      type="file"
+                      class="d-none"
+                      id="caroousel-image-1"
+                      name="file"
+                    />
+                    <img
+                      style="object-fit: cover"
+                      src="<%= carousel[0].imgUrl %>"
+                      class="card-img-top"
+                      height="250"
+                      id="caroousel-image-1-label"
+                    />
+                    <label
+                      for="caroousel-image-1"
+                      class="carousel-image-1 mask"
+                      style="background-color: rgba(251, 251, 251, 0.15)"
+                    >
+                    </label>
+                  </div>
+                  <div class="card-body">
+                    <input
+                      type="text"
+                      class="d-none"
+                      name="id"
+                      value="<%= carousel[0].id %>"
+                    />
+                    <input
+                      name="title"
+                      type="text"
+                      class="card-title form-control"
+                      value="<%= carousel[0].title %>"
+                    />
+                    <input
+                      name="text"
+                      type="text"
+                      class="card-text form-control mb-3"
+                      value="<%= carousel[0].text %>"
+                    />
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                    <h2 class="mt-2 text-center">
+                      <%= carousel[0].id %>-slayd
+                    </h2>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-4 p-4">
+              <form
+                action="/edit-carousel"
+                method="post"
+                enctype="multipart/form-data"
+              >
+                <div class="card">
+                  <div
+                    class="bg-image hover-overlay ripple"
+                    data-mdb-ripple-color="light"
+                  >
+                    <input
+                      type="file"
+                      class="d-none"
+                      id="caroousel-image-2"
+                      name="file"
+                    />
+                    <img
+                      style="object-fit: cover"
+                      src="<%= carousel[1].imgUrl %>"
+                      class="card-img-top"
+                      height="250"
+                      id="caroousel-image-2-label"
+                    />
+                    <label
+                      for="caroousel-image-2"
+                      class="carousel-image-1 mask"
+                      style="background-color: rgba(251, 251, 251, 0.15)"
+                    >
+                    </label>
+                  </div>
+                  <div class="card-body">
+                    <input
+                      type="text"
+                      class="d-none"
+                      name="id"
+                      value="<%= carousel[1].id %>"
+                    />
+                    <input
+                      name="title"
+                      type="text"
+                      class="card-title form-control"
+                      value="<%= carousel[1].title %>"
+                    />
+                    <input
+                      name="text"
+                      type="text"
+                      class="card-text form-control mb-3"
+                      value="<%= carousel[1].text %>"
+                    />
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                    <h2 class="mt-2 text-center">
+                      <%= carousel[1].id %>-slayd
+                    </h2>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-4 p-4">
+              <form
+                action="/edit-carousel"
+                method="post"
+                enctype="multipart/form-data"
+              >
+                <div class="card">
+                  <div
+                    class="bg-image hover-overlay ripple"
+                    data-mdb-ripple-color="light"
+                  >
+                    <input
+                      type="file"
+                      class="d-none"
+                      id="caroousel-image-3"
+                      name="file"
+                    />
+                    <img
+                      style="object-fit: cover"
+                      src="<%= carousel[2].imgUrl %>"
+                      class="card-img-top"
+                      height="250"
+                      id="caroousel-image-3-label"
+                    />
+                    <label
+                      for="caroousel-image-3"
+                      class="carousel-image-1 mask"
+                      style="background-color: rgba(251, 251, 251, 0.15)"
+                    >
+                    </label>
+                  </div>
+                  <div class="card-body">
+                    <input
+                      type="text"
+                      class="d-none"
+                      name="id"
+                      value="<%= carousel[2].id %>"
+                    />
+                    <input
+                      name="title"
+                      type="text"
+                      class="card-title form-control"
+                      value="<%= carousel[2].title %>"
+                    />
+                    <input
+                      name="text"
+                      type="text"
+                      class="card-text form-control mb-3"
+                      value="<%= carousel[2].text %>"
+                    />
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                    <h2 class="mt-2 text-center">
+                      <%= carousel[2].id %>-slayd
+                    </h2>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <% } %>
         </div>
       </div>
     </div>

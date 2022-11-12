@@ -20,8 +20,6 @@ module.exports = {
       fs.writeFile(uploadPath, image.data, (err) => {
         console.log(err);
       });
-
-      res.redirect("/direksiya/admin/create/news");
     } catch (err) {
       console.log(err);
     }
@@ -30,8 +28,14 @@ module.exports = {
     try {
       const { id, fileName } = req.body;
       const Path = path.resolve("./src/uploads/assets/news", fileName);
-      fs.unlink(Path, function (err) {
-        if (err) return console.log(err);
+
+      fs.readFile(`./src/uploads/assets/news/${fileName}`, (err, data) => {
+        if (err) console.log(err);
+        if (data) {
+          fs.unlink(Path, function (err) {
+            if (err) console.log(err);
+          });
+        }
       });
       await News.destroy({ where: { id } });
 

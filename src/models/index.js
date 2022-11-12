@@ -53,6 +53,21 @@ const News = sequelize.define("news", {
   },
 });
 
+const Carousel = sequelize.define("carousel", {
+  title: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  text: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  fileName: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+});
+
 const Leaders = sequelize.define("leaders", {
   fullName: {
     type: DataTypes.TEXT,
@@ -64,12 +79,26 @@ const Leaders = sequelize.define("leaders", {
   },
   tel: {
     type: DataTypes.TEXT,
+    allowNull: false,
   },
   mail: {
     type: DataTypes.TEXT,
+    allowNull: false,
   },
   about: {
     type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  acceptance: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  commitment: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  fileName: {
+    type: DataTypes.STRING,
     allowNull: false,
   },
 });
@@ -117,5 +146,6 @@ module.exports = {
   Projects,
   Works,
   Leaders,
+  Carousel,
   sequelize,
 };
