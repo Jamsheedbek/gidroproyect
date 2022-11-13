@@ -90,9 +90,10 @@ a:focus {
 }
 
 .top-bar .logo {
-  padding: 15px 0;
+  padding: 10px 0;
   text-align: left;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .top-bar .logo h1 {
