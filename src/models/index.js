@@ -5,7 +5,7 @@ const { Sequelize, DataTypes } = require("sequelize");
 let test =
   "postgres://cqsxwkvc:9i6ohxAwZ4oh1y1NDBf8sWgMUbSW_Ipy@jelani.db.elephantsql.com/cqsxwkvc";
 
-const sequelize = new Sequelize(test, {
+const sequelize = new Sequelize(connectionString, {
   host: "localhost",
   dialect: "postgres",
   timezone: "Asia/Tashkent",
