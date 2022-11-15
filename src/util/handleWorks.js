@@ -23,8 +23,6 @@ const handleWorks = async (id) => {
     newRes.push(e.dataValues);
   });
 
-  console.log(newRes);
-
   return newRes;
 };
 
