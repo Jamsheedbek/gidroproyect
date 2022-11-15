@@ -18,10 +18,10 @@ const verifyToken = async (req, res, next) => {
   if (!user) {
     return res.redirect("/direksiya/login");
   }
-  if (verifyToken.role == "user" && req.url == "/direksiya/admin") {
+  if (verifyToken.role == "user" && req.url.includes("/direksiya/admin")) {
     return res.redirect("/direksiya/users");
   } else if (verifyToken.role == "admin" && req.url == "/direksiya/users") {
-    return res.redirect("/direksiya/admin");
+    return res.redirect("/direksiya/admin/create/news");
   }
   next();
 };

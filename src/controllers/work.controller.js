@@ -51,10 +51,13 @@ module.exports = {
   downloadWork: async (req, res) => {
     try {
       const fileName = req.params.name;
-      const Path = __basedir + "/src/works/";
+      const Path = path.resolve("./src/works", fileName);
 
-      res.download(Path + fileName, fileName, (err) => {
-        console.log(err);
+      res.download(Path, fileName, (err) => {
+        if (err) {
+          console.log(err);
+          res.redirect("/direksiya/admin/get/works");
+        }
         res.redirect("/direksiya/admin/get/works");
       });
     } catch (err) {
