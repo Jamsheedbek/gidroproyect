@@ -27,9 +27,9 @@ module.exports = {
     try {
       const { id } = req.body;
       const oldWork = await Works.findOne({ where: { id } });
-      const Path = __basedir + "/src/works/" + oldWork.dataValues.fileName;
+      const Path = path.resolve("./src/works", oldWork.dataValues.fileName);
 
-      fs.readFile(`./src/works/${oldWork.dataValues.fileName}`, (err, data) => {
+      fs.readFile(Path, (err, data) => {
         if (err) {
           console.log(err);
         }

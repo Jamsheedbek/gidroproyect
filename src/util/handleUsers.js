@@ -11,9 +11,7 @@ const handleAllUsers = async (id) => {
       },
     });
   } else {
-    allUsers = await Users.findAll({
-      include: Works,
-    });
+    allUsers = await Users.findAll();
   }
 
   return allUsers;
