@@ -13,10 +13,10 @@ const handleAllNews = async (id) => {
 
       allNews.dataValues.date =
         moment(e.dataValues.createdAt).format("L h:mm").slice(0, 11) +
-        (moment(e.dataValues.createdAt).format("L h:mm").slice(11, 12) -
+        (moment(e.dataValues.createdAt).format("L h:mm").slice(-5, -3) -
           0 +
           5) +
-        moment(e.dataValues.createdAt).format("L h:mm").slice(12);
+        moment(e.dataValues.createdAt).format("L h:mm").slice(-3);
 
       return allNews;
     } else {
@@ -26,10 +26,10 @@ const handleAllNews = async (id) => {
 
         e.dataValues.date =
           moment(e.dataValues.createdAt).format("L h:mm").slice(0, 11) +
-          (moment(e.dataValues.createdAt).format("L h:mm").slice(11, 12) -
+          (moment(e.dataValues.createdAt).format("L h:mm").slice(-5, -3) -
             0 +
             5) +
-          moment(e.dataValues.createdAt).format("L h:mm").slice(12);
+          moment(e.dataValues.createdAt).format("L h:mm").slice(-3);
 
         news.push(e.dataValues);
       });
