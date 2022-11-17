@@ -11,9 +11,12 @@ const handleAllNews = async (id) => {
       allNews.dataValues.imgUrl =
         "/files/assets/news/" + allNews.dataValues.fileName;
 
-      allNews.dataValues.date = moment(allNews.dataValues.createdAt).format(
-        "L h:mm:ss"
-      );
+      allNews.dataValues.date =
+        moment(e.dataValues.createdAt).format("L h:mm").slice(0, 11) +
+        (moment(e.dataValues.createdAt).format("L h:mm").slice(11, 12) -
+          0 +
+          5) +
+        moment(e.dataValues.createdAt).format("L h:mm").slice(12);
 
       return allNews;
     } else {
@@ -21,7 +24,12 @@ const handleAllNews = async (id) => {
       allNews.map((e) => {
         e.dataValues.imgUrl = "/files/assets/news/" + e.dataValues.fileName;
 
-        e.dataValues.date = moment(e.dataValues.createdAt).format("L h:mm:ss");
+        e.dataValues.date =
+          moment(e.dataValues.createdAt).format("L h:mm").slice(0, 11) +
+          (moment(e.dataValues.createdAt).format("L h:mm").slice(11, 12) -
+            0 +
+            5) +
+          moment(e.dataValues.createdAt).format("L h:mm").slice(12);
 
         news.push(e.dataValues);
       });
