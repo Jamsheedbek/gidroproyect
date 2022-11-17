@@ -35,18 +35,14 @@ module.exports = {
   },
   deleteProject: async (req, res) => {
     try {
-      const { id } = req.body;
+      const { id, fileName } = req.body;
 
-      const Project = await Projects.findOne({ where: { id } });
+      const Path = path.resolve("./src/uploads/assets/projects", fileName);
 
-      const Path = path.resolve(
-        "./src/uploads/assets/projects",
-        Project.dataValues.fileName
-      );
+      const files = await Projects.findAll({ where: { fileName: fileName } });
 
-      fs.readFile(
-        `./src/uploads/assets/projects/${Project.dataValues.fileName}`,
-        async (err, data) => {
+      if (files.length <= 1) {
+        fs.readFile(Path, async (err, data) => {
           if (err) {
             console.log(err.message);
           }
@@ -55,9 +51,10 @@ module.exports = {
               if (err) return res.redirect("/direksiya/admin/get/projects");
             });
           }
-          await Projects.destroy({ where: { id } });
-        }
-      );
+        });
+      }
+
+      await Projects.destroy({ where: { id } });
 
       res.redirect("direksiya/admin/get/projects");
     } catch (err) {

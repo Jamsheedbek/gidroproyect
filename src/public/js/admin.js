@@ -41,23 +41,13 @@ if (newsImage && document.querySelector("#create-news")) {
   });
 
   document.querySelector("#create-news").addEventListener("submit", (e) => {
-    if (
-      !document.getElementById("news-content").value &&
-      news.getContents().ops.length > 1
-    ) {
-      e.preventDefault();
+    e.preventDefault();
 
-      document.getElementById("news-content").value = JSON.stringify(
-        news.getContents()
-      );
+    document.getElementById("news-content").value = JSON.stringify(
+      news.getContents()
+    );
 
-      document.querySelector("#create-news").submit();
-    } else if (
-      news.getContents().ops.length == 1 &&
-      !document.getElementById("news-content").value
-    ) {
-      e.preventDefault();
-    }
+    document.querySelector("#create-news").submit();
   });
 }
 
@@ -79,23 +69,13 @@ if (projectImage && document.getElementById("create-projects")) {
   });
 
   document.getElementById("create-projects").addEventListener("submit", (e) => {
-    if (
-      !document.getElementById("project-content").value &&
-      project.getContents().ops.length > 1
-    ) {
-      e.preventDefault();
+    e.preventDefault();
 
-      document.getElementById("project-content").value = JSON.stringify(
-        project.getContents()
-      );
+    document.getElementById("project-content").value = JSON.stringify(
+      project.getContents()
+    );
 
-      document.querySelector("#create-projects").submit();
-    } else if (
-      project.getContents().ops.length == 1 &&
-      !document.getElementById("project-content").value
-    ) {
-      e.preventDefault();
-    }
+    document.querySelector("#create-projects").submit();
   });
 }
 
@@ -128,6 +108,8 @@ if (projectsWrapper) {
       document.querySelector(".project-edit").value = e.target.dataset.id;
     } else if (e.target.textContent.includes("Delete")) {
       document.querySelector(".project-id").value = e.target.dataset.id;
+      document.querySelector(".project-fileName").value =
+        e.target.dataset.fileName;
     }
   });
 }

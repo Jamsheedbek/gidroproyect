@@ -2,7 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Yangiliklar | Uzbekgidroenergo 1-Direksiya</title>
+    <title>
+      <%= activeNews.dataValues.title %> | Uzbekgidroenergo 1-Direksiya
+    </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta
       content="UzbekGidroEnergo 1-direksiya loyiha offisi sayti"
@@ -146,24 +148,6 @@
           >
             <div class="navbar-nav mr-auto">
               <a href="/" class="nav-item nav-link">Bosh sahifa</a>
-              <div class="dropdown">
-                <a
-                  class="nav-item nav-link dropdown-toggle"
-                  id="dropdownMenuButton"
-                  data-mdb-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Korxona to'g'risida
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <li>
-                    <a class="dropdown-item" href="/lidership">Rahbariyat</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="/news">Yangiliklar</a>
-                  </li>
-                </ul>
-              </div>
               <a href="/projects/current" class="nav-item nav-link"
                 >Joriy loyihalar</a
               >
@@ -171,6 +155,7 @@
                 >Istiqbolli loyihalar</a
               >
               <a href="/tenders" class="nav-item nav-link">Tenderlar</a>
+              <a class="nav-item nav-link" href="/news">Yangiliklar</a>
               <a href="#" id="to-footer" class="nav-item nav-link">Aloqa</a>
             </div>
           </div>

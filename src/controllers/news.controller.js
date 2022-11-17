@@ -20,6 +20,8 @@ module.exports = {
       fs.writeFile(uploadPath, image.data, (err) => {
         console.log(err);
       });
+
+      res.redirect("/direksiya/admin/create/news");
     } catch (err) {
       console.log(err);
     }
@@ -29,14 +31,18 @@ module.exports = {
       const { id, fileName } = req.body;
       const Path = path.resolve("./src/uploads/assets/news", fileName);
 
-      fs.readFile(`./src/uploads/assets/news/${fileName}`, (err, data) => {
-        if (err) console.log(err);
-        if (data) {
-          fs.unlink(Path, function (err) {
-            if (err) console.log(err);
-          });
-        }
-      });
+      const files = await News.findAll({ where: { fileName: fileName } });
+
+      if (files.length <= 1) {
+        fs.readFile(`./src/uploads/assets/news/${fileName}`, (err, data) => {
+          if (err) console.log(err);
+          if (data) {
+            fs.unlink(Path, function (err) {
+              if (err) console.log(err);
+            });
+          }
+        });
+      }
       await News.destroy({ where: { id } });
 
       res.redirect("/direksiya/admin/get/news");
