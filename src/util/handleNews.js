@@ -12,11 +12,11 @@ const handleAllNews = async (id) => {
         "/files/assets/news/" + allNews.dataValues.fileName;
 
       allNews.dataValues.date =
-        moment(e.dataValues.createdAt).format("L h:mm").slice(0, 11) +
-        (moment(e.dataValues.createdAt).format("L h:mm").slice(-5, -3) -
+        moment(allNews.dataValues.createdAt).format("L h:mm").slice(0, 11) +
+        (moment(allNews.dataValues.createdAt).format("L h:mm").slice(-5, -3) -
           0 +
           5) +
-        moment(e.dataValues.createdAt).format("L h:mm").slice(-3);
+        moment(allNews.dataValues.createdAt).format("L h:mm").slice(-3);
 
       return allNews;
     } else {
