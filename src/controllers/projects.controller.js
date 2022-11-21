@@ -41,7 +41,7 @@ module.exports = {
 
       const files = await Projects.findAll({ where: { fileName: fileName } });
 
-      if (files.length <= 1) {
+      if (files.length == 1) {
         fs.readFile(Path, async (err, data) => {
           if (err) {
             console.log(err.message);
@@ -68,19 +68,23 @@ module.exports = {
 
       const image = req.files;
 
-      const oldProject = await Projects.findOne({ where: { id } });
+      const oldProject = await Projects.findOne({ where: { id: id } });
 
       if (image) {
         const fileName = image.file.name;
-        fs.unlink(
-          path.resolve(
-            "./src/uploads/assets/projects",
-            oldProject.dataValues.fileName
-          ),
-          function (err) {
-            if (err) return console.log(err);
-          }
-        );
+        const files = await Projects.findAll({ where: { fileName: fileName } });
+
+        if (files.length == 1) {
+          fs.unlink(
+            path.resolve(
+              "./src/uploads/assets/projects",
+              oldProject.dataValues.fileName
+            ),
+            function (err) {
+              if (err) return console.log(err);
+            }
+          );
+        }
 
         let project = await Projects.update(
           {
@@ -91,7 +95,7 @@ module.exports = {
           },
           {
             where: {
-              id,
+              id: id,
             },
           }
         );
@@ -114,7 +118,7 @@ module.exports = {
           },
           {
             where: {
-              id,
+              id: id,
             },
           }
         );

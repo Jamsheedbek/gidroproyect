@@ -251,38 +251,69 @@
     </div>
     <!-- Carousel End -->
 
-    <!-- News Start -->
-    <div class="blog">
+    <!-- Projects Start -->
+    <div class="service">
       <div class="container">
         <div class="section-header text-center">
-          <h2>So'ngi yangiliklar</h2>
+          <h2>Joriy Loyihalar</h2>
         </div>
         <div class="row">
-          <% news.slice(0,3).forEach(news => { %> <% if(news.type == "news"){ %>
+          <% projects.filter(e => e.type ==
+          "finished").slice(0,3).forEach(project => { %>
           <div class="col-lg-4 col-md-6 p-4 wow fadeInUp" data-wow-delay="0.1s">
             <div class="card h-100">
               <img
                 class="card-img-top card-images"
-                src="<%= news.imgUrl %>"
-                alt="<%= news.title %>"
+                src="<%= project.imgUrl %>"
+                alt="<%= project.name %>"
               />
               <div class="card-body">
-                <p class="fs-6 text-secondary mb-2">
-                  <i class="far fa-calendar"></i> <%= news.date %>
-                </p>
-                <h5 class="card-title fw-normal"><%= news.title %></h5>
+                <h5 class="card-title"><%= project.name %></h5>
                 <hr />
-                <a href="/news/view/<%= news.id %>" class="text-primary"
+                <a href="/projects/view/<%= project.id %>" class="text-primary"
                   >batafsil</a
                 >
               </div>
             </div>
           </div>
-          <% } %> <% }); %>
+          <% }); %>
         </div>
       </div>
     </div>
-    <!-- News End -->
+    <!-- Projects End -->
+
+    <hr class="text-secondary" />
+
+    <!-- Projects Start -->
+    <div class="service">
+      <div class="container">
+        <div class="section-header text-center">
+          <h2>Istiqbolli Loyihalar</h2>
+        </div>
+        <div class="row">
+          <% projects.filter(e => e.type ==
+          "planned").slice(0,3).forEach(project => { %>
+          <div class="col-lg-4 col-md-6 p-4 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="card h-100">
+              <img
+                class="card-img-top card-images"
+                src="<%= project.imgUrl %>"
+                alt="<%= project.name %>"
+              />
+              <div class="card-body">
+                <h5 class="card-title"><%= project.name %></h5>
+                <hr />
+                <a href="/projects/view/<%= project.id %>" class="text-primary"
+                  >batafsil</a
+                >
+              </div>
+            </div>
+          </div>
+          <% }); %>
+        </div>
+      </div>
+    </div>
+    <!-- Projects End -->
 
     <!-- Useful links start -->
     <div class="slider-wrapper">
@@ -393,29 +424,64 @@
     </div>
     <!-- Useful links end -->
 
-    <!-- Projects Start -->
-    <div class="service">
+    <!-- Tenders Start -->
+    <div class="blog">
       <div class="container">
         <div class="section-header text-center">
-          <h2>Loyihalar</h2>
+          <h2>Tender va E'lonlar</h2>
         </div>
         <div class="row">
-          <% projects.slice(0,3).forEach(project => { %> <% if(project.type ==
-          "finished"){ %>
+          <% news.filter(e => e.type == "poster").slice(0,3).forEach(news => {
+          %>
+          <div class="col-lg-4 col-md-6 p-4 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="card h-100">
+              <img
+                class="card-img-top"
+                src="<%= news.imgUrl %>"
+                alt="<%= news.title %>"
+              />
+              <div class="card-body">
+                <p class="fs-6 text-secondary mb-2">
+                  <i class="far fa-calendar"></i> <%= news.date %>
+                </p>
+                <h5 class="card-title fw-normal"><%= news.title %></h5>
+                <hr />
+                <a href="/news/view/<%= news.id %>" class="text-primary"
+                  >batafsil</a
+                >
+              </div>
+            </div>
+          </div>
+          <% }); %>
+        </div>
+      </div>
+    </div>
+    <!-- Tenders End -->
+
+    <hr class="text-secondary" />
+
+    <!-- News Start -->
+    <div class="blog">
+      <div class="container">
+        <div class="section-header text-center">
+          <h2>So'ngi yangiliklar</h2>
+        </div>
+        <div class="row">
+          <% news.slice(0,3).forEach(news => { %> <% if(news.type == "news"){ %>
           <div class="col-lg-4 col-md-6 p-4 wow fadeInUp" data-wow-delay="0.1s">
             <div class="card h-100">
               <img
                 class="card-img-top card-images"
-                src="<%= project.imgUrl %>"
-                alt="<%= project.name %>"
+                src="<%= news.imgUrl %>"
+                alt="<%= news.title %>"
               />
               <div class="card-body">
-                <!-- <p class="fs-6 text-secondary mb-2">
-                      <i class="far fa-calendar"></i>
-                    </p> -->
-                <h5 class="card-title"><%= project.name %></h5>
+                <p class="fs-6 text-secondary mb-2">
+                  <i class="far fa-calendar"></i> <%= news.date %>
+                </p>
+                <h5 class="card-title fw-normal"><%= news.title %></h5>
                 <hr />
-                <a href="/projects/view/<%= project.id %>" class="text-primary"
+                <a href="/news/view/<%= news.id %>" class="text-primary"
                   >batafsil</a
                 >
               </div>
@@ -425,7 +491,7 @@
         </div>
       </div>
     </div>
-    <!-- Projects End -->
+    <!-- News End -->
 
     <!-- Testimonial Start -->
     <div class="testimonial" data-wow-delay="0.1s">
@@ -537,40 +603,6 @@
       </div>
     </div>
     <!-- Testimonial End -->
-
-    <!-- Tenders Start -->
-    <div class="blog">
-      <div class="container">
-        <div class="section-header text-center">
-          <h2>Tender va E'lonlar</h2>
-        </div>
-        <div class="row">
-          <% news.filter(e => e.type == "poster").slice(0,3).forEach(news => {
-          %>
-          <div class="col-lg-4 col-md-6 p-4 wow fadeInUp" data-wow-delay="0.1s">
-            <div class="card h-100">
-              <img
-                class="card-img-top"
-                src="<%= news.imgUrl %>"
-                alt="<%= news.title %>"
-              />
-              <div class="card-body">
-                <p class="fs-6 text-secondary mb-2">
-                  <i class="far fa-calendar"></i> <%= news.date %>
-                </p>
-                <h5 class="card-title fw-normal"><%= news.title %></h5>
-                <hr />
-                <a href="/news/view/<%= news.id %>" class="text-primary"
-                  >batafsil</a
-                >
-              </div>
-            </div>
-          </div>
-          <% }); %>
-        </div>
-      </div>
-    </div>
-    <!-- Tenders End -->
 
     <!-- Footer Start -->
     <div class="wow fadeIn" data-wow-delay="0.3s">
