@@ -91,7 +91,7 @@ module.exports = {
             name,
             content,
             fileName,
-            type,
+            type: type,
           },
           {
             where: {
@@ -113,8 +113,8 @@ module.exports = {
           {
             name,
             content,
-            fileName: oldNews.dataValues.fileName,
-            type,
+            fileName: oldProject.dataValues.fileName,
+            type: type,
           },
           {
             where: {
