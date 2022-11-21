@@ -506,19 +506,15 @@
                 >
                   <div class="card-body p-4">
                     <div class="d-flex">
-                      <h6 class="flex-grow-1 text-start">
-                        <%= wheather.name %>
-                      </h6>
-                      <h6><%= wheather.time %></h6>
+                      <h6 class="flex-grow-1 text-start">Toshkent Shahri</h6>
+                      <h6 class="wheather-time"></h6>
                     </div>
 
                     <div class="d-flex flex-column text-center mt-5 mb-4">
                       <h6
-                        class="display-4 mb-0 font-weight-bold"
+                        class="display-4 mb-0 font-weight-bold wheather-temp"
                         style="color: #1c2331"
-                      >
-                        <%= wheather.temp %>°C
-                      </h6>
+                      ></h6>
                     </div>
 
                     <div class="d-flex align-items-center">
@@ -528,14 +524,14 @@
                             class="fas fa-wind fa-fw"
                             style="color: #868b94"
                           ></i>
-                          <span class="ms-1"> <%= wheather.wind %> m/s </span>
+                          <span class="ms-1 wheather-wind"></span>
                         </div>
                         <div class="text-start">
                           <i
                             class="fas fa-tint fa-fw"
                             style="color: #868b94"
                           ></i>
-                          <span class="ms-1"> <%= wheather.humidity %>% </span>
+                          <span class="ms-1 wheather-humidty"></span>
                         </div>
                       </div>
                       <div class="d-flex">
@@ -564,7 +560,7 @@
                   <div class="card-body p-4">
                     <div class="d-flex">
                       <h6 class="flex-grow-1 text-start">Valyuta kurslari</h6>
-                      <h6><%= wheather.date %></h6>
+                      <h6 class="wheather-date"></h6>
                     </div>
 
                     <div class="d-flex flex-column mt-3 mb-2">
@@ -829,6 +825,6 @@
     <script src="lib/counterup/counterup.min.js"></script>
     <script src="lib/slick/slick.min.js"></script>
     <script src="/js/main.js"></script>
-    <!-- <script src="/js/wheather.js"></script> -->
+    <script src="/js/wheather.js"></script>
   </body>
 </html>
