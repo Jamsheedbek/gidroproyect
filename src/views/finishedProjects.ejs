@@ -161,10 +161,10 @@
     <div class="service">
       <div class="container">
         <div class="section-header text-center">
-          <h2>Joriy loyihalar</h2>
+          <h2>Joriy Loyihalar</h2>
         </div>
         <div class="row">
-          <% projects.forEach(project => { %>
+          <% projects.filter(e => e.type == "finished").forEach(project => { %>
           <div class="col-lg-4 col-md-6 p-4 wow fadeInUp" data-wow-delay="0.1s">
             <div class="card h-100">
               <img
@@ -173,9 +173,6 @@
                 alt="<%= project.name %>"
               />
               <div class="card-body">
-                <!-- <p class="fs-6 text-secondary mb-2">
-                      <i class="far fa-calendar"></i>
-                    </p> -->
                 <h5 class="card-title"><%= project.name %></h5>
                 <hr />
                 <a href="/projects/view/<%= project.id %>" class="text-primary"

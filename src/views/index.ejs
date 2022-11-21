@@ -315,6 +315,42 @@
     </div>
     <!-- Projects End -->
 
+    <hr class="text-secondary" />
+
+    <!-- Tenders Start -->
+    <div class="blog">
+      <div class="container">
+        <div class="section-header text-center">
+          <h2>Tender va E'lonlar</h2>
+        </div>
+        <div class="row">
+          <% news.filter(e => e.type == "poster").slice(0,3).forEach(news => {
+          %>
+          <div class="col-lg-4 col-md-6 p-4 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="card h-100">
+              <img
+                class="card-img-top"
+                src="<%= news.imgUrl %>"
+                alt="<%= news.title %>"
+              />
+              <div class="card-body">
+                <p class="fs-6 text-secondary mb-2">
+                  <i class="far fa-calendar"></i> <%= news.date %>
+                </p>
+                <h5 class="card-title fw-normal"><%= news.title %></h5>
+                <hr />
+                <a href="/news/view/<%= news.id %>" class="text-primary"
+                  >batafsil</a
+                >
+              </div>
+            </div>
+          </div>
+          <% }); %>
+        </div>
+      </div>
+    </div>
+    <!-- Tenders End -->
+
     <!-- Useful links start -->
     <div class="slider-wrapper">
       <div class="slider">
@@ -423,42 +459,6 @@
       </div>
     </div>
     <!-- Useful links end -->
-
-    <!-- Tenders Start -->
-    <div class="blog">
-      <div class="container">
-        <div class="section-header text-center">
-          <h2>Tender va E'lonlar</h2>
-        </div>
-        <div class="row">
-          <% news.filter(e => e.type == "poster").slice(0,3).forEach(news => {
-          %>
-          <div class="col-lg-4 col-md-6 p-4 wow fadeInUp" data-wow-delay="0.1s">
-            <div class="card h-100">
-              <img
-                class="card-img-top"
-                src="<%= news.imgUrl %>"
-                alt="<%= news.title %>"
-              />
-              <div class="card-body">
-                <p class="fs-6 text-secondary mb-2">
-                  <i class="far fa-calendar"></i> <%= news.date %>
-                </p>
-                <h5 class="card-title fw-normal"><%= news.title %></h5>
-                <hr />
-                <a href="/news/view/<%= news.id %>" class="text-primary"
-                  >batafsil</a
-                >
-              </div>
-            </div>
-          </div>
-          <% }); %>
-        </div>
-      </div>
-    </div>
-    <!-- Tenders End -->
-
-    <hr class="text-secondary" />
 
     <!-- News Start -->
     <div class="blog">
@@ -818,6 +818,7 @@
       type="text/javascript"
       src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="lib/easing/easing.min.js"></script>
@@ -828,5 +829,6 @@
     <script src="lib/counterup/counterup.min.js"></script>
     <script src="lib/slick/slick.min.js"></script>
     <script src="/js/main.js"></script>
+    <!-- <script src="/js/wheather.js"></script> -->
   </body>
 </html>
