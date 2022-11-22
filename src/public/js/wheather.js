@@ -19,7 +19,7 @@ const handleWheather = async () => {
     data.main.humidity + " %";
 
   document.querySelector(".wheather-date").textContent =
-    date.getDate() + "/" + date.getMonth() + 1 + "/" + date.getFullYear();
+    date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
 };
 
 const handleCurrency = async () => {
