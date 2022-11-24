@@ -390,16 +390,22 @@
             </ul>
           </div>
           <div class="col-lg-8">
-            <form>
+            <form
+              action="https://bot.uzhydroenergy.uz/send-message"
+              method="post"
+              enctype="application/x-www-form-urlencoded"
+            >
               <div class="row">
                 <div class="col-md-8">
                   <div class="row mb-4">
                     <div class="col-md-6 mb-4 mb-md-0">
                       <div class="form-outline">
                         <input
+                          name="name"
                           type="text"
                           id="form3Example1"
                           class="form-control border"
+                          required
                         />
                         <label class="form-label" for="form3Example1"
                           >Ismingiz</label
@@ -409,9 +415,11 @@
                     <div class="col-md-6">
                       <div class="form-outline">
                         <input
+                          name="email"
                           type="email"
                           id="form3Example2"
                           class="form-control border"
+                          required
                         />
                         <label class="form-label" for="form3Example2"
                           >Pochtangiz</label
@@ -421,6 +429,8 @@
                   </div>
                   <div class="form-outline mb-4">
                     <input
+                      name="theme"
+                      required
                       type="text"
                       id="form3Example3"
                       class="form-control border"
@@ -429,14 +439,16 @@
                   </div>
                   <div class="form-outline mb-4">
                     <textarea
+                      name="text"
                       class="form-control border"
                       id="form4Example3"
                       rows="4"
+                      required
                     ></textarea>
                     <label class="form-label" for="form4Example3">Xabar</label>
                   </div>
                   <div class="text-center text-md-start">
-                    <button type="button" class="btn btn-primary mb-5 mb-md-0">
+                    <button type="submit" class="btn btn-primary mb-5 mb-md-0">
                       Send
                     </button>
                   </div>
