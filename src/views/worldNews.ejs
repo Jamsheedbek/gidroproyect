@@ -39,26 +39,21 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css"
       rel="stylesheet"
     />
-
-    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet" />
-    <link href="lib/animate/animate.min.css" rel="stylesheet" />
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
-    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
-    <link href="lib/slick/slick.css" rel="stylesheet" />
-    <link href="lib/slick/slick-theme.css" rel="stylesheet" />
-
-    <!-- Main Quill library -->
-    <script src="//cdn.quilljs.com/1.0.0/quill.js"></script>
-
-    <!-- Theme included stylesheets -->
-    <link href="//cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet" />
+    <link href="/lib/flaticon/font/flaticon.css" rel="stylesheet" />
+    <link href="/lib/animate/animate.min.css" rel="stylesheet" />
+    <link
+      href="/lib/owlcarousel/assets/owl.carousel.min.css"
+      rel="stylesheet"
+    />
+    <link href="/lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
+    <link href="/lib/slick/slick.css" rel="stylesheet" />
+    <link href="/lib/slick/slick-theme.css" rel="stylesheet" />
 
     <!-- Template Stylesheet -->
     <link href="/css/style.css" rel="stylesheet" />
   </head>
 
   <body>
-    <!-- <div class="wrapper"> -->
     <!-- Top Bar Start -->
     <div class="top-bar">
       <div class="container-fluid">
@@ -156,7 +151,28 @@
                 >Istiqbolli loyihalar</a
               >
               <a href="/tenders" class="nav-item nav-link">Tenderlar</a>
-              <a class="nav-item nav-link" href="/news">Yangiliklar</a>
+              <div class="dropdown">
+                <a
+                  class="nav-item nav-link dropdown-toggle"
+                  id="dropdownMenuButton"
+                  data-mdb-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Yangiliklar
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li>
+                    <a class="dropdown-item" href="/news/company"
+                      >Korxona yangiliklari</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/news/world"
+                      >Jahon yangiliklari</a
+                    >
+                  </li>
+                </ul>
+              </div>
               <a href="#" id="to-footer" class="nav-item nav-link">Aloqa</a>
             </div>
           </div>
@@ -169,10 +185,10 @@
     <div class="blog">
       <div class="container">
         <div class="section-header text-center">
-          <h2>So'ngi yangiliklar</h2>
+          <h2>Yangiliklar</h2>
         </div>
         <div class="row">
-          <% news.forEach(news => { %> <% if(news.type == "news"){ %>
+          <% news.filter(e => e.type == "world-news").forEach(news => { %>
           <div class="col-lg-4 col-md-6 p-4 wow fadeInUp" data-wow-delay="0.1s">
             <div class="card h-100">
               <img
@@ -192,7 +208,7 @@
               </div>
             </div>
           </div>
-          <% } %> <% }); %>
+          <% }); %>
         </div>
       </div>
     </div>

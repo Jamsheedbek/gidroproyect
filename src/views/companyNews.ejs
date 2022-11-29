@@ -2,9 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>
-      <%= activeProject.dataValues.name %> | Uzbekgidroenergo 1-Direksiya
-    </title>
+    <title>Yangiliklar | Uzbekgidroenergo 1-Direksiya</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta
       content="UzbekGidroEnergo 1-direksiya loyiha offisi sayti"
@@ -14,6 +12,10 @@
       content="UzbekGidroEnergo 1-direksiya loyiha offisi sayti"
       name="description"
     />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon" />
@@ -37,23 +39,15 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css"
       rel="stylesheet"
     />
-
-    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet" />
-    <link href="lib/animate/animate.min.css" rel="stylesheet" />
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
-    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
-    <link href="lib/slick/slick.css" rel="stylesheet" />
-    <link href="lib/slick/slick-theme.css" rel="stylesheet" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-
-    <!-- Main Quill library -->
-    <script src="//cdn.quilljs.com/1.0.0/quill.js"></script>
-
-    <!-- Theme included stylesheets -->
-    <link href="//cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet" />
+    <link href="/lib/flaticon/font/flaticon.css" rel="stylesheet" />
+    <link href="/lib/animate/animate.min.css" rel="stylesheet" />
+    <link
+      href="/lib/owlcarousel/assets/owl.carousel.min.css"
+      rel="stylesheet"
+    />
+    <link href="/lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
+    <link href="/lib/slick/slick.css" rel="stylesheet" />
+    <link href="/lib/slick/slick-theme.css" rel="stylesheet" />
 
     <!-- Template Stylesheet -->
     <link href="/css/style.css" rel="stylesheet" />
@@ -187,59 +181,38 @@
     </div>
     <!-- Nav Bar End -->
 
-    <!-- Project start -->
-    <div class="row mt-lg-3 mt-md-0 p-lg-4 p-md-0">
-      <div class="col-lg-8 col-md-12 p-md-0 p-lg-4 mb-4">
-        <div class="card shadow p-md-0">
-          <img
-            src="<%= activeProject.imgUrl %>"
-            class="card-img-top"
-            alt="activeProject.dataValues.fileName"
-          />
-          <div class="card-body">
-            <h5 class="card-title"><%= activeProject.dataValues.name %></h5>
-            <hr />
-            <p
-              id="editor"
-              data-content="<%= activeProject.dataValues.content %>"
-            ></p>
-          </div>
+    <!-- News Start -->
+    <div class="blog">
+      <div class="container">
+        <div class="section-header text-center">
+          <h2>Yangiliklar</h2>
         </div>
-      </div>
-      <div class="col-lg-4 col-md-12 p-4">
-        <% if(news.length > 0){ %>
-        <div class="card bg-light p-2">
-          <h2 class="text-center mb-2 text-primary">So'ngi yangiliklar</h2>
-          <div class="py-3 px-3 w-100">
-            <% news.filter(e => e.type == "news").slice(0,10).forEach(news => {
-            %>
-            <div class="d-flex w-100 mb-3">
-              <div class="flex-shrink-0">
-                <img
-                  src="<%= news.imgUrl %>"
-                  alt="<%= news.title %>"
-                  width="85"
-                  class="rounded"
-                />
-              </div>
-              <div class="ms-3 w-100">
-                <a
-                  href="/news/view/<%= news.id %>"
-                  class="news-title-left card-text d-block"
-                  ><%= news.title %></a
-                >
-                <small class="text-muted text-primary"
-                  ><i class="far fa-calendar"></i> <%= news.date %></small
+        <div class="row">
+          <% news.filter(e => e.type == "news").forEach(news => { %>
+          <div class="col-lg-4 col-md-6 p-4 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="card h-100">
+              <img
+                class="card-img-top card-images"
+                src="<%= news.imgUrl %>"
+                alt="<%= news.title %>"
+              />
+              <div class="card-body">
+                <p class="fs-6 text-secondary mb-2">
+                  <i class="far fa-calendar"></i> <%= news.date %>
+                </p>
+                <h5 class="card-title fw-normal"><%= news.title %></h5>
+                <hr />
+                <a href="/news/view/<%= news.id %>" class="text-primary"
+                  >batafsil</a
                 >
               </div>
             </div>
-            <% }) %>
           </div>
+          <% }); %>
         </div>
-        <% } %>
       </div>
     </div>
-    <!-- News end -->
+    <!-- News End -->
 
     <!-- Useful links start -->
     <div class="slider-wrapper">
