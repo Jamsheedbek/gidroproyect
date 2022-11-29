@@ -22,11 +22,20 @@ module.exports = {
       console.log(err);
     }
   },
-  allNewsPage: async (req, res) => {
+  worldNewsPage: async (req, res) => {
     try {
       const news = await handleAllNews();
 
-      res.render("allNews", { news });
+      res.render("worldNews", { news });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  companyNewsPage: async (req, res) => {
+    try {
+      const news = await handleAllNews();
+
+      res.render("companyNews", { news });
     } catch (err) {
       console.log(err);
     }

@@ -34,7 +34,8 @@ let routes = (app) => {
       pageController.editNewsPage
     )
     .get("/news/view/:id", pageController.newsPage)
-    .get("/news", pageController.allNewsPage)
+    .get("/news/company", pageController.companyNewsPage)
+    .get("/news/world", pageController.worldNewsPage)
     .get("/tenders", pageController.tendersPage)
 
     // Projects page
