@@ -81,6 +81,7 @@ module.exports = {
   },
   editProjectPage: async (req, res) => {
     const project = await handleProjects(req.params.id);
+    console.log(req.params.id);
 
     res.render("admin", { page: "edit-project", project });
   },

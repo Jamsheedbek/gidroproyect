@@ -65,6 +65,7 @@ module.exports = {
   editProject: async (req, res) => {
     try {
       const { id, name, content, type } = req.body;
+      console.log(id);
 
       const image = req.files;
 
