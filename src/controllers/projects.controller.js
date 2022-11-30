@@ -65,7 +65,6 @@ module.exports = {
   editProject: async (req, res) => {
     try {
       const { id, name, content, type } = req.body;
-      console.log(id);
 
       const image = req.files;
 
@@ -73,7 +72,9 @@ module.exports = {
 
       if (image) {
         const fileName = image.file.name;
-        const files = await Projects.findAll({ where: { fileName: fileName } });
+        const files = await Projects.findAll({
+          where: { fileName: oldProject.dataValues.fileName },
+        });
 
         if (files.length == 1) {
           fs.unlink(
