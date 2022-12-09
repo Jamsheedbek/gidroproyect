@@ -1,5 +1,4 @@
-const { News, sequelize } = require("../models");
-const { QueryTypes } = require('sequelize');
+const { News } = require("../models");
 const moment = require("moment");
 moment.locale("uz");
 
@@ -8,10 +7,9 @@ const handleAllNews = async (id) => {
     var news = [];
     var allNews;
     if (id) {
-      allNews = await sequelize.query(`SELECT * FROM news WHERE news_id = ${id}`,{
-        type: QueryTypes.SELECT,
-        model: News
-      });
+      allNews = await News.findOne({ where: { id }, attributes: [
+        'news_id','title','content', 'fileName', 'type'
+      ]});
       allNews.dataValues.imgUrl =
         "/files/assets/news/" + allNews.dataValues.fileName;
 
@@ -24,10 +22,9 @@ const handleAllNews = async (id) => {
 
       return allNews;
     } else {
-      const allNews = await sequelize.query('SELECT * FROM news ORDER BY createdAt DESC',{
-        type: QueryTypes.SELECT,
-        model: News
-      });
+      const allNews = await News.findAll({ order: [["createdAt", "DESC"]], attributes: [
+        'news_id','title','content', 'fileName', 'type'
+      ]});
       allNews.map((e) => {
         e.dataValues.imgUrl = "/files/assets/news/" + e.dataValues.fileName;
 

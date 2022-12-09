@@ -1,15 +1,13 @@
-const { Projects, sequelize } = require("../models");
-const { QueryTypes } = require('sequelize');
+const { Projects, projectImages } = require("../models");
 
 const handleProjects = async (id) => {
   try {
     var newRes = [];
     var allProjects;
     if (id) {
-      allProjects = await sequelize.query(`SELECT * FROM projects WHERE project_id = ${id}`, {
-        type: QueryTypes.SELECT,
-        model: Projects
-      });
+      allProjects = await Projects.findOne({ where: { id }, attributes: [
+        'project_id','name','type', 'fileName', 'content'
+      ] });
 
       allProjects.imgUrl =
         "/files/assets/projects/" + allProjects.dataValues.fileName;
@@ -17,12 +15,9 @@ const handleProjects = async (id) => {
       return allProjects;
     }
 
-    allProjects = await sequelize.query('SELECT * FROM projects ORDER BY createdAt DESC', {
-      type: QueryTypes.SELECT,
-      model: Projects
-    });
-
-    console.log(allProjects);
+    allProjects = await Projects.findAll({ order: [["createdAt", "DESC"]], attributes: [
+      'project_id','name','type', 'fileName', 'content'
+    ]});
 
     allProjects.forEach((e) => {
       e.dataValues.imgUrl = "/files/assets/projects/" + e.dataValues.fileName;
