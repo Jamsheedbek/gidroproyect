@@ -5,7 +5,7 @@ const handleProjects = async (id) => {
     var newRes = [];
     var allProjects;
     if (id) {
-      allProjects = await Projects.findOne({ where: { id } });
+      allProjects = await Projects.findOne({ where: { project_id:id } });
 
       allProjects.imgUrl =
         "/files/assets/projects/" + allProjects.dataValues.fileName;

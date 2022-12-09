@@ -62,7 +62,7 @@ module.exports = {
                 });
             }
 
-            await Projects.destroy({ where: { id: Number(id) } });
+            await Projects.destroy({ where: { project_id: id } });
 
             res.redirect("direksiya/admin/get/projects");
         } catch (err) {
@@ -76,7 +76,9 @@ module.exports = {
 
             const image = req.files;
 
-            const oldProject = await Projects.findOne({ where: { id: id } });
+            const oldProject = await Projects.findOne({
+                where: { project_id: id },
+            });
 
             if (image) {
                 const fileName = image.file.name;
@@ -105,7 +107,7 @@ module.exports = {
                     },
                     {
                         where: {
-                            id: Number(id),
+                            project_id: id,
                         },
                     }
                 );
@@ -128,7 +130,7 @@ module.exports = {
                     },
                     {
                         where: {
-                            id: Number(id),
+                            project_id: id,
                         },
                     }
                 );

@@ -7,7 +7,7 @@ const handleAllNews = async (id) => {
     var news = [];
     var allNews;
     if (id) {
-      allNews = await News.findOne({ where: { id } });
+      allNews = await News.findOne({ where: { news_id: id } });
       allNews.dataValues.imgUrl =
         "/files/assets/news/" + allNews.dataValues.fileName;
 
