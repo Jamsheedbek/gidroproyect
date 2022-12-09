@@ -22,6 +22,8 @@ const handleProjects = async (id) => {
       model: Projects
     });
 
+    console.log(allProjects);
+
     allProjects.forEach((e) => {
       e.dataValues.imgUrl = "/files/assets/projects/" + e.dataValues.fileName;
       newRes.push(e.dataValues);
