@@ -11,6 +11,7 @@ const handleCarousel = async () => {
       arr.push(e.dataValues);
     });
 
+    console.log(arr);
     return arr;
   } catch (err) {
     console.log(err);
