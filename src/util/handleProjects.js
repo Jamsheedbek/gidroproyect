@@ -5,7 +5,7 @@ const handleProjects = async (id) => {
     var newRes = [];
     var allProjects;
     if (id) {
-      allProjects = await Projects.findOne({ where: { id }, attributes: [
+      allProjects = await Projects.findOne({ where: { project_id: id }, attributes: [
         'project_id','name','type', 'fileName', 'content'
       ] });
 
