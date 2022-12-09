@@ -5,7 +5,7 @@ const handleProjects = async (id) => {
     var newRes = [];
     var allProjects;
     if (id) {
-      allProjects = await Projects.findOne({ where: { project_id:id } });
+      allProjects = await sequelize.query(`SELECT * FROM projects WHERE project_id = ${id}`);
 
       allProjects.imgUrl =
         "/files/assets/projects/" + allProjects.dataValues.fileName;
@@ -13,7 +13,7 @@ const handleProjects = async (id) => {
       return allProjects;
     }
 
-    allProjects = await Projects.findAll({ order: [["createdAt", "DESC"]] });
+    allProjects = await sequelize.query('SELECT * FROM projects ORDER BY createdAt DESC');
 
     allProjects.forEach((e) => {
       e.dataValues.imgUrl = "/files/assets/projects/" + e.dataValues.fileName;
