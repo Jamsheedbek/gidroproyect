@@ -7,6 +7,7 @@ const handleAllNews = async (id) => {
         var news = [];
         var allNews;
         if (id.type == "legal-status") {
+            console.log(`tepadagi if ishladi\n\n`);
             allNews = await News.findOne({
                 where: { type: id.type },
                 attributes: ["news_id", "title", "content", "fileName", "type"],
@@ -15,6 +16,7 @@ const handleAllNews = async (id) => {
             return allNews;
         }
         if (id) {
+            console.log(`pastgi if ishladi\n\n`);
             allNews = await News.findOne({
                 where: { news_id: id },
                 attributes: ["news_id", "title", "content", "fileName", "type"],
