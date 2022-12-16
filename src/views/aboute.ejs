@@ -247,10 +247,12 @@
                     <div class="card-body">
                         <h2>Yuridik Maqomi</h2>
                         <hr />
+                        <% if(activeNews.dataValues) { %>
                         <div
                             id="editor"
                             data-content="<%= activeNews.dataValues.content %>"
                         ></div>
+                        <% } %>
                     </div>
                 </div>
             </div>
