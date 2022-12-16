@@ -6,7 +6,7 @@ const handleAllNews = async (id) => {
     try {
         var news = [];
         var allNews;
-        if (id.type) {
+        if (id.type == "legal-status") {
             allNews = await News.findOne({
                 where: { type: id.type },
                 attributes: ["news_id", "title", "content", "fileName", "type"],
