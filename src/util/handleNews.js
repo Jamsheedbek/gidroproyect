@@ -6,7 +6,7 @@ const handleAllNews = async (id) => {
     try {
         var news = [];
         var allNews;
-        if (id.type == "legal-status") {
+        if (id && id.type && id.type == "legal-status") {
             console.log(`tepadagi if ishladi\n\n`);
             allNews = await News.findOne({
                 where: { type: id.type },
