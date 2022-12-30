@@ -1,21 +1,25 @@
-const { Carousel } = require("../models");
+const { Carousel } = require('../models');
 
 const handleCarousel = async () => {
-  try {
-    var arr = [];
-    const carousel = await Carousel.findAll({ order: [["createdAt", "ASC"]] });
+    try {
+        var arr = [];
+        const carousel = await Carousel.findAll({
+            order: [['createdAt', 'ASC']],
+            attributes: ['carousel_id', 'title', 'text', 'fileName'],
+        });
 
-    carousel.forEach((e) => {
-      e.dataValues.imgUrl = "/files/assets/images/" + e.dataValues.fileName;
+        carousel.forEach((e) => {
+            e.dataValues.imgUrl =
+                '/files/assets/images/' + e.dataValues.fileName;
 
-      arr.push(e.dataValues);
-    });
+            arr.push(e.dataValues);
+        });
 
-    console.log(arr);
-    return arr;
-  } catch (err) {
-    console.log(err);
-  }
+        console.log(arr);
+        return arr;
+    } catch (err) {
+        console.log(err);
+    }
 };
 
 module.exports = handleCarousel;

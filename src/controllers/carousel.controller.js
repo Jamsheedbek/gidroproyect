@@ -32,7 +32,7 @@ module.exports = {
 
       const image = req.files;
 
-      const oldCArousel = await Carousel.findOne({ where: { id } });
+      const oldCArousel = await Carousel.findOne({ where: { carousel_id:id } });
 
       if (image) {
         const fileName = image.file.name;
@@ -53,7 +53,7 @@ module.exports = {
             text,
             fileName,
           },
-          { where: { id: oldCArousel.dataValues.id } }
+          { where: { carousel_id: oldCArousel.dataValues.id } }
         );
 
         const uploadPath = path.resolve(
@@ -73,7 +73,7 @@ module.exports = {
           },
           {
             where: {
-              id: oldCArousel.dataValues.id,
+              carousel_id: oldCArousel.dataValues.id,
             },
           }
         );
