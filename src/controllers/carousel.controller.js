@@ -33,15 +33,13 @@ module.exports = {
         try {
             const { id, title, text } = req.body;
 
-            console.log(id, title, text);
-
             const image = req.files;
-
-            console.log(image);
 
             const oldCArousel = await Carousel.findOne({
                 where: { carousel_id: id },
             });
+
+            console.log(oldCArousel);
 
             if (image) {
                 const fileName = image.file.name;
