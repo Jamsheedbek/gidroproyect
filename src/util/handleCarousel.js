@@ -8,6 +8,8 @@ const handleCarousel = async () => {
             attributes: ['carousel_id', 'title', 'text', 'fileName'],
         });
 
+        console.log(carousel);
+
         carousel.forEach((e) => {
             e.dataValues.imgUrl =
                 '/files/assets/images/' + e.dataValues.fileName;
