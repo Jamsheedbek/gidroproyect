@@ -37,6 +37,8 @@ module.exports = {
 
             const image = req.files;
 
+            console.log(image);
+
             const oldCArousel = await Carousel.findOne({
                 where: { carousel_id: id },
             });
