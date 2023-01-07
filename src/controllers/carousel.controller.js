@@ -39,8 +39,6 @@ module.exports = {
                 where: { carousel_id: id },
             });
 
-            console.log(oldCArousel);
-
             if (image) {
                 const fileName = image.file.name;
 
@@ -60,7 +58,7 @@ module.exports = {
                         text,
                         fileName,
                     },
-                    { where: { carousel_id: oldCArousel.dataValues.id } }
+                    { where: { carousel_id: id } }
                 );
 
                 const uploadPath = path.resolve(
@@ -80,7 +78,7 @@ module.exports = {
                     },
                     {
                         where: {
-                            carousel_id: oldCArousel.dataValues.id,
+                            carousel_id: id,
                         },
                     }
                 );
