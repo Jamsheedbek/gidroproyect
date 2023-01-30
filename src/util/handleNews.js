@@ -18,12 +18,18 @@ const handleAllNews = async (id) => {
         if (id) {
             allNews = await News.findOne({
                 where: { news_id: id },
-                attributes: ['news_id', 'title', 'content', 'fileName', 'type'],
+                attributes: [
+                    'news_id',
+                    'title',
+                    'content',
+                    'fileName',
+                    'type',
+                    'createdAt',
+                ],
             });
             allNews.dataValues.imgUrl =
                 '/files/assets/news/' + allNews.dataValues.fileName;
 
-            console.log(allNews.dataValues);
             allNews.dataValues.date =
                 moment(allNews.dataValues.createdAt)
                     .format('L h:mm')
@@ -39,13 +45,18 @@ const handleAllNews = async (id) => {
         } else {
             const allNews = await News.findAll({
                 order: [['createdAt', 'DESC']],
-                attributes: ['news_id', 'title', 'content', 'fileName', 'type'],
+                attributes: [
+                    'news_id',
+                    'title',
+                    'content',
+                    'fileName',
+                    'type',
+                    'createdAt',
+                ],
             });
             allNews.map((e) => {
                 e.dataValues.imgUrl =
                     '/files/assets/news/' + e.dataValues.fileName;
-
-                console.log(e.dataValues);
                 e.dataValues.date =
                     moment(e.dataValues.createdAt)
                         .format('L h:mm')
