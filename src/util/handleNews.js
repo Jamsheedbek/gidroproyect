@@ -23,7 +23,7 @@ const handleAllNews = async (id) => {
             allNews.dataValues.imgUrl =
                 '/files/assets/news/' + allNews.dataValues.fileName;
 
-            console.log(allNews.dataValues.createdAt);
+            console.log(allNews.dataValues);
             allNews.dataValues.date =
                 moment(allNews.dataValues.createdAt)
                     .format('L h:mm')
@@ -45,7 +45,7 @@ const handleAllNews = async (id) => {
                 e.dataValues.imgUrl =
                     '/files/assets/news/' + e.dataValues.fileName;
 
-                console.log(e.dataValues.createdAt);
+                console.log(e.dataValues);
                 e.dataValues.date =
                     moment(e.dataValues.createdAt)
                         .format('L h:mm')
