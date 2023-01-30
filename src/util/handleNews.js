@@ -16,7 +16,6 @@ const handleAllNews = async (id) => {
             return allNews;
         }
         if (id) {
-            console.log(`pastgi if ishladi\n\n`);
             allNews = await News.findOne({
                 where: { news_id: id },
                 attributes: ['news_id', 'title', 'content', 'fileName', 'type'],
@@ -24,7 +23,7 @@ const handleAllNews = async (id) => {
             allNews.dataValues.imgUrl =
                 '/files/assets/news/' + allNews.dataValues.fileName;
 
-            console.log(allNews.dataValues.date);
+            console.log(allNews.dataValues.createdAt);
             allNews.dataValues.date =
                 moment(allNews.dataValues.createdAt)
                     .format('L h:mm')
@@ -46,7 +45,7 @@ const handleAllNews = async (id) => {
                 e.dataValues.imgUrl =
                     '/files/assets/news/' + e.dataValues.fileName;
 
-                console.log(e.dataValues.date);
+                console.log(e.dataValues.createdAt);
                 e.dataValues.date =
                     moment(e.dataValues.createdAt)
                         .format('L h:mm')
