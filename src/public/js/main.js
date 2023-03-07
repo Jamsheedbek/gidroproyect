@@ -1,3 +1,36 @@
+if (document.getElementById("editor")) {
+  var Content = new Quill(document.getElementById("editor"));
+
+  Content.setContents(
+    JSON.parse(document.getElementById("editor").dataset.content)
+  );
+
+  document.getElementById("editor").dataset.content = "";
+
+  Content.enable(false);
+
+  document
+    .getElementById("editor")
+    .querySelectorAll("img")
+    .forEach((e) => {
+      e.classList.add("card-img");
+    });
+
+  document
+    .getElementById("editor")
+    .querySelectorAll("p")
+    .forEach((e) => {
+      e.classList.add("card-text");
+    });
+}
+
+document.getElementById("to-footer").addEventListener("click", () => {
+  const footer = document.getElementById("footer-section").offsetTop;
+  $("body, html").animate({
+    scrollTop: footer,
+  });
+});
+
 (function ($) {
   "use strict";
 
@@ -65,36 +98,3 @@
     portfolioIsotope.isotope({ filter: $(this).data("filter") });
   });
 })(jQuery);
-
-if (document.getElementById("editor")) {
-  var Content = new Quill(document.getElementById("editor"));
-
-  Content.setContents(
-    JSON.parse(document.getElementById("editor").dataset.content)
-  );
-
-  document.getElementById("editor").dataset.content = "";
-
-  Content.enable(false);
-
-  document
-    .getElementById("editor")
-    .querySelectorAll("img")
-    .forEach((e) => {
-      e.classList.add("card-img");
-    });
-
-  document
-    .getElementById("editor")
-    .querySelectorAll("p")
-    .forEach((e) => {
-      e.classList.add("card-text");
-    });
-}
-
-document.getElementById("to-footer").addEventListener("click", () => {
-  const footer = document.getElementById("footer-section").offsetTop;
-  $("body, html").animate({
-    scrollTop: footer,
-  });
-});
