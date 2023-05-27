@@ -1,8 +1,11 @@
 const { News } = require('../models');
 const handleCarousel = require('../util/handleCarousel');
 const handleCurrency = require('../util/handleCurrency');
-const handleAllNews = require('../util/handleNews');
-const handleProjects = require('../util/handleProjects');
+const { handleAllNews, handleNewsSlice } = require('../util/handleNews');
+const {
+    handleProjects,
+    handleProjectsSlice,
+} = require('../util/handleProjects');
 const handleAllUsers = require('../util/handleUsers');
 const handleWheather = require('../util/handleWheatther');
 const handleWorks = require('../util/handleWorks');
@@ -11,10 +14,10 @@ const { verifyUser } = require('../util/jwt');
 module.exports = {
     homePage: async (req, res) => {
         try {
-            const posters = await handleAllNews('poster', 3);
-            const news = await handleAllNews('news', 3);
-            const finishedProjects = await handleProjects('finished', 3);
-            const plannedProjects = await handleProjects('planned', 3);
+            const posters = await handleNewsSlice('poster', 3);
+            const news = await handleNewsSlice('news', 3);
+            const finishedProjects = await handleProjectsSlice('finished', 3);
+            const plannedProjects = await handleProjectsSlice('planned', 3);
             const currency = await handleCurrency();
             const wheather = await handleWheather();
             const carousel = await handleCarousel();

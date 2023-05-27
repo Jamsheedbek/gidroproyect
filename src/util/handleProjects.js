@@ -1,28 +1,10 @@
 const { Projects, projectImages } = require('../models');
 
-const handleProjects = async (id, limit) => {
+const handleProjects = async (id) => {
     try {
         var newRes = [];
         var allProjects;
         if (id) {
-            if (limit) {
-                allProjects = await Projects.findOne({
-                    where: { project_id: id },
-                    attributes: [
-                        'project_id',
-                        'name',
-                        'type',
-                        'fileName',
-                        'content',
-                    ],
-                    limit,
-                });
-
-                allProjects.imgUrl =
-                    '/files/assets/projects/' + allProjects.dataValues.fileName;
-
-                return allProjects;
-            }
             allProjects = await Projects.findOne({
                 where: { project_id: id },
                 attributes: [
@@ -40,42 +22,16 @@ const handleProjects = async (id, limit) => {
             return allProjects;
         }
 
-        if (limit) {
-            allProjects = await Projects.findAll({
-                order: [['createdAt', 'DESC']],
-                attributes: [
-                    'project_id',
-                    'name',
-                    'type',
-                    'fileName',
-                    'content',
-                ],
-                limit,
-            });
+        allProjects = await Projects.findAll({
+            order: [['createdAt', 'DESC']],
+            attributes: ['project_id', 'name', 'type', 'fileName', 'content'],
+        });
 
-            allProjects.forEach((e) => {
-                e.dataValues.imgUrl =
-                    '/files/assets/projects/' + e.dataValues.fileName;
-                newRes.push(e.dataValues);
-            });
-        } else {
-            allProjects = await Projects.findAll({
-                order: [['createdAt', 'DESC']],
-                attributes: [
-                    'project_id',
-                    'name',
-                    'type',
-                    'fileName',
-                    'content',
-                ],
-            });
-
-            allProjects.forEach((e) => {
-                e.dataValues.imgUrl =
-                    '/files/assets/projects/' + e.dataValues.fileName;
-                newRes.push(e.dataValues);
-            });
-        }
+        allProjects.forEach((e) => {
+            e.dataValues.imgUrl =
+                '/files/assets/projects/' + e.dataValues.fileName;
+            newRes.push(e.dataValues);
+        });
 
         return newRes;
     } catch (err) {
@@ -83,4 +39,27 @@ const handleProjects = async (id, limit) => {
     }
 };
 
-module.exports = handleProjects;
+const handleProjectsSlice = async (type, limit) => {
+    try {
+        var newRes = [];
+
+        const allProjects = await Projects.findAll({
+            where: { type },
+            order: [['createdAt', 'DESC']],
+            attributes: ['project_id', 'name', 'type', 'fileName', 'content'],
+            limit,
+        });
+
+        allProjects.forEach((e) => {
+            e.dataValues.imgUrl =
+                '/files/assets/projects/' + e.dataValues.fileName;
+            newRes.push(e.dataValues);
+        });
+
+        return newRes;
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+module.exports = { handleProjects, handleProjectsSlice };
