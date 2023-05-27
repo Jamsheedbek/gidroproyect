@@ -2,7 +2,7 @@ const { News } = require('../models');
 const moment = require('moment');
 moment.locale('uz');
 
-const handleAllNews = async (id) => {
+const handleAllNews = async (id, limit) => {
     try {
         var news = [];
         var allNews;
@@ -16,6 +16,38 @@ const handleAllNews = async (id) => {
             return allNews;
         }
         if (id) {
+            if (limit) {
+                allNews = await News.findOne({
+                    where: { news_id: id },
+                    attributes: [
+                        'news_id',
+                        'title',
+                        'content',
+                        'fileName',
+                        'type',
+                        'createdAt',
+                    ],
+                    limit,
+                });
+                allNews.dataValues.imgUrl =
+                    '/files/assets/news/' + allNews.dataValues.fileName;
+
+                allNews.dataValues.date =
+                    moment(allNews.dataValues.createdAt)
+                        .format('L h:mm')
+                        .slice(0, 11) +
+                    (moment(allNews.dataValues.createdAt)
+                        .format('L h:mm')
+                        .slice(-5, -3) -
+                        0 +
+                        5) +
+                    moment(allNews.dataValues.createdAt)
+                        .format('L h:mm')
+                        .slice(-3);
+
+                return allNews;
+            }
+
             allNews = await News.findOne({
                 where: { news_id: id },
                 attributes: [
@@ -42,6 +74,35 @@ const handleAllNews = async (id) => {
                 moment(allNews.dataValues.createdAt).format('L h:mm').slice(-3);
 
             return allNews;
+        } else if (limit) {
+            const allNews = await News.findAll({
+                order: [['createdAt', 'DESC']],
+                attributes: [
+                    'news_id',
+                    'title',
+                    'content',
+                    'fileName',
+                    'type',
+                    'createdAt',
+                ],
+                limit: limit,
+            });
+            allNews.map((e) => {
+                e.dataValues.imgUrl =
+                    '/files/assets/news/' + e.dataValues.fileName;
+                e.dataValues.date =
+                    moment(e.dataValues.createdAt)
+                        .format('L h:mm')
+                        .slice(0, 11) +
+                    (moment(e.dataValues.createdAt)
+                        .format('L h:mm')
+                        .slice(-5, -3) -
+                        0 +
+                        5) +
+                    moment(e.dataValues.createdAt).format('L h:mm').slice(-3);
+
+                news.push(e.dataValues);
+            });
         } else {
             const allNews = await News.findAll({
                 order: [['createdAt', 'DESC']],

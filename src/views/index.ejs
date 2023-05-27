@@ -332,7 +332,7 @@
             </button>
         </div>
         <!-- Carousel End -->
-
+        
         <!-- Projects Start -->
         <div class="service">
             <div class="container">
@@ -340,8 +340,8 @@
                     <h2>Joriy Loyihalar</h2>
                 </div>
                 <div class="row">
-                    <% if(projects) { %> <% projects.filter(e => e.type ==
-                    "finished").slice(0,3).forEach(project => { %>
+                    <% if(finishedProjects) { %> <%
+                    finishedProjects.forEach(project => { %>
                     <div
                         class="col-lg-4 col-md-6 p-4 wow fadeInUp"
                         data-wow-delay="0.1s"
@@ -378,8 +378,8 @@
                     <h2>Istiqbolli Loyihalar</h2>
                 </div>
                 <div class="row">
-                    <% if (projects) { %> <% projects.filter(e => e.type ==
-                    "planned").slice(0,3).forEach(project => { %>
+                    <% if (plannedProjects) { %> <%
+                    plannedProjects.forEach(project => { %>
                     <div
                         class="col-lg-4 col-md-6 p-4 wow fadeInUp"
                         data-wow-delay="0.1s"
@@ -416,8 +416,7 @@
                     <h2>Tender va E'lonlar</h2>
                 </div>
                 <div class="row">
-                    <% if (news) { %> <% news.filter(e => e.type ==
-                    "poster").slice(0,3).forEach(news => { %>
+                    <% if (posters) { %> <% posters.forEach(news => { %>
                     <div
                         class="col-lg-4 col-md-6 p-4 wow fadeInUp"
                         data-wow-delay="0.1s"
@@ -567,8 +566,7 @@
                     <h2>So'ngi yangiliklar</h2>
                 </div>
                 <div class="row">
-                    <% if (news) { %> <% news.filter(e => e.type !=
-                    "poster").slice(0,3).forEach(news => { %>
+                    <% if (news) { %> <% news.forEach(news => { %>
                     <div
                         class="col-lg-4 col-md-6 p-4 wow fadeInUp"
                         data-wow-delay="0.1s"
